@@ -28,9 +28,12 @@ body {
 }
 
 .main-logo {
-    width: 120px; /* Μπορείς να αυξομειώσεις αυτό το νούμερο για το μέγεθος */
-    height: auto;
-    margin-bottom: 15px;
+    width: 180px; /* Προσαρμόζεις το μέγεθος όπως θες */
+    height: 180px;
+    object-fit: cover;
+    /* Αυτό "κόβει" το εξωτερικό περιθώριο. Παίξε με το ποσοστό (π.χ. 18%, 20%, 25%) μέχρι να μείνει μόνο το μαύρο τετράγωνο */
+    clip-path: inset(18%); 
+    margin-bottom: 5px;
 }
 
 .menu-header h1 {
