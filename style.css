@@ -173,3 +173,15 @@ body {
         justify-content: space-around;
     }
 }
+/* Ρυθμίσεις για τους συνδέσμους στο Footer */
+.footer-link {
+    color: inherit; /* Κρατάει το μαύρο χρώμα του footer */
+    text-decoration: none; /* Αφαιρεί την μπλε υπογράμμιση */
+    transition: opacity 0.2s ease;
+}
+
+/* Ένα ελαφρύ εφέ όταν ο χρήστης περνάει το ποντίκι ή πατάει τον σύνδεσμο */
+.footer-link:hover, 
+.footer-link:active {
+    opacity: 0.6; 
+}
