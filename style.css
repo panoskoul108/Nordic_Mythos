@@ -185,3 +185,38 @@ body {
 .footer-link:active {
     opacity: 0.6; 
 }
+/* Κουμπί Wolt */
+.wolt-btn {
+    background-color: #00c2e8; /* Το χαρακτηριστικό γαλάζιο της Wolt */
+    color: #ffffff !important; /* Λευκά γράμματα */
+    text-decoration: none;
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    padding: 10px 22px;
+    border-radius: 25px; /* Στρογγυλεμένο κουμπί */
+    box-shadow: 0 4px 10px rgba(0, 194, 232, 0.3);
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    text-align: center;
+}
+
+/* Εφέ όταν ο χρήστης ακουμπάει ή πατάει το κουμπί */
+.wolt-btn:hover,
+.wolt-btn:active {
+    background-color: #00b0d4;
+    transform: scale(1.03);
+}
+
+/* Μικρή προσαρμογή για να μην κρύβεται το μενού πίσω από το footer */
+body {
+    padding-bottom: 140px; /* Αυξάνουμε το κενό επειδή το footer ψήλωσε λίγο */
+}
+
+/* Mobile διόρθωση για να είναι το κουμπί ευδιάκριτο */
+@media (max-width: 599px) {
+    .wolt-btn {
+        width: 100%; /* Πιάνει όλο το πλάτος στο κινητό για να πατιέται εύκολα */
+        order: -1; /* Φέρνει το κουμπί πρώτο-πρώτο στο κινητό, πάνω από τηλέφωνο/διεύθυνση */
+    }
+}
