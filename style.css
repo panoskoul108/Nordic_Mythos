@@ -7,33 +7,33 @@
 
 body {
     font-family: 'Montserrat', sans-serif;
-    background-color: #ffffff; /* Καθαρό λευκό υπόβαθρο */
-    color: #000000; /* Μαύρα γράμματα */
+    background-color: #ffffff; 
+    color: #000000; 
     line-height: 1.4;
-    padding-bottom: 100px; /* Χώρος για το sticky footer στο κάτω μέρος */
+    padding-bottom: 100px; 
 }
 
-/* Header */
+/* Header & Logo */
 .menu-header {
     background-color: #ffffff;
     color: #000000;
     text-align: center;
     padding: 30px 20px;
-    border-bottom: 3px solid #000000; /* Μαύρη διαχωριστική γραμμή */
+    border-bottom: 3px solid #000000; 
     margin-bottom: 35px;
 }
 
 .logo-container {
-    margin-bottom: 12px;
+    margin-bottom: 5px;
 }
 
 .main-logo {
-    width: 180px; /* Προσαρμόζεις το μέγεθος όπως θες */
+    width: 180px; 
     height: 180px;
     object-fit: cover;
-    /* Αυτό "κόβει" το εξωτερικό περιθώριο. Παίξε με το ποσοστό (π.χ. 18%, 20%, 25%) μέχρι να μείνει μόνο το μαύρο τετράγωνο */
+    /* Κόβει το εξωτερικό περιθώριο της εικόνας για να μείνει το εσωτερικό πλαίσιο */
     clip-path: inset(18%); 
-    margin-bottom: 5px;
+    margin-bottom: -15px; /* Μαζεύει το κενό που αφήνει το κόψιμο */
 }
 
 .menu-header h1 {
@@ -53,7 +53,7 @@ body {
 
 .tagline {
     font-style: italic;
-    color: #444444; /* Σκούρο γκρι για το tagline */
+    color: #444444; 
     font-size: 0.95rem;
 }
 
@@ -70,7 +70,6 @@ body {
     gap: 15px;
 }
 
-/* Desktop Layout (Δύο στήλες ακριβώς όπως η οθόνη του καταστήματος) */
 @media (min-width: 992px) {
     .pizza-grid {
         grid-template-columns: 1fr 1fr;
@@ -78,71 +77,70 @@ body {
     }
 }
 
-/* Πλαίσιο Προϊόντος (Pizza Card) */
+/* Πλαίσιο Προϊόντος (Pizza Card) - Σταθερό με CSS Grid για κινητά/desktop */
 .pizza-card {
     background: #ffffff;
-    border: 2px solid #000000; /* Έντονο μαύρο πλαίσιο γύρω από κάθε προϊόν */
-    border-radius: 10px; /* Στρογγυλεμένες γωνίες */
-    padding: 15px;
-    display: flex;
-    align-items: center; /* Κατακόρυφη στοίχιση στο κέντρο */
-    justify-content: space-between;
+    border: 2px solid #000000; 
+    border-radius: 10px; 
+    padding: 10px 12px; 
+    display: grid;
+    grid-template-columns: auto 1fr auto; 
+    gap: 12px; 
+    align-items: center; 
     transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
-/* Εφέ hover για να δείχνει πιο "ζωντανό" στο desktop */
 .pizza-card:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-/* Το πλαίσιο του αριθμού στα αριστερά */
+/* Το πλαίσιο του αριθμού */
 .pizza-number {
-    border: 2px solid #000000; /* Μαύρο πλαίσιο γύρω από τον αριθμό */
+    border: 2px solid #000000; 
     border-radius: 6px;
-    padding: 5px 10px;
+    padding: 5px 8px;
     font-weight: 800;
-    font-size: 1.1rem;
+    font-size: 1rem;
     color: #000000;
-    min-width: 48px;
     text-align: center;
-    margin-right: 15px;
-    flex-shrink: 0; /* Αποτρέπει τη σύνθλιψη του κουτιού σε μικρές οθόνες */
+    min-width: 42px;
 }
 
 /* Μεσαίο τμήμα: Όνομα & Υλικά */
 .pizza-details {
-    flex-grow: 1;
     display: flex;
     flex-direction: column;
+    justify-content: center;
 }
 
 .pizza-title {
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 800;
     color: #000000;
     letter-spacing: 0.5px;
-    margin-bottom: 3px;
+    margin-bottom: 2px;
+    line-height: 1.1;
 }
 
 .pizza-ingredients {
-    font-size: 0.85rem;
-    color: #555555; /* Σκούρο γκρι για τα υλικά ώστε να διαβάζονται εύκολα */
-    text-transform: uppercase; /* Κεφαλαία γράμματα όπως στη φωτογραφία */
+    font-size: 0.75rem; 
+    color: #555555; 
+    text-transform: uppercase; 
     font-weight: 500;
+    line-height: 1.3;
 }
 
 /* Δεξί τμήμα: Τιμή */
 .pizza-price {
     font-weight: 800;
-    font-size: 1.15rem;
+    font-size: 1rem;
     color: #000000;
-    white-space: nowrap;
-    margin-left: 15px;
-    flex-shrink: 0;
+    white-space: nowrap; 
+    text-align: right;
 }
 
-/* Footer (Sticky στο κάτω μέρος της οθόνης) */
+/* Footer (Sticky) */
 .menu-footer {
     position: fixed;
     bottom: 0;
@@ -151,7 +149,7 @@ body {
     background-color: #ffffff;
     color: #000000;
     padding: 15px 20px;
-    border-top: 2.5px solid #000000; /* Μαύρη γραμμή στο πάνω μέρος του footer */
+    border-top: 2.5px solid #000000; 
     z-index: 100;
 }
 
