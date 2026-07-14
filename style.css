@@ -1,45 +1,65 @@
 /* =========================================
    ΠΡΟΣΑΡΜΟΓΗ ΓΙΑ ΚΙΝΗΤΑ (Mobile View)
    ========================================= */
-@media (max-width: 767px) {
-    /* Μικραίνουμε λίγο τους τίτλους στο Header */
-    .menu-header h1 {
-        font-size: 1.8rem;
-    }
-    .menu-header h2 {
-        font-size: 1.1rem;
-    }
+/* Πλαίσιο Προϊόντος (Pizza Card) με CSS Grid για απόλυτη σταθερότητα */
+.pizza-card {
+    background: #ffffff;
+    border: 2px solid #000000;
+    border-radius: 10px;
+    padding: 10px 12px; /* Λίγο μικρότερο padding για να ανασαίνει στο κινητό */
+    display: grid;
+    grid-template-columns: auto 1fr auto; /* 1. Αριθμός, 2. Κείμενο, 3. Τιμή */
+    gap: 12px; /* Σταθερό κενό ανάμεσα στα 3 στοιχεία */
+    align-items: center; /* Όλα στοιχισμένα κάθετα στο κέντρο */
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
 
-    /* Αλλάζουμε τη στοίχιση στην κάρτα του προϊόντος */
-    .pizza-card {
-        align-items: flex-start; /* Όλα τα στοιχεία ξεκινούν από την κορυφή, όχι από το κέντρο */
-        padding: 12px;
-    }
+.pizza-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
 
-    /* Προσαρμογή στο κουτάκι του αριθμού */
-    .pizza-number {
-        margin-top: 2px; /* Μικρή διόρθωση για να ευθυγραμμίζεται με το κείμενο του τίτλου */
-        padding: 4px 8px;
-        font-size: 0.95rem;
-        min-width: 40px;
-        margin-right: 12px;
-    }
+/* Το πλαίσιο του αριθμού */
+.pizza-number {
+    border: 2px solid #000000;
+    border-radius: 6px;
+    padding: 5px 8px;
+    font-weight: 800;
+    font-size: 1rem;
+    color: #000000;
+    text-align: center;
+    min-width: 42px;
+}
 
-    /* Τίτλος και υλικά */
-    .pizza-title {
-        font-size: 1rem;
-        margin-bottom: 4px;
-    }
+/* Μεσαίο τμήμα: Όνομα & Υλικά */
+.pizza-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
 
-    .pizza-ingredients {
-        font-size: 0.8rem;
-        line-height: 1.4;
-    }
+.pizza-title {
+    font-size: 1rem;
+    font-weight: 800;
+    color: #000000;
+    letter-spacing: 0.5px;
+    margin-bottom: 2px;
+    line-height: 1.1;
+}
 
-    /* Προσαρμογή τιμής */
-    .pizza-price {
-        font-size: 1rem;
-        margin-left: 10px;
-        margin-top: 2px;
-    }
+.pizza-ingredients {
+    font-size: 0.75rem; /* Μικρότερα γράμματα στα υλικά για να χωράνε σε στενές οθόνες */
+    color: #555555;
+    text-transform: uppercase;
+    font-weight: 500;
+    line-height: 1.3;
+}
+
+/* Δεξί τμήμα: Τιμή */
+.pizza-price {
+    font-weight: 800;
+    font-size: 1rem;
+    color: #000000;
+    white-space: nowrap; /* Απαγορεύει στην τιμή να κοπεί στη μέση */
+    text-align: right;
 }
