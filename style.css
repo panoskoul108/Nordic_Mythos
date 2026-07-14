@@ -32,8 +32,8 @@ body {
     height: 300px;
     object-fit: cover;
     
-    /* Μικρύναμε την ακτίνα στο 19.5% και κατεβάσαμε το κέντρο στο 42% */
-    clip-path: circle(19.5% at 50% 42%); 
+    /* Κατεβάσαμε το κέντρο στο 43% και την ακτίνα στο 19% */
+    clip-path: circle(19% at 50% 43%); 
     
     margin-top: -80px;
     margin-bottom: -110px; 
