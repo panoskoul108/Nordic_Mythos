@@ -7,32 +7,36 @@
 
 body {
     font-family: 'Montserrat', sans-serif;
-    background-color: #f7f9fa;
-    color: #1a2530;
-    line-height: 1.6;
-    padding-bottom: 80px; /* Χώρος για το sticky footer */
+    background-color: #ffffff; /* Καθαρό λευκό υπόβαθρο */
+    color: #000000; /* Μαύρα γράμματα */
+    line-height: 1.4;
+    padding-bottom: 100px; /* Χώρος για το sticky footer στο κάτω μέρος */
 }
 
 /* Header */
 .menu-header {
-    background-color: #0b1a30; /* Σκούρο blue/black */
-    color: #ffffff;
+    background-color: #ffffff;
+    color: #000000;
     text-align: center;
-    padding: 40px 20px;
-    border-bottom: 4px solid #d4af37; /* Χρυσή/Bronze λεπτομέρεια */
+    padding: 30px 20px;
+    border-bottom: 3px solid #000000; /* Μαύρη διαχωριστική γραμμή */
+    margin-bottom: 35px;
+}
+
+.logo-container {
+    margin-bottom: 12px;
 }
 
 .logo-placeholder {
-    width: 70px;
-    height: 70px;
-    border: 2px solid #ffffff;
+    width: 75px;
+    height: 75px;
+    border: 3px solid #000000; /* Μαύρο κυκλικό logo */
     border-radius: 50%;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     font-weight: 800;
-    font-size: 1.5rem;
-    margin-bottom: 15px;
+    font-size: 1.6rem;
     letter-spacing: 2px;
 }
 
@@ -40,104 +44,118 @@ body {
     font-size: 2.2rem;
     font-weight: 800;
     letter-spacing: 3px;
+    margin-bottom: 4px;
 }
 
 .menu-header h2 {
-    font-size: 1.2rem;
-    font-weight: 600;
-    letter-spacing: 4px;
-    color: #b0c4de;
-    margin-top: 5px;
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: 5px;
+    color: #000000;
+    margin-bottom: 8px;
 }
 
 .tagline {
     font-style: italic;
-    color: #d4af37;
-    margin-top: 8px;
+    color: #444444; /* Σκούρο γκρι για το tagline */
     font-size: 0.95rem;
 }
 
-/* Menu Grid */
+/* Menu Container & Grid */
 .menu-container {
-    max-width: 1200px;
-    margin: 30px auto;
+    max-width: 1250px;
+    margin: 0 auto;
     padding: 0 20px;
 }
 
 .pizza-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 20px;
+    gap: 15px;
 }
 
-/* Desktop: 2 στήλες όπως στη φωτογραφία */
-@media (min-width: 768px) {
+/* Desktop Layout (Δύο στήλες ακριβώς όπως η οθόνη του καταστήματος) */
+@media (min-width: 992px) {
     .pizza-grid {
         grid-template-columns: 1fr 1fr;
+        gap: 20px;
     }
 }
 
-/* Pizza Cards */
+/* Πλαίσιο Προϊόντος (Pizza Card) */
 .pizza-card {
     background: #ffffff;
-    border: 1px solid #e1e8ed;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-    transition: transform 0.2s ease;
+    border: 2px solid #000000; /* Έντονο μαύρο πλαίσιο γύρω από κάθε προϊόν */
+    border-radius: 10px; /* Στρογγυλεμένες γωνίες */
+    padding: 15px;
+    display: flex;
+    align-items: center; /* Κατακόρυφη στοίχιση στο κέντρο */
+    justify-content: space-between;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
+/* Εφέ hover για να δείχνει πιο "ζωντανό" στο desktop */
 .pizza-card:hover {
     transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-.pizza-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 10px;
-}
-
+/* Το πλαίσιο του αριθμού στα αριστερά */
 .pizza-number {
-    background-color: #0b1a30;
-    color: white;
+    border: 2px solid #000000; /* Μαύρο πλαίσιο γύρω από τον αριθμό */
+    border-radius: 6px;
+    padding: 5px 10px;
     font-weight: 800;
-    padding: 3px 8px;
-    border-radius: 4px;
-    font-size: 0.9rem;
-    margin-right: 12px;
+    font-size: 1.1rem;
+    color: #000000;
+    min-width: 48px;
+    text-align: center;
+    margin-right: 15px;
+    flex-shrink: 0; /* Αποτρέπει τη σύνθλιψη του κουτιού σε μικρές οθόνες */
+}
+
+/* Μεσαίο τμήμα: Όνομα & Υλικά */
+.pizza-details {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 .pizza-title {
-    flex-grow: 1;
     font-size: 1.1rem;
     font-weight: 800;
-    color: #0b1a30;
-}
-
-.pizza-price {
-    font-weight: 800;
-    color: #0b1a30;
-    font-size: 1.1rem;
-    white-space: nowrap;
+    color: #000000;
+    letter-spacing: 0.5px;
+    margin-bottom: 3px;
 }
 
 .pizza-ingredients {
-    font-size: 0.9rem;
-    color: #657786;
-    margin-left: 45px; /* Στοίχιση κάτω από τον τίτλο */
+    font-size: 0.85rem;
+    color: #555555; /* Σκούρο γκρι για τα υλικά ώστε να διαβάζονται εύκολα */
+    text-transform: uppercase; /* Κεφαλαία γράμματα όπως στη φωτογραφία */
+    font-weight: 500;
 }
 
-/* Footer (Sticky) */
+/* Δεξί τμήμα: Τιμή */
+.pizza-price {
+    font-weight: 800;
+    font-size: 1.15rem;
+    color: #000000;
+    white-space: nowrap;
+    margin-left: 15px;
+    flex-shrink: 0;
+}
+
+/* Footer (Sticky στο κάτω μέρος της οθόνης) */
 .menu-footer {
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
-    background-color: #0b1a30;
-    color: #ffffff;
+    background-color: #ffffff;
+    color: #000000;
     padding: 15px 20px;
-    box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+    border-top: 2.5px solid #000000; /* Μαύρη γραμμή στο πάνω μέρος του footer */
     z-index: 100;
 }
 
@@ -147,7 +165,8 @@ body {
     align-items: center;
     justify-content: center;
     gap: 10px;
-    font-size: 0.9rem;
+    font-weight: 700;
+    font-size: 0.95rem;
     max-width: 1200px;
     margin: 0 auto;
 }
@@ -155,6 +174,6 @@ body {
 @media (min-width: 600px) {
     .footer-info {
         flex-direction: row;
-        justify-content: space-between;
+        justify-content: space-around;
     }
 }
