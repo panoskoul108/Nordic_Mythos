@@ -31,7 +31,7 @@ body {
     width: 300px; 
     height: 300px;
     object-fit: cover;
-    clip-path: circle(19% at 50% 41%); 
+    clip-path: circle(19% at 50% 42%); 
     margin-top: -80px;
     margin-bottom: -110px; 
 }
