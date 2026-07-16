@@ -1,8 +1,13 @@
 <!DOCTYPE html>
 <html lang="da">
 <head>
-  <link rel="icon" type="image/jpeg" href="images/favicon.jpg">
-  <meta name="description" content="Nordic Mythos i Aalborg - Se vores lækre pizzakatalog online. Bestil nemt og hurtigt den bedste pizza i Aalborg via Wolt!">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nordic Mythos</title>
+    
+    <link rel="icon" type="image/jpeg" href="images/favicon.jpg">
+
+    <meta name="description" content="Nordic Mythos i Aalborg - Se vores lækre pizzakatalog online. Bestil nemt og hurtigt den bedste pizza i Aalborg via Wolt!">
     <meta name="keywords" content="pizza, pizzeria, Aalborg, pizzakatalog, takeaway, mad, Ved Stranden, Wolt, Nordic Mythos">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://nordicmythos.dk/">
@@ -12,50 +17,32 @@
     <meta property="og:image" content="logo.jpg">
     <meta property="og:url" content="https://nordicmythos.dk">
     <meta property="og:type" content="website">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nordic Mythos </title>
+
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;800&display=swap" rel="stylesheet">
-  <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Restaurant",
-  "name": "Nordic Mythos",
-  "image": "https://nordicmythos.dk/logo.jpg",
-  "@id": "https://nordicmythos.dk/#restaurant",
-  "url": "https://nordicmythos.dk",
-  "telephone": "+4593949755", 
-  "priceRange": "$$",
-  "servesCuisine": "Pizza, Italian, Greek",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "Ved Stranden 19",
-    "addressLocality": "Aalborg",
-    "postalCode": "9000",
-    "addressCountry": "DK"
-  },
-  "geo": {
-    "@type": "GeoCoordinates",
-    "latitude": 57.0488,
-    "longitude": 9.9217
-  },
-  "menu": "https://nordicmythos.dk",
-  "potentialAction": {
-    "@type": "OrderAction",
-    "target": {
-      "@type": "EntryPoint",
-      "urlTemplate": "https://wolt.com/",
-      "inLanguage": "da",
-      "actionPlatform": [
-        "http://schema.org/DesktopWebPlatform",
-        "http://schema.org/MobileWebPlatform"
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Restaurant",
+      "name": "Nordic Mythos",
+      "image": "https://nordicmythos.dk/logo.jpg",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Ved Stranden 19",
+        "addressLocality": "Aalborg",
+        "postalCode": "9000",
+        "addressCountry": "DK"
+      },
+      "telephone": "+4593949755",
+      "url": "https://nordicmythos.dk",
+      "servesCuisine": ["Pizza", "Italian", "Nordic"],
+      "priceRange": "$$",
+      "sameAs": [
+        "https://wolt.com/da/dnk/aalborg/restaurant/mythos-pizza"
       ]
-    },
-    "deliveryMethod": ["http://purl.org/goodrelations/v1#DeliveryModeOwnFleet"]
-  }
-}
-</script>
+    }
+    </script>
 </head>
 <body>
 
@@ -80,7 +67,7 @@
 
     <div id="pizza-modal" class="modal">
         <div class="modal-content">
-            <span class="close-modal">&times;</span>
+            <span class="close-modal">×</span>
             <div class="modal-image-container">
                 <img id="modal-image" src="" alt="Pizza Image">
             </div>
