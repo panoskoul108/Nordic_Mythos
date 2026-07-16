@@ -24,6 +24,7 @@ const translations = {
 let globalPizzaData = [];
 
 // Συνάρτηση αλλαγής γλώσσας
+// Συνάρτηση αλλαγής γλώσσας
 function setLanguage(lang) {
     // 1. Αλλαγή των στατικών κειμένων
     document.querySelectorAll('[data-i18n]').forEach(element => {
@@ -39,10 +40,16 @@ function setLanguage(lang) {
     // 3. Αποθήκευση της επιλογής του χρήστη
     localStorage.setItem('selectedLang', lang);
 
-    // 4. Οπτική ένδειξη του ενεργού κουμπιού
-    document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-    const activeButton = document.getElementById(`btn-${lang}`);
-    if (activeButton) activeButton.classList.add('active');
+    // 4. Αλλαγή του κειμένου στο κεντρικό κουμπί του Dropdown
+    const langNames = {
+        da: '🇩🇰 DA',
+        en: '🇬🇧 EN',
+        el: '🇬🇷 EL'
+    };
+    const currentLangBtn = document.getElementById('current-lang-btn');
+    if (currentLangBtn) {
+        currentLangBtn.innerHTML = `${langNames[lang]} <i class="fas fa-chevron-down"></i>`;
+    }
 
     // 5. Αν έχουν ήδη φορτώσει τα δεδομένα, ξαναζωγραφίζουμε το μενού στη νέα γλώσσα
     if (globalPizzaData.length > 0) {
