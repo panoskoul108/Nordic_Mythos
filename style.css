@@ -315,3 +315,34 @@ body {
         order: -1; 
     }
 }
+/* Language Switcher Styles */
+.language-switcher {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.lang-btn {
+    background: transparent;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    color: #333;
+}
+
+.lang-btn:hover {
+    background: #f0f0f0;
+}
+
+.lang-btn.active {
+    background: #e31837; /* Ένα χρώμα που ταιριάζει με τη Wolt ή το brand σου */
+    color: white;
+    border-color: #e31837;
+    font-weight: bold;
+}
