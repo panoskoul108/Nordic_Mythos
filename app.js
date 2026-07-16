@@ -42,7 +42,7 @@ function setLanguage(lang) {
     // 4. Οπτική ένδειξη του ενεργού κουμπιού
     document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
     const activeButton = document.getElementById(`btn-${lang}`);
-    if(activeButton) activeButton.classList.add('active');
+    if (activeButton) activeButton.classList.add('active');
 
     // 5. Αν έχουν ήδη φορτώσει τα δεδομένα, ξαναζωγραφίζουμε το μενού στη νέα γλώσσα
     if (globalPizzaData.length > 0) {
