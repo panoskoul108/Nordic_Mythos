@@ -87,16 +87,23 @@ function renderMenu(lang) {
         
         if (!row || !row.c || !row.c[0]) continue; 
 
-        // Ανάγνωση στηλών βάσει της νέας δομής (7 στήλες)
+        // Ανάγνωση στηλών βάσει της νέας δομής (9 στήλες)
         let number = row.c[0] && row.c[0].v ? row.c[0].v : '';
-        let title = row.c[1] && row.c[1].v ? row.c[1].v : '';
-        let ingredientsDA = row.c[2] && row.c[2].v ? row.c[2].v : '';
-        let ingredientsEN = row.c[3] && row.c[3].v ? row.c[3].v : '';
-        let ingredientsEL = row.c[4] && row.c[4].v ? row.c[4].v : '';
-        let price = row.c[5] && row.c[5].v ? row.c[5].v : '';
-        let imageName = row.c[6] && row.c[6].v ? row.c[6].v.toString().trim() : '';
+        let titleDA = row.c[1] && row.c[1].v ? row.c[1].v : '';
+        let titleEN = row.c[2] && row.c[2].v ? row.c[2].v : '';
+        let titleEL = row.c[3] && row.c[3].v ? row.c[3].v : '';
+        let ingredientsDA = row.c[4] && row.c[4].v ? row.c[4].v : '';
+        let ingredientsEN = row.c[5] && row.c[5].v ? row.c[5].v : '';
+        let ingredientsEL = row.c[6] && row.c[6].v ? row.c[6].v : '';
+        let price = row.c[7] && row.c[7].v ? row.c[7].v : '';
+        let imageName = row.c[8] && row.c[8].v ? row.c[8].v.toString().trim() : '';
 
-        // Επιλογή σωστών υλικών βάσει γλώσσας (με fallback στα Δανέζικα αν λείπει η μετάφραση)
+        // Επιλογή σωστού τίτλου (fallback στα Δανέζικα αν είναι άδειο)
+        let activeTitle = titleDA; 
+        if (lang === 'en' && titleEN) activeTitle = titleEN;
+        if (lang === 'el' && titleEL) activeTitle = titleEL;
+
+        // Επιλογή σωστών υλικών (fallback στα Δανέζικα αν είναι άδειο)
         let activeIngredients = ingredientsDA; 
         if (lang === 'en' && ingredientsEN) activeIngredients = ingredientsEN;
         if (lang === 'el' && ingredientsEL) activeIngredients = ingredientsEL;
@@ -107,7 +114,7 @@ function renderMenu(lang) {
         }
 
         // Παράλειψη των επικεφαλίδων
-        if (number.toString().toLowerCase() === 'number' || title.toString().toLowerCase() === 'title') {
+        if (number.toString().toLowerCase() === 'number' || titleDA.toString().toLowerCase() === 'title') {
             continue;
         }
 
@@ -115,16 +122,17 @@ function renderMenu(lang) {
         const clickableClass = hasImage ? 'clickable' : '';
         const imagePath = hasImage ? `images/${imageName}` : '';
 
+        // Φτιάχνουμε την κάρτα με τις σωστές (μεταφρασμένες) μεταβλητές
         const cardHTML = `
             <div class="pizza-card ${clickableClass}" 
                  data-number="${number}" 
-                 data-title="${title}" 
+                 data-title="${activeTitle}" 
                  data-ingredients="${activeIngredients}" 
                  data-price="${price}" 
                  data-image="${imagePath}">
                 <div class="pizza-number">${number}</div>
                 <div class="pizza-details">
-                    <h3 class="pizza-title">${title}</h3>
+                    <h3 class="pizza-title">${activeTitle}</h3>
                     <p class="pizza-ingredients">${activeIngredients}</p>
                 </div>
                 <div class="pizza-price">${price}</div>
@@ -134,7 +142,7 @@ function renderMenu(lang) {
         container.innerHTML += cardHTML;
     }
 
-    // Ενεργοποιούμε τα κλικ στις κάρτες (πρέπει να ξαναγίνει επειδή ξαναφτιάξαμε το HTML)
+    // Ενεργοποιούμε τα κλικ στις κάρτες
     setupModalEvents();
 }
 
@@ -150,7 +158,7 @@ function setupModalEvents() {
     const modalIngredients = document.getElementById('modal-ingredients');
 
     document.querySelectorAll('.pizza-card.clickable').forEach(card => {
-        // Αφαίρεση παλιών event listeners (για ασφάλεια κατά την αλλαγή γλώσσας)
+        // Αφαίρεση παλιών event listeners (απαραίτητο όταν ξαναζωγραφίζουμε το DOM)
         const newCard = card.cloneNode(true);
         card.parentNode.replaceChild(newCard, card);
 
