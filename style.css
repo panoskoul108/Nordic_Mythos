@@ -15,27 +15,30 @@ body {
     padding-bottom: 180px; /* Κενό στο κάτω μέρος για να μην κρύβεται το μενού πίσω από το sticky footer */
 }
 
+/* ==========================================================================
+   2. Header & Logo (Desktop & Base)
+   ========================================================================== */
 .menu-header {
     background-color: #ffffff;
     color: #000000;
     text-align: center;
-    padding: 15px 20px 10px 20px; /* Μειώσαμε το πάνω/κάτω padding (από 30px σε 15px/10px) */
+    padding: 15px 20px 10px 20px;
     border-bottom: 3px solid #000000; 
-    margin-bottom: 20px; /* Μειώσαμε το κενό κάτω από το header (από 35px σε 20px) */
+    margin-bottom: 20px;
     position: relative;
 }
 
 .logo-container {
-    margin-bottom: 2px; /* Μειώσαμε το κενό κάτω από το logo container */
+    margin-bottom: 2px;
 }
 
 .main-logo {
-    width: 320px; /* Αυξήσαμε το μέγεθος (από 300px σε 320px) */
-    height: 320px; /* Αυξήσαμε το μέγεθος (από 300px σε 320px) */
+    width: 360px; /* Αυξήσαμε το μέγεθος σε 360px */
+    height: 360px; /* Αυξήσαμε το μέγεθος σε 360px */
     object-fit: cover;
     clip-path: circle(19% at 50% 42.3%); 
-    margin-top: -85px; /* Προσαρμογή για να "κάτσει" σωστά λόγω μεγαλύτερου μεγέθους */
-    margin-bottom: -120px; /* Προσαρμογή για να μαζευτεί το κενό από κάτω */
+    margin-top: -95px; /* Προσαρμογή για να "κάτσει" σωστά */
+    margin-bottom: -135px; /* Προσαρμογή για το κενό από κάτω */
 }
 
 .menu-header h1 {
@@ -75,7 +78,7 @@ body {
     padding: 8px 12px;
     font-size: 13px;
     font-weight: 800;
-    border: 2px solid #000000; /* Bold μαύρο περίγραμμα */
+    border: 2px solid #000000;
     border-radius: 6px;
     cursor: pointer;
     font-family: 'Montserrat', sans-serif;
@@ -96,7 +99,7 @@ body {
     background-color: #ffffff;
     min-width: 120px;
     box-shadow: 0px 4px 12px rgba(0,0,0,0.15);
-    border: 2px solid #000000; /* Bold μαύρο περίγραμμα */
+    border: 2px solid #000000;
     border-radius: 6px;
     overflow: hidden;
     margin-top: 5px;
@@ -115,10 +118,9 @@ body {
 
 .dropdown-content a:hover {
     background-color: #f1f1f1;
-    color: #e31837; /* Brand κόκκινο στο hover */
+    color: #e31837;
 }
 
-/* Εμφάνιση του μενού όταν περνάει το ποντίκι */
 .language-switcher.dropdown:hover .dropdown-content {
     display: block;
 }
@@ -419,20 +421,26 @@ body {
     background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
 }
 
-/* Σφιχτό και κομψό Header */
+/* ==========================================================================
+   9. Mobile Optimization (max-width: 768px)
+   ========================================================================== */
+@media (max-width: 768px) {
+    body {
+        padding-bottom: 230px; 
+    }
+
     .menu-header {
-        padding: 8px 10px 5px 10px; /* Μειώσαμε το πάνω/κάτω padding στο κινητό */
-        margin-bottom: 10px; /* Μειώσαμε το κενό κάτω από το header στα κινητά */
+        padding: 8px 10px 5px 10px; 
+        margin-bottom: 10px; 
     }
     
-    /* Διορθώνουμε τη σύγκρουση μεγέθους στο λογότυπο */
     .main-logo {
-        width: 85px !important; /* Μεγαλώσαμε το logo στο κινητό (από 70px σε 85px) */
-        height: 85px !important; /* Μεγαλώσαμε το logo στο κινητό (από 70px σε 85px) */
-        max-width: 85px !important;
+        width: 105px !important; 
+        height: 105px !important; 
+        max-width: 105px !important;
         clip-path: none !important;
         margin-top: 0 !important;
-        margin-bottom: 2px !important; /* Μικρότερο κάτω κενό */
+        margin-bottom: 2px !important; 
         border-radius: 50%;
     }
     
@@ -454,7 +462,6 @@ body {
         margin-bottom: 8px;
     }
     
-    /* Συμμάζεμα στις Γλώσσες (Dropdown) για το Κινητό */
     .language-switcher.dropdown {
         top: 10px;
         right: 10px;
@@ -474,7 +481,6 @@ body {
         font-size: 11px;
     }
 
-    /* Συμμάζεμα στις κάρτες (Pizza Cards) */
     #menu-container {
         gap: 8px; 
         padding: 5px 5px;
@@ -508,7 +514,6 @@ body {
         padding-left: 5px;
     }
 
-    /* Συμμάζεμα στο Footer */
     .menu-footer {
         padding: 12px 10px;
     }
