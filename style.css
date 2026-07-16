@@ -399,54 +399,45 @@ body {
         padding-bottom: 230px; /* Αυξάνουμε το κενό στο κάτω μέρος για το κινητό */
     }
 
-    /* Σφιχτό και κομψό Header */
+    /* 1. Σφιχτό και κομψό Header για Κινητά (ΝΕΟ ΟΡΙΖΟΝΤΙΟ DESIGN) */
     .menu-header {
-        padding: 12px 10px;
         margin-bottom: 15px;
+        padding-bottom: 10px;
     }
-    
-    /* Διορθώνουμε τη σύγκρουση μεγέθους στο λογότυπο */
-    .main-logo {
-        width: 70px !important;
-        height: 70px !important;
-        max-width: 70px !important;
-        clip-path: none !important; /* Αφαιρούμε το clip-path που το έκοβε περίεργα */
-        margin-top: 0 !important;
-        margin-bottom: 5px !important;
-        border-radius: 50%; /* Το κρατάμε τέλειο κύκλο */
+
+    .top-nav {
+        padding: 10px 15px;
     }
-    
-    .menu-header h1 {
-        font-size: 1.4rem; 
-        margin-top: 5px;
+
+    .nav-logo {
+        width: 50px;
+        height: 50px;
+    }
+
+    .dropbtn {
+        padding: 6px 12px;
+        font-size: 13px;
+    }
+
+    .header-titles h1 {
+        font-size: 1.5rem; 
+        margin-top: 0;
         margin-bottom: 2px;
         letter-spacing: 1.5px;
     }
-    
-    .menu-header h2 {
+
+    .header-titles h2 {
         font-size: 1rem;
         margin-bottom: 3px;
         letter-spacing: 3px;
     }
-    
+
     .tagline {
         font-size: 0.8rem;
         margin-bottom: 8px;
     }
-    
-    /* Συμμάζεμα στις Γλώσσες */
-    .language-switcher {
-        margin-top: 5px;
-        margin-bottom: 5px;
-        gap: 6px; 
-    }
-    
-    .lang-btn {
-        padding: 4px 10px;
-        font-size: 11px; 
-    }
 
-    /* Συμμάζεμα στις κάρτες (Pizza Cards) */
+    /* 2. Συμμάζεμα στις κάρτες (Pizza Cards) */
     #menu-container {
         gap: 8px; 
         padding: 5px 5px;
@@ -480,7 +471,7 @@ body {
         padding-left: 5px;
     }
 
-    /* Συμμάζεμα στο Footer */
+    /* 3. Συμμάζεμα στο Footer */
     .menu-footer {
         padding: 12px 10px;
     }
