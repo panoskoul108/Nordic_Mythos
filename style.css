@@ -1,4 +1,6 @@
-/* Reset & Base Styles */
+/* ==========================================================================
+   1. Reset & Base Styles
+   ========================================================================== */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -10,10 +12,12 @@ body {
     background-color: #ffffff; 
     color: #000000; 
     line-height: 1.4;
-    padding-bottom: 140px; /* Αυξημένο κενό για το footer */
+    padding-bottom: 180px; /* Κενό στο κάτω μέρος για να μην κρύβεται το μενού πίσω από το sticky footer */
 }
 
-/* Header & Logo */
+/* ==========================================================================
+   2. Header & Logo (Desktop & Base)
+   ========================================================================== */
 .menu-header {
     background-color: #ffffff;
     color: #000000;
@@ -57,7 +61,43 @@ body {
     font-size: 0.95rem;
 }
 
-/* Menu Container & Grid */
+/* ==========================================================================
+   3. Language Switcher
+   ========================================================================== */
+.language-switcher {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.lang-btn {
+    background: transparent;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    color: #333;
+}
+
+.lang-btn:hover {
+    background: #f0f0f0;
+}
+
+.lang-btn.active {
+    background: #e31837; 
+    color: white;
+    border-color: #e31837;
+    font-weight: bold;
+}
+
+/* ==========================================================================
+   4. Menu Container & Grid
+   ========================================================================== */
 .menu-container {
     max-width: 1250px;
     margin: 0 auto;
@@ -77,7 +117,9 @@ body {
     }
 }
 
-/* Πλαίσιο Προϊόντος (Pizza Card) */
+/* ==========================================================================
+   5. Pizza Cards
+   ========================================================================== */
 .pizza-card {
     background: #ffffff;
     border: 2px solid #000000; 
@@ -90,7 +132,6 @@ body {
     transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
-/* Όταν η κάρτα έχει φωτογραφία, γίνεται πατήσιμη */
 .pizza-card.clickable {
     cursor: pointer;
 }
@@ -101,7 +142,6 @@ body {
     background-color: #fafafa;
 }
 
-/* Το πλαίσιο του αριθμού */
 .pizza-number {
     border: 2px solid #000000; 
     border-radius: 6px;
@@ -113,7 +153,6 @@ body {
     min-width: 42px;
 }
 
-/* Μεσαίο τμήμα: Όνομα & Υλικά */
 .pizza-details {
     display: flex;
     flex-direction: column;
@@ -137,7 +176,6 @@ body {
     line-height: 1.3;
 }
 
-/* Δεξί τμήμα: Τιμή */
 .pizza-price {
     font-weight: 800;
     font-size: 1rem;
@@ -146,35 +184,34 @@ body {
     text-align: right;
 }
 
-/* =========================================
-   ΕΞΕΛΙΓΜΕΝΟ DESIGN ΓΙΑ ΤΟ MODAL (POPUP)
-   ========================================= */
+/* ==========================================================================
+   6. Modal (Popup) Design
+   ========================================================================== */
 .modal {
-    display: none; /* Κρυφό από προεπιλογή */
+    display: none; 
     position: fixed; 
     z-index: 1000; 
     left: 0;
     top: 0;
     width: 100%; 
     height: 100%; 
-    background-color: rgba(0, 0, 0, 0.75); /* Σκούρο φόντο πίσω */
-    backdrop-filter: blur(4px); /* Θολώνει ελαφρώς το μενού από πίσω */
+    background-color: rgba(0, 0, 0, 0.75); 
+    backdrop-filter: blur(4px); 
     align-items: center;
     justify-content: center;
     padding: 20px;
 }
 
-/* Το πλαίσιο του Popup */
 .modal-content {
     background-color: #ffffff;
     border: 3px solid #000000;
     border-radius: 16px;
     width: 100%;
-    max-width: 500px; /* Μέγιστο πλάτος για να φαίνεται τέλεια */
+    max-width: 500px; 
     overflow: hidden;
     position: relative;
     box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-    animation: zoomIn 0.25s ease-out; /* Εφέ απαλής μεγέθυνσης */
+    animation: zoomIn 0.25s ease-out; 
 }
 
 @keyframes zoomIn {
@@ -182,7 +219,6 @@ body {
     to { transform: scale(1); opacity: 1; }
 }
 
-/* Κουμπί Κλεισίματος (X) */
 .close-modal {
     position: absolute;
     top: 15px;
@@ -192,7 +228,7 @@ body {
     font-weight: bold;
     cursor: pointer;
     z-index: 10;
-    text-shadow: 0 2px 6px rgba(0,0,0,0.8); /* Σκιά για να φαίνεται πάνω από ανοιχτόχρωμες φωτό */
+    text-shadow: 0 2px 6px rgba(0,0,0,0.8); 
     transition: transform 0.15s ease;
 }
 
@@ -200,20 +236,18 @@ body {
     transform: scale(1.1);
 }
 
-/* Φωτογραφία μέσα στο Modal */
 .modal-image-container {
     width: 100%;
-    height: 320px; /* Ύψος φωτογραφίας */
+    height: 320px; 
     background-color: #f0f0f0;
 }
 
 #modal-image {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Γεμίζει το πλαίσιο ομοιόμορφα */
+    object-fit: cover; 
 }
 
-/* Κείμενα μέσα στο Modal */
 .modal-details {
     padding: 25px 20px;
 }
@@ -244,7 +278,9 @@ body {
     line-height: 1.5;
 }
 
-/* Footer (Sticky) */
+/* ==========================================================================
+   7. Footer (Sticky) & Contacts
+   ========================================================================== */
 .menu-footer {
     position: fixed;
     bottom: 0;
@@ -287,7 +323,7 @@ body {
     opacity: 0.6; 
 }
 
-/* Κουμπί Wolt */
+/* Wolt Button */
 .wolt-btn {
     background-color: #00c2e8; 
     color: #ffffff !important; 
@@ -315,45 +351,17 @@ body {
         order: -1; 
     }
 }
-/* Language Switcher Styles */
-.language-switcher {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 10px;
-    margin-bottom: 20px;
-}
 
-.lang-btn {
-    background: transparent;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 5px 10px;
-    cursor: pointer;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 14px;
-    transition: all 0.3s ease;
-    color: #333;
-}
-
-.lang-btn:hover {
-    background: #f0f0f0;
-}
-
-.lang-btn.active {
-    background: #e31837; /* Ένα χρώμα που ταιριάζει με τη Wolt ή το brand σου */
-    color: white;
-    border-color: #e31837;
-    font-weight: bold;
-}
-/* --- Social Media Icons --- */
+/* ==========================================================================
+   8. Social Media Links
+   ========================================================================== */
 .social-links {
     display: flex;
     justify-content: center;
     gap: 15px;
-    margin-top: 20px;
-    padding-top: 15px;
-    border-top: 1px solid #eaeaea; /* Μια λεπτή γραμμή που τα χωρίζει από το υπόλοιπο footer */
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 1px solid #eaeaea; 
 }
 
 .social-icon {
@@ -362,90 +370,145 @@ body {
     justify-content: center;
     width: 45px;
     height: 45px;
-    border-radius: 50%; /* Κάνει τα κουμπιά στρογγυλά */
+    border-radius: 50%; 
     color: white;
     font-size: 22px;
     text-decoration: none;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Εφέ στο Hover (όταν περνάει το ποντίκι) */
 .social-icon:hover {
-    transform: translateY(-4px); /* Ανασηκώνεται ελαφρώς */
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2); /* Βγάζει σκιά */
+    transform: translateY(-4px); 
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2); 
     color: white;
 }
 
-/* Χρώματα Facebook */
 .social-icon.facebook {
     background-color: #1877F2;
 }
 
-/* Χρώματα Instagram (gradient) */
 .social-icon.instagram {
     background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
 }
-/* --- Βελτιώσεις αποκλειστικά για Κινητά (Mobile Optimization) --- */
+
+/* ==========================================================================
+   9. Mobile Optimization (max-width: 768px)
+   ========================================================================== */
 @media (max-width: 768px) {
-    /* 1. Συμμάζεμα στο Header και στις Γλώσσες */
+    body {
+        padding-bottom: 230px; /* Αυξάνουμε το κενό στο κάτω μέρος για το κινητό */
+    }
+
+    /* Σφιχτό και κομψό Header */
     .menu-header {
-        padding: 10px 5px;
+        padding: 12px 10px;
+        margin-bottom: 15px;
     }
     
+    /* Διορθώνουμε τη σύγκρουση μεγέθους στο λογότυπο */
     .main-logo {
-        max-width: 70px; /* Μικραίνουμε ελαφρώς το λογότυπο */
-    }
-    
-    .language-switcher {
-        margin-top: 5px;
-        margin-bottom: 10px;
-        gap: 8px; /* Φέρνουμε τα κουμπιά πιο κοντά */
-    }
-    
-    .lang-btn {
-        padding: 5px 10px;
-        font-size: 12px; /* Μικρότερα γράμματα στα κουμπιά γλωσσών */
+        width: 70px !important;
+        height: 70px !important;
+        max-width: 70px !important;
+        clip-path: none !important; /* Αφαιρούμε το clip-path που το έκοβε περίεργα */
+        margin-top: 0 !important;
+        margin-bottom: 5px !important;
+        border-radius: 50%; /* Το κρατάμε τέλειο κύκλο */
     }
     
     .menu-header h1 {
-        font-size: 1.5rem;
+        font-size: 1.4rem; 
         margin-top: 5px;
+        margin-bottom: 2px;
+        letter-spacing: 1.5px;
     }
     
     .menu-header h2 {
-        font-size: 1.1rem;
+        font-size: 1rem;
+        margin-bottom: 3px;
+        letter-spacing: 3px;
     }
     
     .tagline {
-        font-size: 0.9rem;
-        margin-bottom: 15px;
+        font-size: 0.8rem;
+        margin-bottom: 8px;
+    }
+    
+    /* Συμμάζεμα στις Γλώσσες */
+    .language-switcher {
+        margin-top: 5px;
+        margin-bottom: 5px;
+        gap: 6px; 
+    }
+    
+    .lang-btn {
+        padding: 4px 10px;
+        font-size: 11px; 
     }
 
-    /* 2. Συμμάζεμα στο Footer (Τηλέφωνο, Διεύθυνση, Wolt, Social) */
+    /* Συμμάζεμα στις κάρτες (Pizza Cards) */
+    #menu-container {
+        gap: 8px; 
+        padding: 5px 5px;
+    }
+
+    .pizza-card {
+        padding: 8px 10px; 
+        gap: 8px;
+        border-radius: 8px;
+    }
+
+    .pizza-number {
+        font-size: 0.9rem; 
+        min-width: 32px;
+        padding: 3px 5px;
+        margin-right: 2px;
+    }
+
+    .pizza-title {
+        font-size: 0.9rem; 
+        margin-bottom: 1px;
+    }
+
+    .pizza-ingredients {
+        font-size: 0.72rem; 
+        line-height: 1.2;
+    }
+
+    .pizza-price {
+        font-size: 0.9rem;
+        padding-left: 5px;
+    }
+
+    /* Συμμάζεμα στο Footer */
     .menu-footer {
-        padding: 20px 10px;
+        padding: 12px 10px;
     }
     
     .footer-info {
-        gap: 12px; /* Πιο σφιχτά τα στοιχεία επικοινωνίας */
+        gap: 6px; 
+    }
+
+    .footer-link {
+        font-size: 0.8rem;
     }
     
     .wolt-btn {
-        padding: 10px 20px;
-        font-size: 14px;
-        width: 100%; /* Απλώνει το κουμπί σε όλο το πλάτος για ευκολότερο πάτημα */
+        padding: 8px 15px;
+        font-size: 12px;
+        width: 100%; 
         box-sizing: border-box;
     }
     
     .social-links {
-        margin-top: 15px;
-        padding-top: 15px;
-        gap: 15px;
+        margin-top: 8px;
+        padding-top: 8px;
+        gap: 12px;
     }
     
     .social-icon {
-        width: 38px;  /* Πιο διακριτικά εικονίδια social */
-        height: 38px;
-        font-size: 18px;
+        width: 34px;  
+        height: 34px;
+        font-size: 15px;
     }
 }
