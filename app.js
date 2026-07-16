@@ -1,21 +1,27 @@
-// Λεξικό Μεταφράσεων
+// Λεξικό Μεταφράσεων για τα στατικά κείμενα
 const translations = {
     da: {
         tagline: "Smag legenden",
         loading: "Indlæser menu...",
-        orderWolt: "Bestil via Wolt"
+        orderWolt: "Bestil via Wolt",
+        error: "Der opstod et problem med at indlæse menuen. Genindlæs venligst siden."
     },
     en: {
         tagline: "Taste the legend",
         loading: "Loading menu...",
-        orderWolt: "Order via Wolt"
+        orderWolt: "Order via Wolt",
+        error: "There was a problem loading the menu. Please refresh the page."
     },
     el: {
         tagline: "Γευτείτε τον μύθο",
         loading: "Φόρτωση Μενού...",
-        orderWolt: "Παραγγελία μέσω Wolt"
+        orderWolt: "Παραγγελία μέσω Wolt",
+        error: "Υπήρξε πρόβλημα στη φόρτωση του μενού. Παρακαλώ ανανεώστε τη σελίδα."
     }
 };
+
+// Εδώ θα αποθηκεύουμε τις πίτσες από το Google Sheet για γρήγορη αλλαγή γλώσσας
+let globalPizzaData = [];
 
 // Συνάρτηση αλλαγής γλώσσας
 function setLanguage(lang) {
@@ -30,92 +36,107 @@ function setLanguage(lang) {
     // 2. Αλλαγή της γλώσσας στο HTML tag για το SEO
     document.documentElement.lang = lang;
 
-    // 3. Αποθήκευση της επιλογής του χρήστη (ώστε αν κάνει refresh να θυμάται τη γλώσσα)
+    // 3. Αποθήκευση της επιλογής του χρήστη
     localStorage.setItem('selectedLang', lang);
 
     // 4. Οπτική ένδειξη του ενεργού κουμπιού
     document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-    document.getElementById(`btn-${lang}`).classList.add('active');
+    const activeButton = document.getElementById(`btn-${lang}`);
+    if(activeButton) activeButton.classList.add('active');
 
-    // (Προαιρετικό) Εδώ θα καλείς ξανά τη συνάρτηση που φορτώνει τις πίτσες σου 
-    // για να φορτώσουν με τη σωστή γλώσσα αν τις τραβάς από βάση δεδομένων.
-    // π.χ. loadPizzas(lang);
+    // 5. Αν έχουν ήδη φορτώσει τα δεδομένα, ξαναζωγραφίζουμε το μενού στη νέα γλώσσα
+    if (globalPizzaData.length > 0) {
+        renderMenu(lang);
+    }
 }
 
-// Όταν φορτώνει η σελίδα, έλεγξε αν ο χρήστης είχε επιλέξει γλώσσα παλιότερα, αλλιώς βάλε Δανέζικα
-document.addEventListener('DOMContentLoaded', () => {
-    const savedLang = localStorage.getItem('selectedLang') || 'da';
-    setLanguage(savedLang);
-});
+// Ρυθμίσεις Google Sheets
 const sheetId = '1Fp6ct0Iz0tt77WfWN_UwOIaZn_qZzLcEHDornChx1Yg'; 
 const sheetName = encodeURIComponent('Sheet1'); 
 const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&sheet=${sheetName}`;
 
-fetch(url)
-    .then(response => response.text())
-    .then(text => {
-        const jsonText = text.substring(47).slice(0, -2);
-        const data = JSON.parse(jsonText);
-        
-        const container = document.getElementById('menu-container');
-        container.innerHTML = ''; 
-
-        const rows = data.table.rows;
-        
-        for (let i = 0; i < rows.length; i++) {
-            let row = rows[i];
+// Συνάρτηση για τη φόρτωση δεδομένων
+function fetchMenuData() {
+    fetch(url)
+        .then(response => response.text())
+        .then(text => {
+            const jsonText = text.substring(47).slice(0, -2);
+            const data = JSON.parse(jsonText);
             
-            if (!row || !row.c || !row.c[0]) continue; 
-
-            // Παίρνουμε τις τιμές (Στήλη Α, Β, C, D, και τη νέα στήλη Ε για την εικόνα)
-            let number = row.c[0] && row.c[0].v ? row.c[0].v : '';
-            let title = row.c[1] && row.c[1].v ? row.c[1].v : '';
-            let ingredients = row.c[2] && row.c[2].v ? row.c[2].v : '';
-            let price = row.c[3] && row.c[3].v ? row.c[3].v : '';
-            let imageName = row.c[4] && row.c[4].v ? row.c[4].v.toString().trim() : ''; // Στήλη E
-
-            // Φορμάρισμα αριθμού (π.χ. '01')
-            if (number.toString().length === 1 && !isNaN(number)) {
-                number = '0' + number;
-            }
-
-            // Παράλειψη των επικεφαλίδων
-            if (number.toString().toLowerCase() === 'number' || title.toString().toLowerCase() === 'title') {
-                continue;
-            }
-
-            // Έλεγχος αν υπάρχει όνομα αρχείου εικόνας στη στήλη E
-            const hasImage = imageName !== '';
-            const clickableClass = hasImage ? 'clickable' : '';
-            const imagePath = hasImage ? `images/${imageName}` : '';
-
-            // Φτιάχνουμε την κάρτα (προσθέτουμε data attributes για να τα διαβάσει το Modal)
-            const cardHTML = `
-                <div class="pizza-card ${clickableClass}" 
-                     data-number="${number}" 
-                     data-title="${title}" 
-                     data-ingredients="${ingredients}" 
-                     data-price="${price}" 
-                     data-image="${imagePath}">
-                    <div class="pizza-number">${number}</div>
-                    <div class="pizza-details">
-                        <h3 class="pizza-title">${title}</h3>
-                        <p class="pizza-ingredients">${ingredients}</p>
-                    </div>
-                    <div class="pizza-price">${price}</div>
-                </div>
-            `;
+            // Αποθήκευση των δεδομένων στη μνήμη
+            globalPizzaData = data.table.rows;
             
-            container.innerHTML += cardHTML;
+            // Εμφάνιση του μενού στην τρέχουσα γλώσσα
+            const currentLang = localStorage.getItem('selectedLang') || 'da';
+            renderMenu(currentLang);
+        })
+        .catch(error => {
+            console.error('Σφάλμα κατά τη φόρτωση από Google Sheets:', error);
+            const currentLang = localStorage.getItem('selectedLang') || 'da';
+            document.getElementById('menu-container').innerHTML = `<p style="text-align:center; width:100%;">${translations[currentLang].error}</p>`;
+        });
+}
+
+// Συνάρτηση που "ζωγραφίζει" τις πίτσες στην οθόνη
+function renderMenu(lang) {
+    const container = document.getElementById('menu-container');
+    container.innerHTML = ''; 
+
+    for (let i = 0; i < globalPizzaData.length; i++) {
+        let row = globalPizzaData[i];
+        
+        if (!row || !row.c || !row.c[0]) continue; 
+
+        // Ανάγνωση στηλών βάσει της νέας δομής (7 στήλες)
+        let number = row.c[0] && row.c[0].v ? row.c[0].v : '';
+        let title = row.c[1] && row.c[1].v ? row.c[1].v : '';
+        let ingredientsDA = row.c[2] && row.c[2].v ? row.c[2].v : '';
+        let ingredientsEN = row.c[3] && row.c[3].v ? row.c[3].v : '';
+        let ingredientsEL = row.c[4] && row.c[4].v ? row.c[4].v : '';
+        let price = row.c[5] && row.c[5].v ? row.c[5].v : '';
+        let imageName = row.c[6] && row.c[6].v ? row.c[6].v.toString().trim() : '';
+
+        // Επιλογή σωστών υλικών βάσει γλώσσας (με fallback στα Δανέζικα αν λείπει η μετάφραση)
+        let activeIngredients = ingredientsDA; 
+        if (lang === 'en' && ingredientsEN) activeIngredients = ingredientsEN;
+        if (lang === 'el' && ingredientsEL) activeIngredients = ingredientsEL;
+
+        // Φορμάρισμα αριθμού (π.χ. '01')
+        if (number.toString().length === 1 && !isNaN(number)) {
+            number = '0' + number;
         }
 
-        // Ενεργοποιούμε τα κλικ στις κάρτες που έχουν φωτογραφία
-        setupModalEvents();
-    })
-    .catch(error => {
-        console.error('Σφάλμα κατά τη φόρτωση από Google Sheets:', error);
-        document.getElementById('menu-container').innerHTML = '<p style="text-align:center; width:100%;">Υπήρξε πρόβλημα στη φόρτωση του μενού. Παρακαλώ ανανεώστε τη σελίδα.</p>';
-    });
+        // Παράλειψη των επικεφαλίδων
+        if (number.toString().toLowerCase() === 'number' || title.toString().toLowerCase() === 'title') {
+            continue;
+        }
+
+        const hasImage = imageName !== '';
+        const clickableClass = hasImage ? 'clickable' : '';
+        const imagePath = hasImage ? `images/${imageName}` : '';
+
+        const cardHTML = `
+            <div class="pizza-card ${clickableClass}" 
+                 data-number="${number}" 
+                 data-title="${title}" 
+                 data-ingredients="${activeIngredients}" 
+                 data-price="${price}" 
+                 data-image="${imagePath}">
+                <div class="pizza-number">${number}</div>
+                <div class="pizza-details">
+                    <h3 class="pizza-title">${title}</h3>
+                    <p class="pizza-ingredients">${activeIngredients}</p>
+                </div>
+                <div class="pizza-price">${price}</div>
+            </div>
+        `;
+        
+        container.innerHTML += cardHTML;
+    }
+
+    // Ενεργοποιούμε τα κλικ στις κάρτες (πρέπει να ξαναγίνει επειδή ξαναφτιάξαμε το HTML)
+    setupModalEvents();
+}
 
 // Λειτουργία του Modal (Popup)
 function setupModalEvents() {
@@ -128,35 +149,27 @@ function setupModalEvents() {
     const modalPrice = document.getElementById('modal-price');
     const modalIngredients = document.getElementById('modal-ingredients');
 
-    // Όταν πατιέται μια κάρτα με κλάση "clickable"
     document.querySelectorAll('.pizza-card.clickable').forEach(card => {
-        card.addEventListener('click', () => {
-            // Παίρνουμε τα δεδομένα από το Google Sheet
-            const imageSrc = card.getAttribute('data-image');
-            const num = card.getAttribute('data-number');
-            const title = card.getAttribute('data-title');
-            const price = card.getAttribute('data-price');
-            const ingredients = card.getAttribute('data-ingredients');
+        // Αφαίρεση παλιών event listeners (για ασφάλεια κατά την αλλαγή γλώσσας)
+        const newCard = card.cloneNode(true);
+        card.parentNode.replaceChild(newCard, card);
 
-            // Τα περνάμε μέσα στο Modal
-            modalImage.src = imageSrc;
-            modalNumber.textContent = num;
-            modalTitle.textContent = title;
-            modalPrice.textContent = price;
-            modalIngredients.textContent = ingredients;
+        newCard.addEventListener('click', () => {
+            modalImage.src = newCard.getAttribute('data-image');
+            modalNumber.textContent = newCard.getAttribute('data-number');
+            modalTitle.textContent = newCard.getAttribute('data-title');
+            modalPrice.textContent = newCard.getAttribute('data-price');
+            modalIngredients.textContent = newCard.getAttribute('data-ingredients');
 
-            // Εμφανίζουμε το Modal
             modal.style.display = 'flex';
-            document.body.style.overflow = 'hidden'; // Κλειδώνει το scrolling της πίσω σελίδας
+            document.body.style.overflow = 'hidden'; 
         });
     });
 
-    // Κλείσιμο με το κουμπί (X)
     closeBtn.addEventListener('click', () => {
         closeModal(modal);
     });
 
-    // Κλείσιμο αν πατηθεί οπουδήποτε έξω από το λευκό πλαίσιο
     window.addEventListener('click', (e) => {
         if (e.target === modal) {
             closeModal(modal);
@@ -166,5 +179,12 @@ function setupModalEvents() {
 
 function closeModal(modal) {
     modal.style.display = 'none';
-    document.body.style.overflow = ''; // Ξεκλειδώνει το scrolling
+    document.body.style.overflow = ''; 
 }
+
+// Όταν φορτώνει η σελίδα, ορίζουμε τη γλώσσα και κατεβάζουμε τα δεδομένα
+document.addEventListener('DOMContentLoaded', () => {
+    const savedLang = localStorage.getItem('selectedLang') || 'da';
+    setLanguage(savedLang); 
+    fetchMenuData(); 
+});
