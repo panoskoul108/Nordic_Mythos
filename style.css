@@ -385,3 +385,67 @@ body {
 .social-icon.instagram {
     background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
 }
+/* --- Βελτιώσεις αποκλειστικά για Κινητά (Mobile Optimization) --- */
+@media (max-width: 768px) {
+    /* 1. Συμμάζεμα στο Header και στις Γλώσσες */
+    .menu-header {
+        padding: 10px 5px;
+    }
+    
+    .main-logo {
+        max-width: 70px; /* Μικραίνουμε ελαφρώς το λογότυπο */
+    }
+    
+    .language-switcher {
+        margin-top: 5px;
+        margin-bottom: 10px;
+        gap: 8px; /* Φέρνουμε τα κουμπιά πιο κοντά */
+    }
+    
+    .lang-btn {
+        padding: 5px 10px;
+        font-size: 12px; /* Μικρότερα γράμματα στα κουμπιά γλωσσών */
+    }
+    
+    .menu-header h1 {
+        font-size: 1.5rem;
+        margin-top: 5px;
+    }
+    
+    .menu-header h2 {
+        font-size: 1.1rem;
+    }
+    
+    .tagline {
+        font-size: 0.9rem;
+        margin-bottom: 15px;
+    }
+
+    /* 2. Συμμάζεμα στο Footer (Τηλέφωνο, Διεύθυνση, Wolt, Social) */
+    .menu-footer {
+        padding: 20px 10px;
+    }
+    
+    .footer-info {
+        gap: 12px; /* Πιο σφιχτά τα στοιχεία επικοινωνίας */
+    }
+    
+    .wolt-btn {
+        padding: 10px 20px;
+        font-size: 14px;
+        width: 100%; /* Απλώνει το κουμπί σε όλο το πλάτος για ευκολότερο πάτημα */
+        box-sizing: border-box;
+    }
+    
+    .social-links {
+        margin-top: 15px;
+        padding-top: 15px;
+        gap: 15px;
+    }
+    
+    .social-icon {
+        width: 38px;  /* Πιο διακριτικά εικονίδια social */
+        height: 38px;
+        font-size: 18px;
+    }
+}
