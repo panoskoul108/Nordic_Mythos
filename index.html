@@ -7,7 +7,7 @@
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <link rel="stylesheet" href="style.css?v=5">
+    <link rel="stylesheet" href="style.css?v=4">
     
     <link rel="icon" type="image/jpeg" href="images/favicon.jpg">
     <meta name="description" content="Nordic Mythos i Aalborg - Se vores lækre pizzakatalog online. Bestil nemt og hurtigt den bedste pizza i Aalborg via Wolt!">
@@ -49,29 +49,19 @@
 <body>
 
     <header class="menu-header">
-        <div class="top-nav">
-            <div class="nav-left">
-                <img src="logo.jpg" alt="Nordic Mythos Logo" class="nav-logo">
-            </div>
-            
-            <div class="nav-right">
-                <div class="custom-dropdown">
-                    <button class="dropbtn" id="current-lang-btn">🇩🇰 DA <i class="fas fa-chevron-down"></i></button>
-                    <div class="dropdown-content">
-                        <a href="#" onclick="setLanguage('da'); return false;">🇩🇰 Dansk</a>
-                        <a href="#" onclick="setLanguage('en'); return false;">🇬🇧 English</a>
-                        <a href="#" onclick="setLanguage('el'); return false;">🇬🇷 Ελληνικά</a>
-                    </div>
-                </div>
-            </div>
+        <div class="language-switcher">
+            <button onclick="setLanguage('da')" class="lang-btn" id="btn-da">🇩🇰 DA</button>
+            <button onclick="setLanguage('en')" class="lang-btn" id="btn-en">🇬🇧 EN</button>
+            <button onclick="setLanguage('el')" class="lang-btn" id="btn-el">🇬🇷 EL</button>
         </div>
-
-        <div class="header-titles">
-            <h1>NORDIC MYTHOS</h1>
-            <h2>PIZZAKATALOG</h2>
-            <p class="tagline" data-i18n="tagline">Taste the legend</p>
+        <div class="logo-container">
+            <img src="logo.jpg" alt="Nordic Mythos Logo" class="main-logo">
         </div>
+        <h1>NORDIC MYTHOS</h1>
+        <h2>PIZZAKATALOG</h2>
+        <p class="tagline" data-i18n="tagline">Taste the legend</p>
     </header>
+
     <main class="menu-container">
         <section class="menu-section">
             <div class="pizza-grid" id="menu-container">
