@@ -63,37 +63,67 @@ body {
 }
 
 /* ==========================================================================
-   3. Language Switcher
+   3. Language Switcher (Dropdown Style)
    ========================================================================== */
-.language-switcher {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 10px;
-    margin-bottom: 20px;
+.language-switcher.dropdown {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 100;
 }
 
-.lang-btn {
-    background: transparent;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 5px 10px;
+.dropbtn {
+    background-color: #ffffff;
+    color: #000000;
+    padding: 8px 12px;
+    font-size: 13px;
+    font-weight: 800;
+    border: 2px solid #000000; /* Bold μαύρο περίγραμμα */
+    border-radius: 6px;
     cursor: pointer;
     font-family: 'Montserrat', sans-serif;
-    font-size: 14px;
-    transition: all 0.3s ease;
-    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s ease;
 }
 
-.lang-btn:hover {
-    background: #f0f0f0;
+.dropbtn:hover {
+    background-color: #fafafa;
 }
 
-.lang-btn.active {
-    background: #e31837; 
-    color: white;
-    border-color: #e31837;
-    font-weight: bold;
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: #ffffff;
+    min-width: 120px;
+    box-shadow: 0px 4px 12px rgba(0,0,0,0.15);
+    border: 2px solid #000000; /* Bold μαύρο περίγραμμα */
+    border-radius: 6px;
+    overflow: hidden;
+    margin-top: 5px;
+}
+
+.dropdown-content a {
+    color: #000000;
+    padding: 10px 14px;
+    text-decoration: none;
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    text-align: left;
+    transition: background-color 0.2s;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+    color: #e31837; /* Brand κόκκινο στο hover */
+}
+
+/* Εμφάνιση του μενού όταν περνάει το ποντίκι */
+.language-switcher.dropdown:hover .dropdown-content {
+    display: block;
 }
 
 /* ==========================================================================
@@ -435,16 +465,24 @@ body {
         margin-bottom: 8px;
     }
     
-    /* Συμμάζεμα στις Γλώσσες */
-    .language-switcher {
-        margin-top: 5px;
-        margin-bottom: 5px;
-        gap: 6px; 
+    /* Συμμάζεμα στις Γλώσσες (Dropdown) για το Κινητό */
+    .language-switcher.dropdown {
+        top: 10px;
+        right: 10px;
     }
     
-    .lang-btn {
-        padding: 4px 10px;
-        font-size: 11px; 
+    .dropbtn {
+        padding: 5px 10px;
+        font-size: 11px;
+    }
+
+    .dropdown-content {
+        min-width: 110px;
+    }
+
+    .dropdown-content a {
+        padding: 8px 12px;
+        font-size: 11px;
     }
 
     /* Συμμάζεμα στις κάρτες (Pizza Cards) */
