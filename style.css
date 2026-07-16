@@ -346,3 +346,42 @@ body {
     border-color: #e31837;
     font-weight: bold;
 }
+/* --- Social Media Icons --- */
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #eaeaea; /* Μια λεπτή γραμμή που τα χωρίζει από το υπόλοιπο footer */
+}
+
+.social-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%; /* Κάνει τα κουμπιά στρογγυλά */
+    color: white;
+    font-size: 22px;
+    text-decoration: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Εφέ στο Hover (όταν περνάει το ποντίκι) */
+.social-icon:hover {
+    transform: translateY(-4px); /* Ανασηκώνεται ελαφρώς */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2); /* Βγάζει σκιά */
+    color: white;
+}
+
+/* Χρώματα Facebook */
+.social-icon.facebook {
+    background-color: #1877F2;
+}
+
+/* Χρώματα Instagram (gradient) */
+.social-icon.instagram {
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+}
