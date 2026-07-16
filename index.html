@@ -49,10 +49,13 @@
 <body>
 
     <header class="menu-header">
-        <div class="language-switcher">
-            <button onclick="setLanguage('da')" class="lang-btn" id="btn-da">🇩🇰 DA</button>
-            <button onclick="setLanguage('en')" class="lang-btn" id="btn-en">🇬🇧 EN</button>
-            <button onclick="setLanguage('el')" class="lang-btn" id="btn-el">🇬🇷 EL</button>
+        <div class="language-switcher dropdown">
+            <button class="dropbtn" id="current-lang-btn">🇩🇰 DA <i class="fas fa-chevron-down"></i></button>
+            <div class="dropdown-content">
+                <a href="#" onclick="setLanguage('da'); return false;">🇩🇰 Dansk</a>
+                <a href="#" onclick="setLanguage('en'); return false;">🇬🇧 English</a>
+                <a href="#" onclick="setLanguage('el'); return false;">🇬🇷 Ελληνικά</a>
+            </div>
         </div>
         <div class="logo-container">
             <img src="logo.jpg" alt="Nordic Mythos Logo" class="main-logo">
