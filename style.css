@@ -15,30 +15,27 @@ body {
     padding-bottom: 180px; /* Κενό στο κάτω μέρος για να μην κρύβεται το μενού πίσω από το sticky footer */
 }
 
-/* ==========================================================================
-   2. Header & Logo (Desktop & Base)
-   ========================================================================== */
 .menu-header {
     background-color: #ffffff;
     color: #000000;
     text-align: center;
-    padding: 30px 20px;
+    padding: 15px 20px 10px 20px; /* Μειώσαμε το πάνω/κάτω padding (από 30px σε 15px/10px) */
     border-bottom: 3px solid #000000; 
-    margin-bottom: 35px;
-    position: relative; /* Προσθήκη για να κλειδώσει το dropdown πάνω δεξιά */
+    margin-bottom: 20px; /* Μειώσαμε το κενό κάτω από το header (από 35px σε 20px) */
+    position: relative;
 }
 
 .logo-container {
-    margin-bottom: 5px;
+    margin-bottom: 2px; /* Μειώσαμε το κενό κάτω από το logo container */
 }
 
 .main-logo {
-    width: 300px; 
-    height: 300px;
+    width: 320px; /* Αυξήσαμε το μέγεθος (από 300px σε 320px) */
+    height: 320px; /* Αυξήσαμε το μέγεθος (από 300px σε 320px) */
     object-fit: cover;
     clip-path: circle(19% at 50% 42.3%); 
-    margin-top: -80px;
-    margin-bottom: -110px; 
+    margin-top: -85px; /* Προσαρμογή για να "κάτσει" σωστά λόγω μεγαλύτερου μεγέθους */
+    margin-bottom: -120px; /* Προσαρμογή για να μαζευτεί το κενό από κάτω */
 }
 
 .menu-header h1 {
@@ -422,29 +419,21 @@ body {
     background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
 }
 
-/* ==========================================================================
-   9. Mobile Optimization (max-width: 768px)
-   ========================================================================== */
-@media (max-width: 768px) {
-    body {
-        padding-bottom: 230px; /* Αυξάνουμε το κενό στο κάτω μέρος για το κινητό */
-    }
-
-    /* Σφιχτό και κομψό Header */
+/* Σφιχτό και κομψό Header */
     .menu-header {
-        padding: 12px 10px;
-        margin-bottom: 15px;
+        padding: 8px 10px 5px 10px; /* Μειώσαμε το πάνω/κάτω padding στο κινητό */
+        margin-bottom: 10px; /* Μειώσαμε το κενό κάτω από το header στα κινητά */
     }
     
     /* Διορθώνουμε τη σύγκρουση μεγέθους στο λογότυπο */
     .main-logo {
-        width: 70px !important;
-        height: 70px !important;
-        max-width: 70px !important;
-        clip-path: none !important; /* Αφαιρούμε το clip-path που το έκοβε περίεργα */
+        width: 85px !important; /* Μεγαλώσαμε το logo στο κινητό (από 70px σε 85px) */
+        height: 85px !important; /* Μεγαλώσαμε το logo στο κινητό (από 70px σε 85px) */
+        max-width: 85px !important;
+        clip-path: none !important;
         margin-top: 0 !important;
-        margin-bottom: 5px !important;
-        border-radius: 50%; /* Το κρατάμε τέλειο κύκλο */
+        margin-bottom: 2px !important; /* Μικρότερο κάτω κενό */
+        border-radius: 50%;
     }
     
     .menu-header h1 {
