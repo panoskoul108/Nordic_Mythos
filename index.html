@@ -46,19 +46,25 @@
 <body>
 
     <header class="menu-header">
+        <!-- Επιλογέας Γλώσσας -->
+        <div class="language-switcher">
+            <button onclick="setLanguage('da')" class="lang-btn" id="btn-da">🇩🇰 DA</button>
+            <button onclick="setLanguage('en')" class="lang-btn" id="btn-en">🇬🇧 EN</button>
+            <button onclick="setLanguage('el')" class="lang-btn" id="btn-el">🇬🇷 EL</button>
+        </div>
         <div class="logo-container">
             <img src="logo.jpg" alt="Nordic Mythos Logo" class="main-logo">
         </div>
         <h1>NORDIC MYTHOS</h1>
         <h2>PIZZAKATALOG</h2>
-        <p class="tagline">Taste the legend</p>
+       <p class="tagline" data-i18n="tagline">Taste the legend</p>
     </header>
 
     <main class="menu-container">
         <section class="menu-section">
             <div class="pizza-grid" id="menu-container">
                 <p style="text-align: center; font-weight: bold; width: 100%; grid-column: 1 / -1;">
-                    Φόρτωση Μενού...
+                    <span data-i18n="loading">Indlæser menu...</span>
                 </p>
             </div>
         </section>
@@ -87,7 +93,7 @@
                 <span class="phone">📞 93949755</span>
             </a>
             <a href="https://wolt.com/da/dnk/aalborg/restaurant/mythos-pizza?srsltid=AfmBOorvtUlsmwlpqY_njT0AXNxkM7JZ2VbnfQ4wDxzJuphT5mWSL-1y" target="_blank" rel="noopener noreferrer" class="wolt-btn">
-                Order via Wolt
+                <span data-i18n="orderWolt">Bestil via Wolt</span>
             </a>
             <a href="https://www.google.com/maps/search/?api=1&query=Ved+Stranden+19,+9000+Aalborg,+Denmark" target="_blank" rel="noopener noreferrer" class="footer-link">
                 <span class="address">📍 VED STRANDEN 19, 9000 AALBORG</span>
