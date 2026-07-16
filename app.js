@@ -1,3 +1,52 @@
+// Λεξικό Μεταφράσεων
+const translations = {
+    da: {
+        tagline: "Smag legenden",
+        loading: "Indlæser menu...",
+        orderWolt: "Bestil via Wolt"
+    },
+    en: {
+        tagline: "Taste the legend",
+        loading: "Loading menu...",
+        orderWolt: "Order via Wolt"
+    },
+    el: {
+        tagline: "Γευτείτε τον μύθο",
+        loading: "Φόρτωση Μενού...",
+        orderWolt: "Παραγγελία μέσω Wolt"
+    }
+};
+
+// Συνάρτηση αλλαγής γλώσσας
+function setLanguage(lang) {
+    // 1. Αλλαγή των στατικών κειμένων
+    document.querySelectorAll('[data-i18n]').forEach(element => {
+        const key = element.getAttribute('data-i18n');
+        if (translations[lang][key]) {
+            element.innerText = translations[lang][key];
+        }
+    });
+
+    // 2. Αλλαγή της γλώσσας στο HTML tag για το SEO
+    document.documentElement.lang = lang;
+
+    // 3. Αποθήκευση της επιλογής του χρήστη (ώστε αν κάνει refresh να θυμάται τη γλώσσα)
+    localStorage.setItem('selectedLang', lang);
+
+    // 4. Οπτική ένδειξη του ενεργού κουμπιού
+    document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+    document.getElementById(`btn-${lang}`).classList.add('active');
+
+    // (Προαιρετικό) Εδώ θα καλείς ξανά τη συνάρτηση που φορτώνει τις πίτσες σου 
+    // για να φορτώσουν με τη σωστή γλώσσα αν τις τραβάς από βάση δεδομένων.
+    // π.χ. loadPizzas(lang);
+}
+
+// Όταν φορτώνει η σελίδα, έλεγξε αν ο χρήστης είχε επιλέξει γλώσσα παλιότερα, αλλιώς βάλε Δανέζικα
+document.addEventListener('DOMContentLoaded', () => {
+    const savedLang = localStorage.getItem('selectedLang') || 'da';
+    setLanguage(savedLang);
+});
 const sheetId = '1Fp6ct0Iz0tt77WfWN_UwOIaZn_qZzLcEHDornChx1Yg'; 
 const sheetName = encodeURIComponent('Sheet1'); 
 const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&sheet=${sheetName}`;
