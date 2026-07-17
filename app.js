@@ -1,42 +1,3 @@
-// --- Λειτουργία Dark Mode & Συννεφάκι Προσφοράς ---
-document.addEventListener('DOMContentLoaded', () => {
-    const darkModeToggle = document.getElementById('dark-mode-toggle');
-    const body = document.body;
-
-    if (localStorage.getItem('darkMode') === 'enabled') {
-        body.classList.add('dark-mode');
-        darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-    }
-
-    darkModeToggle.addEventListener('click', () => {
-        body.classList.toggle('dark-mode');
-        if (body.classList.contains('dark-mode')) {
-            localStorage.setItem('darkMode', 'enabled');
-            darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-        } else {
-            localStorage.setItem('darkMode', 'disabled');
-            darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
-        }
-    });
-
-    // Συννεφάκι Προσφοράς - Αλληλεπίδραση
-    const promoTrigger = document.getElementById('promo-trigger');
-    const promoBubble = document.getElementById('promo-bubble');
-    const closePromo = document.getElementById('close-promo');
-    const notifBadge = document.querySelector('.notification-badge');
-
-    if (promoTrigger && promoBubble && closePromo) {
-        promoTrigger.addEventListener('click', () => {
-            promoBubble.classList.toggle('hidden');
-            if (notifBadge) notifBadge.style.display = 'none'; // Κρύβει το "1" όταν το διαβάσει
-        });
-
-        closePromo.addEventListener('click', () => {
-            promoBubble.classList.add('hidden');
-        });
-    }
-});
-
 // Λεξικό Μεταφράσεων 
 const translations = {
     da: { tagline: "Smag legenden", loading: "Indlæser menu...", orderWolt: "Bestil via Wolt", open: "Åben nu", closed: "Lukket" },
@@ -73,6 +34,7 @@ const menuUrl = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=o
 const settingsUrl = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent('Settings')}`;
 
 function fetchMenuData() {
+    // 1. Κατέβασμα Πιτσών
     fetch(menuUrl)
         .then(response => response.text())
         .then(text => {
@@ -81,6 +43,7 @@ function fetchMenuData() {
             renderMenu(localStorage.getItem('selectedLang') || 'da');
         }).catch(error => console.error('Σφάλμα (Menu):', error));
 
+    // 2. Κατέβασμα Ρυθμίσεων
     fetch(settingsUrl)
         .then(response => response.text())
         .then(text => {
@@ -120,7 +83,7 @@ function renderSettings(lang) {
         }
         promoContainer.style.display = 'flex'; 
     } else {
-        promoContainer.style.display = 'none';
+        promoContainer.style.display = 'none'; // Αν είναι NO, κρύβεται εντελώς
     }
 
     const statusIndicator = document.getElementById('store-status-indicator');
@@ -289,3 +252,51 @@ function setupModalEvents() {
         }
     });
 }
+
+// ==========================================================
+// ΕΔΩ ΕΙΝΑΙ Ο "ΚΙΝΗΤΗΡΑΣ" ΠΟΥ ΕΛΕΙΠΕ ΚΑΙ ΔΕΝ ΦΟΡΤΩΝΕ ΤΟ SITE!
+// Αρχικοποιεί τα πάντα μόλις ανοίξει η σελίδα.
+// ==========================================================
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. Εκκίνηση Δεδομένων
+    const savedLang = localStorage.getItem('selectedLang') || 'da';
+    setLanguage(savedLang); 
+    fetchMenuData(); 
+
+    // 2. Εκκίνηση Dark Mode
+    const darkModeToggle = document.getElementById('dark-mode-toggle');
+    const body = document.body;
+
+    if (localStorage.getItem('darkMode') === 'enabled') {
+        body.classList.add('dark-mode');
+        darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+    }
+
+    darkModeToggle.addEventListener('click', () => {
+        body.classList.toggle('dark-mode');
+        if (body.classList.contains('dark-mode')) {
+            localStorage.setItem('darkMode', 'enabled');
+            darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        } else {
+            localStorage.setItem('darkMode', 'disabled');
+            darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+        }
+    });
+
+    // 3. Εκκίνηση Συννεφάκι (Promo Bubble)
+    const promoTrigger = document.getElementById('promo-trigger');
+    const promoBubble = document.getElementById('promo-bubble');
+    const closePromo = document.getElementById('close-promo');
+    const notifBadge = document.querySelector('.notification-badge');
+
+    if (promoTrigger && promoBubble && closePromo) {
+        promoTrigger.addEventListener('click', () => {
+            promoBubble.classList.toggle('hidden');
+            if (notifBadge) notifBadge.style.display = 'none'; 
+        });
+
+        closePromo.addEventListener('click', () => {
+            promoBubble.classList.add('hidden');
+        });
+    }
+});
