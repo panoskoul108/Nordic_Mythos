@@ -33,10 +33,11 @@ body.dark-mode {
 
 body {
     font-family: 'Montserrat', sans-serif;
-    background-color: #ffffff; 
-    color: #000000; 
+    background-color: var(--bg-color); 
+    color: var(--text-color); 
     line-height: 1.4;
-    padding-bottom: 180px; /* Κενό στο κάτω μέρος για να μην κρύβεται το μενού πίσω από το sticky footer */
+    padding-bottom: 180px;
+    transition: background-color 0.3s ease, color 0.3s ease; /* Ομαλή αλλαγή σε Dark Mode */
 }
 
 /* ==========================================================================
