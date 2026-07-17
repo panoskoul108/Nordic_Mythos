@@ -7,7 +7,7 @@
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <link rel="stylesheet" href="style.css?v=11">
+    <link rel="stylesheet" href="style.css?v=12">
     
     <link rel="icon" type="image/jpeg" href="images/favicon.jpg">
     <meta name="description" content="Nordic Mythos i Aalborg - Se vores lækre pizzakatalog online. Bestil nemt og hurtigt den bedste pizza i Aalborg via Wolt!">
@@ -48,6 +48,11 @@
 </head>
 <body>
 
+    <!-- Αναδυόμενο Banner Προσφορών -->
+    <div id="promo-banner" class="promo-banner" style="display: none;">
+        <span id="promo-text"></span>
+    </div>
+
     <header class="menu-header">
         <!-- Dark Mode Button (Αριστερά) -->
         <button id="dark-mode-toggle" class="dropbtn icon-btn" aria-label="Toggle Dark Mode">
@@ -72,6 +77,12 @@
         <h1>NORDIC MYTHOS</h1>
         <h2>PIZZAKATALOG</h2>
         <p class="tagline" data-i18n="tagline">Taste the legend</p>
+        
+        <!-- Δυναμική Ένδειξη Ωραρίου / Κατάστασης -->
+        <div class="store-status-container">
+            <div id="store-status-indicator" class="status-dot"></div>
+            <span id="store-status-text">...</span>
+        </div>
     </header>
 
     <main class="menu-container">
