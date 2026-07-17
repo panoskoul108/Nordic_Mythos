@@ -1,4 +1,4 @@
-// --- Λειτουργία Dark Mode ---
+// --- Λειτουργία Dark Mode & Συννεφάκι Προσφοράς ---
 document.addEventListener('DOMContentLoaded', () => {
     const darkModeToggle = document.getElementById('dark-mode-toggle');
     const body = document.body;
@@ -18,38 +18,34 @@ document.addEventListener('DOMContentLoaded', () => {
             darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
         }
     });
+
+    // Συννεφάκι Προσφοράς - Αλληλεπίδραση
+    const promoTrigger = document.getElementById('promo-trigger');
+    const promoBubble = document.getElementById('promo-bubble');
+    const closePromo = document.getElementById('close-promo');
+    const notifBadge = document.querySelector('.notification-badge');
+
+    if (promoTrigger && promoBubble && closePromo) {
+        promoTrigger.addEventListener('click', () => {
+            promoBubble.classList.toggle('hidden');
+            if (notifBadge) notifBadge.style.display = 'none'; // Κρύβει το "1" όταν το διαβάσει
+        });
+
+        closePromo.addEventListener('click', () => {
+            promoBubble.classList.add('hidden');
+        });
+    }
 });
 
 // Λεξικό Μεταφράσεων 
 const translations = {
-    da: {
-        tagline: "Smag legenden",
-        loading: "Indlæser menu...",
-        orderWolt: "Bestil via Wolt",
-        error: "Der opstod et problem med at indlæse menuen. Genindlæs venligst siden.",
-        open: "Åben nu",
-        closed: "Lukket"
-    },
-    en: {
-        tagline: "Taste the legend",
-        loading: "Loading menu...",
-        orderWolt: "Order via Wolt",
-        error: "There was a problem loading the menu. Please refresh the page.",
-        open: "Open now",
-        closed: "Closed"
-    },
-    el: {
-        tagline: "Γευτείτε τον μύθο",
-        loading: "Φόρτωση Μενού...",
-        orderWolt: "Παραγγελία μέσω Wolt",
-        error: "Υπήρξε πρόβλημα στη φόρτωση του μενού. Παρακαλώ ανανεώστε τη σελίδα.",
-        open: "Ανοιχτά",
-        closed: "Κλειστά"
-    }
+    da: { tagline: "Smag legenden", loading: "Indlæser menu...", orderWolt: "Bestil via Wolt", open: "Åben nu", closed: "Lukket" },
+    en: { tagline: "Taste the legend", loading: "Loading menu...", orderWolt: "Order via Wolt", open: "Open now", closed: "Closed" },
+    el: { tagline: "Γευτείτε τον μύθο", loading: "Φόρτωση Μενού...", orderWolt: "Παραγγελία μέσω Wolt", open: "Ανοιχτά", closed: "Κλειστά" }
 };
 
 let globalPizzaData = [];
-let globalSettings = {}; // Αποθήκευση των δυναμικών ρυθμίσεων
+let globalSettings = {}; 
 
 function setLanguage(lang) {
     document.querySelectorAll('[data-i18n]').forEach(element => {
@@ -72,23 +68,19 @@ function setLanguage(lang) {
     if (Object.keys(globalSettings).length > 0) renderSettings(lang);
 }
 
-// Ρυθμίσεις Google Sheets
 const sheetId = '1Fp6ct0Iz0tt77WfWN_UwOIaZn_qZzLcEHDornChx1Yg'; 
 const menuUrl = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent('Sheet1')}`;
 const settingsUrl = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent('Settings')}`;
 
 function fetchMenuData() {
-    // 1. Φόρτωση Μενού
     fetch(menuUrl)
         .then(response => response.text())
         .then(text => {
             const jsonText = text.substring(47).slice(0, -2);
             globalPizzaData = JSON.parse(jsonText).table.rows;
             renderMenu(localStorage.getItem('selectedLang') || 'da');
-        })
-        .catch(error => console.error('Σφάλμα (Menu):', error));
+        }).catch(error => console.error('Σφάλμα (Menu):', error));
 
-    // 2. Φόρτωση Ρυθμίσεων (Ωράριο/Banner)
     fetch(settingsUrl)
         .then(response => response.text())
         .then(text => {
@@ -103,51 +95,46 @@ function fetchMenuData() {
                 }
             });
             renderSettings(localStorage.getItem('selectedLang') || 'da');
-        })
-        .catch(error => console.error('Σφάλμα (Settings):', error));
+        }).catch(error => console.error('Σφάλμα (Settings):', error));
 }
 
-// Υπολογισμός Ώρας & Ζωγραφική του Banner/Ωραρίου
+// Υπολογισμός Ώρας & Ζωγραφική του Συννεφάκι/Ωραρίου
 function renderSettings(lang) {
-    // Banner
-    const banner = document.getElementById('promo-banner');
-    const bannerText = document.getElementById('promo-text');
+    const promoContainer = document.getElementById('promo-container');
+    const promoText = document.getElementById('promo-text');
     
-    // Ελέγχουμε αν ο διακόπτης στο Google Sheets είναι στο YES
-    const isBannerActive = globalSettings['banner_active'] && globalSettings['banner_active'].toUpperCase() === 'YES';
+    // ΑΣΦΑΛΗΣ ΕΛΕΓΧΟΣ: Καθαρίζουμε τα κενά και τα κάνουμε όλα κεφαλαία
+    const rawBannerActive = globalSettings['banner_active'] ? globalSettings['banner_active'].toString().toUpperCase().trim() : 'NO';
+    const isBannerActive = rawBannerActive === 'YES';
     
-    // Έλεγχος & Εμφάνιση Banner ανάλογα με τον διακόπτη ΚΑΙ τη γλώσσα
-    if (isBannerActive && globalSettings['banner'] && globalSettings['banner'] !== '') {
+    if (isBannerActive && globalSettings['banner'] && globalSettings['banner'].trim() !== '') {
         let bannerContent = globalSettings['banner'];
         const langPrefix = lang.toUpperCase() + ":";
         
         if (bannerContent.includes(langPrefix)) {
             const parts = bannerContent.split(',');
             const currentPart = parts.find(p => p.trim().startsWith(langPrefix));
-            bannerText.textContent = currentPart ? currentPart.replace(langPrefix, '').trim() : bannerContent;
+            promoText.textContent = currentPart ? currentPart.replace(langPrefix, '').trim() : bannerContent;
         } else {
-            bannerText.textContent = bannerContent;
+            promoText.textContent = bannerContent;
         }
-        banner.style.display = 'block';
+        promoContainer.style.display = 'flex'; 
     } else {
-        banner.style.display = 'none';
+        promoContainer.style.display = 'none';
     }
 
-    // Ωράριο - Έλεγχος Κατάστασης
     const statusIndicator = document.getElementById('store-status-indicator');
     const statusText = document.getElementById('store-status-text');
     
     if (statusIndicator && statusText) {
-        statusIndicator.className = 'status-dot'; // Reset
+        statusIndicator.className = 'status-dot'; 
         
         const daysMap = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-        
-        // Λήψη τρέχουσας ώρας σε ζώνη Δανίας
         const now = new Date();
         const dkTimeStr = now.toLocaleString("en-US", { timeZone: "Europe/Copenhagen" });
         const dkTime = new Date(dkTimeStr);
         
-        const currentDay = dkTime.getDay(); // 0-6
+        const currentDay = dkTime.getDay();
         const currentTotalMinutes = dkTime.getHours() * 60 + dkTime.getMinutes();
         
         const todayKey = daysMap[currentDay];
@@ -157,7 +144,6 @@ function renderSettings(lang) {
         const prevDayKey = daysMap[prevDay];
         const prevDaySchedule = globalSettings[prevDayKey] || 'CLOSED';
         
-        // Αλγόριθμος ελέγχου βάρδιας (διαχειρίζεται σωστά τα μεσάνυχτα)
         function isTimeInShift(schedule, checkYesterday) {
             if (schedule.toUpperCase() === 'CLOSED') return false;
             const parts = schedule.split('-');
@@ -169,18 +155,14 @@ function renderSettings(lang) {
             const endMins = parseInt(endParts[0]) * 60 + parseInt(endParts[1]);
             
             if (checkYesterday) {
-                // Ελέγχουμε αν η χθεσινή βάρδια συνεχίζεται σήμερα το πρωί
                 if (endMins <= startMins && endMins !== 0) {
                     if (currentTotalMinutes < endMins) return true;
                 }
                 return false;
             } else {
-                // Ελέγχουμε τη σημερινή βάρδια
                 if (endMins <= startMins && endMins !== 0) {
-                    // Η βάρδια πάει μέχρι αύριο (πχ 18:00-06:00)
                     if (currentTotalMinutes >= startMins) return true;
                 } else {
-                    // Κανονική βάρδια (πχ 18:00-00:00)
                     let adjustedEnd = endMins === 0 ? 24 * 60 : endMins;
                     if (currentTotalMinutes >= startMins && currentTotalMinutes < adjustedEnd) return true;
                 }
@@ -190,11 +172,9 @@ function renderSettings(lang) {
 
         let isOpen = false;
         
-        // Έλεγχος Force Close (Κουμπί Πανικού)
         if (globalSettings['force_close'] && globalSettings['force_close'].toUpperCase() === 'YES') {
             isOpen = false;
         } else {
-            // Αν είμαστε μέσα στη χθεσινή βραδινή βάρδια Ή στη σημερινή βάρδια
             if (isTimeInShift(prevDaySchedule, true)) {
                 isOpen = true;
             } else if (isTimeInShift(todaySchedule, false)) {
@@ -210,7 +190,6 @@ function renderSettings(lang) {
     }
 }
 
-// Συνάρτηση που "ζωγραφίζει" τις πίτσες
 function renderMenu(lang) {
     const container = document.getElementById('menu-container');
     container.innerHTML = ''; 
@@ -310,9 +289,3 @@ function setupModalEvents() {
         }
     });
 }
-
-document.addEventListener('DOMContentLoaded', () => {
-    const savedLang = localStorage.getItem('selectedLang') || 'da';
-    setLanguage(savedLang); 
-    fetchMenuData(); 
-});
