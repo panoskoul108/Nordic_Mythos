@@ -527,6 +527,54 @@ body.dark-mode .pizza-number { border-color: var(--text-color); }
 }
 
 /* ==========================================================================
+   10. Banner Προσφορών & Ένδειξη Ωραρίου
+   ========================================================================== */
+.promo-banner {
+    background-color: #e31837; /* Το κόκκινο της εταιρείας */
+    color: #ffffff;
+    text-align: center;
+    padding: 10px 20px;
+    font-size: 0.85rem;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    z-index: 1000;
+    width: 100%;
+}
+
+.store-status-container {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 10px;
+    background-color: var(--card-bg);
+    border: 2px solid var(--card-border);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--text-color);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+.status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #888;
+}
+
+.status-dot.open {
+    background-color: #28a745;
+    box-shadow: 0 0 8px rgba(40, 167, 69, 0.7);
+}
+
+.status-dot.closed {
+    background-color: #dc3545;
+    box-shadow: 0 0 8px rgba(220, 53, 69, 0.7);
+}
+
+/* ==========================================================================
    9. Mobile Optimization (max-width: 768px)
    ========================================================================== */
 @media (max-width: 768px) {
