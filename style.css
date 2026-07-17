@@ -530,7 +530,7 @@ body.dark-mode .pizza-number { border-color: var(--text-color); }
    10. Banner Προσφορών & Ένδειξη Ωραρίου
    ========================================================================== */
 .promo-banner {
-    background-color: #e31837; /* Το κόκκινο της εταιρείας */
+    background-color: #3498db
     color: #ffffff;
     text-align: center;
     padding: 10px 20px;
