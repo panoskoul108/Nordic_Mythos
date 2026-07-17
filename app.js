@@ -113,8 +113,11 @@ function renderSettings(lang) {
     const banner = document.getElementById('promo-banner');
     const bannerText = document.getElementById('promo-text');
     
-    // Έλεγχος & Εμφάνιση Banner ανάλογα με τη γλώσσα
-    if (globalSettings['banner'] && globalSettings['banner'] !== '') {
+    // Ελέγχουμε αν ο διακόπτης στο Google Sheets είναι στο YES
+    const isBannerActive = globalSettings['banner_active'] && globalSettings['banner_active'].toUpperCase() === 'YES';
+    
+    // Έλεγχος & Εμφάνιση Banner ανάλογα με τον διακόπτη ΚΑΙ τη γλώσσα
+    if (isBannerActive && globalSettings['banner'] && globalSettings['banner'] !== '') {
         let bannerContent = globalSettings['banner'];
         const langPrefix = lang.toUpperCase() + ":";
         
