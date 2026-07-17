@@ -1,3 +1,26 @@
+// --- Λειτουργία Dark Mode ---
+document.addEventListener('DOMContentLoaded', () => {
+    const darkModeToggle = document.getElementById('dark-mode-toggle');
+    const body = document.body;
+
+    // Έλεγχος αν ο χρήστης είχε επιλέξει Dark Mode την προηγούμενη φορά
+    if (localStorage.getItem('darkMode') === 'enabled') {
+        body.classList.add('dark-mode');
+        darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+    }
+
+    darkModeToggle.addEventListener('click', () => {
+        body.classList.toggle('dark-mode');
+        if (body.classList.contains('dark-mode')) {
+            localStorage.setItem('darkMode', 'enabled');
+            darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        } else {
+            localStorage.setItem('darkMode', 'disabled');
+            darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+        }
+    });
+});
+
 // Λεξικό Μεταφράσεων για τα στατικά κείμενα
 const translations = {
     da: {
@@ -55,6 +78,7 @@ function setLanguage(lang) {
         renderMenu(lang);
     }
 }
+
 // Ρυθμίσεις Google Sheets
 const sheetId = '1Fp6ct0Iz0tt77WfWN_UwOIaZn_qZzLcEHDornChx1Yg'; 
 const sheetName = encodeURIComponent('Sheet1'); 
@@ -149,6 +173,19 @@ function renderMenu(lang) {
 
     // Ενεργοποιούμε τα κλικ στις κάρτες
     setupModalEvents();
+
+    // --- Λειτουργία Scroll Animation (Fade In) ---
+    const cards = document.querySelectorAll('.pizza-card');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target); // Σταματάει να το παρακολουθεί αφού εμφανιστεί
+            }
+        });
+    }, { threshold: 0.1 }); // Εμφανίζεται όταν το 10% της κάρτας μπει στην οθόνη
+
+    cards.forEach(card => observer.observe(card));
 }
 
 // Λειτουργία του Modal (Popup)
@@ -172,7 +209,9 @@ function setupModalEvents() {
             modalNumber.textContent = newCard.getAttribute('data-number');
             modalTitle.textContent = newCard.getAttribute('data-title');
             modalPrice.textContent = newCard.getAttribute('data-price');
-            modalIngredients.textContent = newCard.getAttribute('data-ingredients');
+            
+            // Προσθήκη του εικονιδίου στα συστατικά
+            modalIngredients.innerHTML = `<div class="modal-ingredients-wrapper"><i class="fas fa-utensils"></i> <span>${newCard.getAttribute('data-ingredients')}</span></div>`;
 
             modal.style.display = 'flex';
             document.body.style.overflow = 'hidden'; 
@@ -197,6 +236,7 @@ function closeModal(modal) {
 
 // Όταν φορτώνει η σελίδα, ορίζουμε τη γλώσσα και κατεβάζουμε τα δεδομένα
 document.addEventListener('DOMContentLoaded', () => {
+    // Ήδη διαχειριζόμαστε το dark mode στο πρώτο DOMContentLoaded
     const savedLang = localStorage.getItem('selectedLang') || 'da';
     setLanguage(savedLang); 
     fetchMenuData(); 
