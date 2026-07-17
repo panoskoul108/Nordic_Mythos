@@ -7,7 +7,7 @@
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <link rel="stylesheet" href="style.css?v=12">
+    <link rel="stylesheet" href="style.css?v=13">
     
     <link rel="icon" type="image/jpeg" href="images/favicon.jpg">
     <meta name="description" content="Nordic Mythos i Aalborg - Se vores lækre pizzakatalog online. Bestil nemt og hurtigt den bedste pizza i Aalborg via Wolt!">
@@ -48,9 +48,18 @@
 </head>
 <body>
 
-    <!-- Αναδυόμενο Banner Προσφορών -->
-    <div id="promo-banner" class="promo-banner" style="display: none;">
-        <span id="promo-text"></span>
+    <!-- Floating Promo Bubble (Επιλογή 2) -->
+    <div id="promo-container" class="promo-container" style="display: none;">
+        <!-- Το συννεφάκι που ανοίγει -->
+        <div id="promo-bubble" class="promo-bubble hidden">
+            <span id="close-promo" class="close-promo"><i class="fas fa-times"></i></span>
+            <div id="promo-text">...</div>
+        </div>
+        <!-- Το εικονίδιο δώρου -->
+        <button id="promo-trigger" class="promo-trigger" aria-label="View Offer">
+            <i class="fas fa-gift"></i>
+            <span class="notification-badge">1</span>
+        </button>
     </div>
 
     <header class="menu-header">
