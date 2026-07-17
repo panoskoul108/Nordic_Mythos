@@ -748,3 +748,17 @@ body.dark-mode .main-logo { filter: invert(1); }
         bottom: 200px; 
     }
 }
+/* ==========================================================================
+   11. Νομικά Στοιχεία (Κάτω από τον Κατάλογο)
+   ========================================================================== */
+.legal-info {
+    text-align: center;
+    margin-top: 50px;       /* Αφήνει αρκετό κενό από την τελευταία πίτσα */
+    margin-bottom: 20px;
+    padding-top: 20px;
+    border-top: 1px solid var(--modal-border); /* Μια διακριτική οριζόντια γραμμή */
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
