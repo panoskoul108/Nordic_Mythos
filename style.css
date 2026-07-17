@@ -527,19 +527,104 @@ body.dark-mode .pizza-number { border-color: var(--text-color); }
 }
 
 /* ==========================================================================
-   10. Banner Προσφορών & Ένδειξη Ωραρίου
+   10. Floating Promo Bubble & Ένδειξη Ωραρίου
    ========================================================================== */
-.promo-banner {
-    background-color: #3498db
-    color: #ffffff;
-    text-align: center;
-    padding: 10px 20px;
-    font-size: 0.85rem;
-    font-weight: 800;
-    letter-spacing: 0.5px;
-    z-index: 1000;
-    width: 100%;
+.promo-container {
+    position: fixed;
+    right: 20px;
+    bottom: 120px; /* Πάνω από το sticky footer στο Desktop */
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
 }
+
+.promo-bubble {
+    background-color: #f39c12;
+    color: #ffffff;
+    padding: 16px 30px 16px 16px;
+    border-radius: 12px;
+    border-bottom-right-radius: 4px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.25);
+    margin-bottom: 12px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    max-width: 250px;
+    position: relative;
+    opacity: 1;
+    transform: scale(1);
+    transform-origin: bottom right;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.promo-bubble.hidden {
+    opacity: 0;
+    transform: scale(0);
+    pointer-events: none;
+}
+
+.close-promo {
+    position: absolute;
+    top: 5px;
+    right: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+    color: #ffffff;
+}
+
+.close-promo:hover {
+    opacity: 1;
+}
+
+.promo-trigger {
+    background-color: #f39c12;
+    color: white;
+    border: none;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    font-size: 26px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(243, 156, 18, 0.4);
+    position: relative;
+    transition: transform 0.2s ease, background-color 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.promo-trigger:hover {
+    transform: scale(1.08);
+    background-color: #e67e22;
+}
+
+.notification-badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: #e31837;
+    color: white;
+    font-size: 13px;
+    font-weight: bold;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--bg-color);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(227, 24, 55, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(227, 24, 55, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(227, 24, 55, 0); }
+}
+
+/* Τα υπόλοιπα της Ενότητας 10 μένουν ίδια... */
 
 .store-status-container {
     display: inline-flex;
@@ -577,7 +662,11 @@ body.dark-mode .pizza-number { border-color: var(--text-color); }
 /* ==========================================================================
    9. Mobile Optimization (max-width: 768px)
    ========================================================================== */
-@media (max-width: 768px) {
+@media (max-width: 768px) 
+.promo-container {
+        right: 15px;
+        bottom: 200px; /* Αρκετά ψηλά για να αποφύγει το ψηλό footer του κινητού */
+    }{
     body {
         padding-bottom: 230px; 
     }
