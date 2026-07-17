@@ -7,7 +7,8 @@
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <link rel="stylesheet" href="style.css?v=10">
+    <!-- Προσθήκη έκδοσης για να καθαρίζει η cache του CSS -->
+    <link rel="stylesheet" href="style.css?v=15">
     
     <link rel="icon" type="image/jpeg" href="images/favicon.jpg">
     <meta name="description" content="Nordic Mythos i Aalborg - Se vores lækre pizzakatalog online. Bestil nemt og hurtigt den bedste pizza i Aalborg via Wolt!">
@@ -48,21 +49,50 @@
 </head>
 <body>
 
+    <!-- Floating Promo Bubble (Το νέο Συννεφάκι) -->
+    <div id="promo-container" class="promo-container" style="display: none;">
+        <!-- Το συννεφάκι που ανοίγει -->
+        <div id="promo-bubble" class="promo-bubble hidden">
+            <span id="close-promo" class="close-promo"><i class="fas fa-times"></i></span>
+            <div id="promo-text">...</div>
+        </div>
+        <!-- Το εικονίδιο δώρου -->
+        <button id="promo-trigger" class="promo-trigger" aria-label="View Offer">
+            <i class="fas fa-gift"></i>
+            <span class="notification-badge">1</span>
+        </button>
+    </div>
+
     <header class="menu-header">
+        <!-- Dark Mode Button (Αριστερά) -->
+        <button id="dark-mode-toggle" class="dropbtn icon-btn" aria-label="Toggle Dark Mode">
+            <i class="fas fa-moon"></i>
+        </button>
+        
+        <!-- Γλώσσα (Δεξιά) -->
         <div class="language-switcher dropdown">
-            <button class="dropbtn" id="current-lang-btn">🇩🇰 DA <i class="fas fa-chevron-down"></i></button>
+            <button id="current-lang-btn" class="dropbtn">
+                🇩🇰 DA <i class="fas fa-chevron-down"></i>
+            </button>
             <div class="dropdown-content">
                 <a href="#" onclick="setLanguage('da'); return false;">🇩🇰 Dansk</a>
                 <a href="#" onclick="setLanguage('en'); return false;">🇬🇧 English</a>
                 <a href="#" onclick="setLanguage('el'); return false;">🇬🇷 Ελληνικά</a>
             </div>
         </div>
+
         <div class="logo-container">
             <img src="logo.jpg" alt="Nordic Mythos Logo" class="main-logo">
         </div>
         <h1>NORDIC MYTHOS</h1>
         <h2>PIZZAKATALOG</h2>
         <p class="tagline" data-i18n="tagline">Taste the legend</p>
+        
+        <!-- Δυναμική Ένδειξη Ωραρίου / Κατάστασης -->
+        <div class="store-status-container">
+            <div id="store-status-indicator" class="status-dot"></div>
+            <span id="store-status-text">...</span>
+        </div>
     </header>
 
     <main class="menu-container">
@@ -71,6 +101,11 @@
                 <p style="text-align: center; font-weight: bold; width: 100%; grid-column: 1 / -1;">
                     <span data-i18n="loading">Indlæser menu...</span>
                 </p>
+            </div>
+
+            <!-- ΝΕΟ: Νομικά Στοιχεία / Legal Info (Κάτω από τον κατάλογο, πάνω από το footer) -->
+            <div class="legal-info">
+                Nordic Mythos | CVR: XXXXXXXX | Email: <a href="mailto:nordicmythos@gmail.com" style="color: inherit; text-decoration: underline;">nordicmythos@gmail.com</a>
             </div>
         </section>
     </main>
@@ -115,6 +150,7 @@
         </div>
     </footer>
 
-    <script src="app.js"></script>
+    <!-- ΕΔΩ ΕΙΝΑΙ Η ΛΥΣΗ: Το ?v=15 αναγκάζει τον browser να ξεκολλήσει και να φορτώσει το σωστό αρχείο -->
+    <script src="app.js?v=15"></script>
 </body>
 </html>
