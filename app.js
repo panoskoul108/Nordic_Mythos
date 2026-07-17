@@ -113,8 +113,18 @@ function renderSettings(lang) {
     const banner = document.getElementById('promo-banner');
     const bannerText = document.getElementById('promo-text');
     
+    // Έλεγχος & Εμφάνιση Banner ανάλογα με τη γλώσσα
     if (globalSettings['banner'] && globalSettings['banner'] !== '') {
-        bannerText.textContent = globalSettings['banner'];
+        let bannerContent = globalSettings['banner'];
+        const langPrefix = lang.toUpperCase() + ":";
+        
+        if (bannerContent.includes(langPrefix)) {
+            const parts = bannerContent.split(',');
+            const currentPart = parts.find(p => p.trim().startsWith(langPrefix));
+            bannerText.textContent = currentPart ? currentPart.replace(langPrefix, '').trim() : bannerContent;
+        } else {
+            bannerText.textContent = bannerContent;
+        }
         banner.style.display = 'block';
     } else {
         banner.style.display = 'none';
@@ -189,6 +199,13 @@ function renderSettings(lang) {
             }
         }
 
+        const statusString = isOpen ? translations[lang].open : translations[lang].closed;
+        const displayHours = todaySchedule.toUpperCase() !== 'CLOSED' ? todaySchedule : '';
+        
+        statusIndicator.classList.add(isOpen ? 'open' : 'closed');
+        statusText.textContent = `${statusString} ${displayHours ? '| ' + displayHours : ''}`;
+    }
+}
         const statusString = isOpen ? translations[lang].open : translations[lang].closed;
         const displayHours = todaySchedule.toUpperCase() !== 'CLOSED' ? todaySchedule : '';
         
