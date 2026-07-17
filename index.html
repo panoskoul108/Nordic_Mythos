@@ -7,7 +7,7 @@
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <link rel="stylesheet" href="style.css?v=10">
+    <link rel="stylesheet" href="style.css?v=11">
     
     <link rel="icon" type="image/jpeg" href="images/favicon.jpg">
     <meta name="description" content="Nordic Mythos i Aalborg - Se vores lækre pizzakatalog online. Bestil nemt og hurtigt den bedste pizza i Aalborg via Wolt!">
@@ -49,23 +49,23 @@
 <body>
 
     <header class="menu-header">
-       <!-- Controls Ελέγχου (Dark Mode & Γλώσσα) -->
-<div class="header-controls">
-    <button id="dark-mode-toggle" class="dropbtn icon-btn" aria-label="Toggle Dark Mode">
-        <i class="fas fa-moon"></i>
-    </button>
-    
-    <div class="language-switcher dropdown">
-        <button id="current-lang-btn" class="dropbtn">
-            🇩🇰 DA <i class="fas fa-chevron-down"></i>
+        <!-- Dark Mode Button (Αριστερά) -->
+        <button id="dark-mode-toggle" class="dropbtn icon-btn" aria-label="Toggle Dark Mode">
+            <i class="fas fa-moon"></i>
         </button>
-        <div class="dropdown-content">
-            <a href="#" onclick="setLanguage('da'); return false;">🇩🇰 Dansk</a>
-            <a href="#" onclick="setLanguage('en'); return false;">🇬🇧 English</a>
-            <a href="#" onclick="setLanguage('el'); return false;">🇬🇷 Ελληνικά</a>
+        
+        <!-- Γλώσσα (Δεξιά) -->
+        <div class="language-switcher dropdown">
+            <button id="current-lang-btn" class="dropbtn">
+                🇩🇰 DA <i class="fas fa-chevron-down"></i>
+            </button>
+            <div class="dropdown-content">
+                <a href="#" onclick="setLanguage('da'); return false;">🇩🇰 Dansk</a>
+                <a href="#" onclick="setLanguage('en'); return false;">🇬🇧 English</a>
+                <a href="#" onclick="setLanguage('el'); return false;">🇬🇷 Ελληνικά</a>
+            </div>
         </div>
-    </div>
-</div>
+
         <div class="logo-container">
             <img src="logo.jpg" alt="Nordic Mythos Logo" class="main-logo">
         </div>
