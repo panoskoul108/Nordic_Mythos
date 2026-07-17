@@ -210,8 +210,8 @@ function setupModalEvents() {
             modalTitle.textContent = newCard.getAttribute('data-title');
             modalPrice.textContent = newCard.getAttribute('data-price');
             
-            // Προσθήκη του εικονιδίου στα συστατικά
-            modalIngredients.innerHTML = `<div class="modal-ingredients-wrapper"><i class="fas fa-utensils"></i> <span>${newCard.getAttribute('data-ingredients')}</span></div>`;
+            // Καθαρό κείμενο συστατικών (έτοιμο να δεχτεί emoji από το Google Sheets)
+            modalIngredients.textContent = newCard.getAttribute('data-ingredients');
 
             modal.style.display = 'flex';
             document.body.style.overflow = 'hidden'; 
