@@ -762,3 +762,39 @@ body.dark-mode .main-logo { filter: invert(1); }
     font-weight: 500;
     letter-spacing: 0.5px;
 }
+/* ==========================================================================
+   Waving Flags (Δίπλα στο Tagline)
+   ========================================================================== */
+.tagline-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px; /* Η απόσταση μεταξύ των σημαιών και του κειμένου */
+    margin-bottom: 5px;
+}
+
+.tagline-wrapper .tagline {
+    margin-bottom: 0; /* Αφαιρούμε το κενό του κειμένου γιατί το αναλαμβάνει το wrapper */
+}
+
+.waving-flag {
+    font-size: 1.1rem; /* Μέγεθος που δένει αρμονικά με το κείμενο */
+    display: inline-block;
+    animation: waveAnimation 2.5s ease-in-out infinite;
+    transform-origin: bottom center;
+}
+
+/* Καθυστέρηση στη δεύτερη σημαία για να μην κουνιούνται εντελώς ταυτόχρονα (πιο φυσικό) */
+.waving-flag:last-child {
+    animation-delay: 0.4s;
+}
+
+/* Το εφέ κυματισμού */
+@keyframes waveAnimation {
+    0% { transform: rotate(0deg) translateY(0); }
+    25% { transform: rotate(8deg) translateY(-1px); }
+    50% { transform: rotate(0deg) translateY(0); }
+    75% { transform: rotate(-8deg) translateY(-1px); }
+    100% { transform: rotate(0deg) translateY(0); }
+}
+
