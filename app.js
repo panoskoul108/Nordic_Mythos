@@ -1,10 +1,9 @@
 // Λεξικό Μεταφράσεων 
 const translations = {
-    da: { tagline: "Smag legenden", loading: "Indlæser menu...", orderWolt: "Bestil via Wolt", open: "Åben nu", closed: "Lukket", familyPizza: "Valgfri familiepizza +89 KR." },
-    en: { tagline: "Taste the legend", loading: "Loading menu...", orderWolt: "Order via Wolt", open: "Open now", closed: "Closed", familyPizza: "Family pizza of your choice +89 KR." },
-    el: { tagline: "Γευτείτε τον μύθο", loading: "Φόρτωση Μενού...", orderWolt: "Παραγγελία μέσω Wolt", open: "Ανοιχτά", closed: "Κλειστά", familyPizza: "Family pizza επιλογής +89 KR." }
+    da: { tagline: "Smag legenden", loading: "Indlæser menu...", orderWolt: "Bestil via Wolt", open: "Åben nu", closed: "Lukket", familyPizza: "Opgrader enhver pizza til Familiepizza for +89 KR." },
+    en: { tagline: "Taste the legend", loading: "Loading menu...", orderWolt: "Order via Wolt", open: "Open now", closed: "Closed", familyPizza: "Upgrade any pizza to Family Size for +89 KR." },
+    el: { tagline: "Γευτείτε τον μύθο", loading: "Φόρτωση Μενού...", orderWolt: "Παραγγελία μέσω Wolt", open: "Ανοιχτά", closed: "Κλειστά", familyPizza: "Κάντε οποιαδήποτε πίτσα Οικογενειακή με +89 KR." }
 };
-
 let globalPizzaData = [];
 let globalSettings = {}; 
 
