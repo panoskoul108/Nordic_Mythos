@@ -46,6 +46,16 @@
       ]
     }
     </script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-XXXXXXXXXX');
+    </script>
 </head>
 <body>
 
@@ -87,12 +97,11 @@
         <h1>NORDIC MYTHOS</h1>
         <h2>PIZZAKATALOG</h2>
         <div class="tagline-wrapper">
-    <span class="waving-flag">🇬🇷</span>
-    <p class="tagline" data-i18n="tagline">Taste the legend</p>
-    <span class="waving-flag">🇩🇰</span>
-</div>
+            <span class="waving-flag">🇬🇷</span>
+            <p class="tagline" data-i18n="tagline">Taste the legend</p>
+            <span class="waving-flag">🇩🇰</span>
+        </div>
 
-        
         <!-- Δυναμική Ένδειξη Ωραρίου / Κατάστασης -->
         <div class="store-status-container">
             <div id="store-status-indicator" class="status-dot"></div>
@@ -102,13 +111,20 @@
 
     <main class="menu-container">
         <section class="menu-section">
+            
+            <!-- ΝΕΟ: Πλαίσιο Family Pizza (Γραφικό Layout) -->
+            <div class="family-pizza-banner">
+                <i class="fas fa-pizza-slice"></i>
+                <span data-i18n="familyPizza">Family pizza της επιλογής σας +89 KR.</span>
+            </div>
+
             <div class="pizza-grid" id="menu-container">
                 <p style="text-align: center; font-weight: bold; width: 100%; grid-column: 1 / -1;">
                     <span data-i18n="loading">Indlæser menu...</span>
                 </p>
             </div>
 
-            <!-- ΝΕΟ: Νομικά Στοιχεία / Legal Info (Κάτω από τον κατάλογο, πάνω από το footer) -->
+            <!-- Νομικά Στοιχεία / Legal Info (Κάτω από τον κατάλογο, πάνω από το footer) -->
             <div class="legal-info">
                 Nordic Mythos | CVR: 46347048 | Email: <a href="mailto:nordicmythos@gmail.com" style="color: inherit; text-decoration: underline;">nordicmythos@gmail.com</a>
             </div>
