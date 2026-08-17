@@ -798,3 +798,40 @@ body.dark-mode .main-logo { filter: invert(1); }
     100% { transform: rotate(0deg) translateY(0); }
 }
 
+/* ==========================================================================
+   12. Family Pizza Banner 
+   ========================================================================== */
+.family-pizza-banner {
+    background-color: var(--card-bg); /* Προσαρμόζεται στο Dark Mode */
+    border: 2px dashed #f97316; 
+    color: var(--text-color); /* Προσαρμόζεται στο Dark Mode */
+    text-align: center;
+    padding: 14px 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    font-size: 1.15rem;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    text-transform: uppercase;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    letter-spacing: 0.5px;
+}
+
+.family-pizza-banner i {
+    color: #8b4513; 
+    font-size: 1.5rem;
+}
+
+@media (max-width: 768px) {
+    .family-pizza-banner {
+        font-size: 0.95rem;
+        padding: 10px 15px;
+        margin-bottom: 15px;
+    }
+    .family-pizza-banner i {
+        font-size: 1.2rem;
+    }
+}
