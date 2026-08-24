@@ -280,6 +280,64 @@ document.addEventListener('DOMContentLoaded', () => {
             localStorage.setItem('darkMode', 'disabled');
             darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
         }
+        // 3. Εκκίνηση Συννεφάκι (Promo Bubble)
+    const promoTrigger = document.getElementById('promo-trigger');
+    const promoBubble = document.getElementById('promo-bubble');
+    const closePromo = document.getElementById('close-promo');
+    const notifBadge = document.querySelector('.notification-badge');
+
+    if (promoTrigger && promoBubble && closePromo) {
+        promoTrigger.addEventListener('click', () => {
+            promoBubble.classList.toggle('hidden');
+            if (notifBadge) notifBadge.style.display = 'none'; 
+        });
+
+        closePromo.addEventListener('click', () => {
+            promoBubble.classList.add('hidden');
+        });
+    }
+
+    // ==========================================
+    // 4. TV Mode (Αυτόματη Κύλιση για Οθόνες)
+    // ==========================================
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('tv') === '1') {
+        document.body.classList.add('tv-mode');
+        startAutoScroll();
+    }
+
+    function startAutoScroll() {
+        let isPaused = false;
+        
+        function scrollStep() {
+            if (isPaused) return;
+            
+            window.scrollBy(0, 1); // Κυλάει προς τα κάτω κατά 1 pixel
+            
+            // Αν φτάσει στο τέλος της σελίδας
+            if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 2) {
+                isPaused = true;
+                setTimeout(() => {
+                    // Επιστροφή στην κορυφή απαλά
+                    window.scrollTo({ top: 0, behavior: 'smooth' }); 
+                    
+                    // Περιμένει 2 δευτερόλεπτα στην κορυφή πριν ξαναρχίσει
+                    setTimeout(() => {
+                        isPaused = false;
+                        requestAnimationFrame(scrollStep);
+                    }, 2000); 
+                }, 3000); // Περιμένει 3 δευτερόλεπτα στο τέλος της σελίδας
+                return;
+            }
+            
+            requestAnimationFrame(scrollStep);
+        }
+        
+        // Ξεκινάει να σκρολάρει 4 δευτερόλεπτα αφού φορτώσει η σελίδα (για να προλάβουν να τη δουν στην αρχή)
+        setTimeout(() => {
+            requestAnimationFrame(scrollStep);
+        }, 4000);
+    }
     });
 
     // 3. Εκκίνηση Συννεφάκι (Promo Bubble)
