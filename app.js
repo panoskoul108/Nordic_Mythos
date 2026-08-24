@@ -4,6 +4,7 @@ const translations = {
     en: { tagline: "Taste the legend", loading: "Loading menu...", orderWolt: "Order via Wolt", open: "Open now", closed: "Closed", familyPizza: "Upgrade any pizza to Family Size for +89 KR." },
     el: { tagline: "Γευτείτε τον μύθο", loading: "Φόρτωση Μενού...", orderWolt: "Παραγγελία μέσω Wolt", open: "Ανοιχτά", closed: "Κλειστά", familyPizza: "Κάντε οποιαδήποτε πίτσα Οικογενειακή με +89 KR." }
 };
+
 let globalPizzaData = [];
 let globalSettings = {}; 
 
@@ -33,7 +34,6 @@ const menuUrl = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=o
 const settingsUrl = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent('Settings')}`;
 
 function fetchMenuData() {
-    // 1. Κατέβασμα Πιτσών
     fetch(menuUrl)
         .then(response => response.text())
         .then(text => {
@@ -42,7 +42,6 @@ function fetchMenuData() {
             renderMenu(localStorage.getItem('selectedLang') || 'da');
         }).catch(error => console.error('Σφάλμα (Menu):', error));
 
-    // 2. Κατέβασμα Ρυθμίσεων
     fetch(settingsUrl)
         .then(response => response.text())
         .then(text => {
@@ -60,12 +59,10 @@ function fetchMenuData() {
         }).catch(error => console.error('Σφάλμα (Settings):', error));
 }
 
-// Υπολογισμός Ώρας & Ζωγραφική του Συννεφάκι/Ωραρίου
 function renderSettings(lang) {
     const promoContainer = document.getElementById('promo-container');
     const promoText = document.getElementById('promo-text');
     
-    // ΑΣΦΑΛΗΣ ΕΛΕΓΧΟΣ: Καθαρίζουμε τα κενά και τα κάνουμε όλα κεφαλαία
     const rawBannerActive = globalSettings['banner_active'] ? globalSettings['banner_active'].toString().toUpperCase().trim() : 'NO';
     const isBannerActive = rawBannerActive === 'YES';
     
@@ -82,7 +79,7 @@ function renderSettings(lang) {
         }
         promoContainer.style.display = 'flex'; 
     } else {
-        promoContainer.style.display = 'none'; // Αν είναι NO, κρύβεται εντελώς
+        promoContainer.style.display = 'none'; 
     }
 
     const statusIndicator = document.getElementById('store-status-indicator');
@@ -252,17 +249,13 @@ function setupModalEvents() {
     });
 }
 
-// ==========================================================
-// ΕΔΩ ΕΙΝΑΙ Ο "ΚΙΝΗΤΗΡΑΣ" ΠΟΥ ΕΛΕΙΠΕ ΚΑΙ ΔΕΝ ΦΟΡΤΩΝΕ ΤΟ SITE!
-// Αρχικοποιεί τα πάντα μόλις ανοίξει η σελίδα.
-// ==========================================================
 document.addEventListener('DOMContentLoaded', () => {
     // 1. Εκκίνηση Δεδομένων
     const savedLang = localStorage.getItem('selectedLang') || 'da';
     setLanguage(savedLang); 
     fetchMenuData(); 
 
-    // 2. Εκκίνηση Dark Mode
+    // 2. Dark Mode
     const darkModeToggle = document.getElementById('dark-mode-toggle');
     const body = document.body;
 
@@ -280,7 +273,9 @@ document.addEventListener('DOMContentLoaded', () => {
             localStorage.setItem('darkMode', 'disabled');
             darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
         }
-        // 3. Εκκίνηση Συννεφάκι (Promo Bubble)
+    });
+
+    // 3. Promo Bubble
     const promoTrigger = document.getElementById('promo-trigger');
     const promoBubble = document.getElementById('promo-bubble');
     const closePromo = document.getElementById('close-promo');
@@ -291,17 +286,15 @@ document.addEventListener('DOMContentLoaded', () => {
             promoBubble.classList.toggle('hidden');
             if (notifBadge) notifBadge.style.display = 'none'; 
         });
-
         closePromo.addEventListener('click', () => {
             promoBubble.classList.add('hidden');
         });
     }
 
     // ==========================================
-    // 4. TV Mode (Αυτόματη Κύλιση για Οθόνες)
+    // 4. TV Mode (Αυτόματη Κύλιση & Απόκρυψη)
     // ==========================================
-    const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get('tv') === '1') {
+    if (window.location.href.includes('tv=1')) {
         document.body.classList.add('tv-mode');
         startAutoScroll();
     }
@@ -312,48 +305,29 @@ document.addEventListener('DOMContentLoaded', () => {
         function scrollStep() {
             if (isPaused) return;
             
-            window.scrollBy(0, 1); // Κυλάει προς τα κάτω κατά 1 pixel
+            window.scrollBy(0, 1);
             
-            // Αν φτάσει στο τέλος της σελίδας
-            if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 2) {
+            // Υπολογισμός αν φτάσαμε στο τέλος
+            const scrollPosition = Math.ceil(window.innerHeight + window.scrollY);
+            const documentHeight = document.body.offsetHeight;
+            
+            if (scrollPosition >= documentHeight - 5) {
                 isPaused = true;
                 setTimeout(() => {
-                    // Επιστροφή στην κορυφή απαλά
                     window.scrollTo({ top: 0, behavior: 'smooth' }); 
-                    
-                    // Περιμένει 2 δευτερόλεπτα στην κορυφή πριν ξαναρχίσει
                     setTimeout(() => {
                         isPaused = false;
                         requestAnimationFrame(scrollStep);
                     }, 2000); 
-                }, 3000); // Περιμένει 3 δευτερόλεπτα στο τέλος της σελίδας
+                }, 3000);
                 return;
             }
             
             requestAnimationFrame(scrollStep);
         }
         
-        // Ξεκινάει να σκρολάρει 4 δευτερόλεπτα αφού φορτώσει η σελίδα (για να προλάβουν να τη δουν στην αρχή)
         setTimeout(() => {
             requestAnimationFrame(scrollStep);
         }, 4000);
-    }
-    });
-
-    // 3. Εκκίνηση Συννεφάκι (Promo Bubble)
-    const promoTrigger = document.getElementById('promo-trigger');
-    const promoBubble = document.getElementById('promo-bubble');
-    const closePromo = document.getElementById('close-promo');
-    const notifBadge = document.querySelector('.notification-badge');
-
-    if (promoTrigger && promoBubble && closePromo) {
-        promoTrigger.addEventListener('click', () => {
-            promoBubble.classList.toggle('hidden');
-            if (notifBadge) notifBadge.style.display = 'none'; 
-        });
-
-        closePromo.addEventListener('click', () => {
-            promoBubble.classList.add('hidden');
-        });
     }
 });
