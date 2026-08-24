@@ -691,13 +691,17 @@ body.dark-mode .main-logo { filter: invert(1); }
 }
 
 /* ==========================================================================
-   13. TV / Kiosk Mode (.tv-mode)
+   13. TV / Kiosk Mode (.tv-mode) - Προσαρμογή σε 1 οθόνη (Fit to Screen)
    ========================================================================== */
 body.tv-mode {
-    padding-bottom: 20px !important; 
+    padding-bottom: 0 !important; 
     overflow: hidden !important; 
+    height: 100vh; /* Κλειδώνει το ύψος ακριβώς στο μέγεθος της τηλεόρασης */
+    display: flex;
+    flex-direction: column;
 }
 
+/* Κρύβουμε τα περιττά στοιχεία */
 body.tv-mode #dark-mode-toggle,
 body.tv-mode .language-switcher,
 body.tv-mode .store-status-container,
@@ -709,6 +713,47 @@ body.tv-mode .menu-footer {
 
 body.tv-mode .menu-header {
     padding-top: 15px;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
     border-bottom: 2px solid var(--text-muted);
+    flex-shrink: 0;
 }
+
+/* Μικραίνουμε λίγο το λογότυπο και τους τίτλους για να δώσουμε χώρο στις πίτσες */
+body.tv-mode .main-logo {
+    width: 140px !important; /* Πιο συμπαγές λογότυπο */
+    margin: 0 auto;
+}
+
+body.tv-mode .menu-header h1 { font-size: 1.5rem; margin-top: 5px; }
+body.tv-mode .menu-header h2 { font-size: 1rem; }
+body.tv-mode .tagline-wrapper { margin-bottom: 2px; }
+
+body.tv-mode .menu-container {
+    flex-grow: 1;
+    max-width: 95%; /* Απλώνεται σε όλο το πλάτος της τηλεόρασης */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Κεντράρει το μενού κάθετα στη μέση της οθόνης */
+}
+
+/* Μικραίνουμε ελαφρώς το πλαίσιο της Family Pizza */
+body.tv-mode .family-pizza-banner {
+    padding: 8px 15px;
+    margin-bottom: 12px;
+    font-size: 1rem;
+}
+
+/* Προσαρμογή Πιτσών */
+body.tv-mode .pizza-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 στήλες */
+    gap: 12px; /* Μικρότερο κενό ανάμεσα στις κάρτες */
+}
+
+body.tv-mode .pizza-card {
+    padding: 8px 10px;
+    gap: 10px;
+}
+
+body.tv-mode .pizza-title { font-size: 0.95rem; }
+body.tv-mode .pizza-ingredients { font-size: 0.75rem; }
+body.tv-mode .pizza-price { font-size: 0.95rem; }
