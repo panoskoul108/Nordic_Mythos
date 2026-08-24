@@ -291,43 +291,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ==========================================
-    // 4. TV Mode (Αυτόματη Κύλιση & Απόκρυψη)
+   // ==========================================
+    // 4. TV Mode (Εντελώς Σταθερό - Χωρίς Κύλιση)
     // ==========================================
     if (window.location.href.includes('tv=1')) {
         document.body.classList.add('tv-mode');
-        startAutoScroll();
-    }
-
-    function startAutoScroll() {
-        let isPaused = false;
-        
-        function scrollStep() {
-            if (isPaused) return;
-            
-            window.scrollBy(0, 1);
-            
-            // Υπολογισμός αν φτάσαμε στο τέλος
-            const scrollPosition = Math.ceil(window.innerHeight + window.scrollY);
-            const documentHeight = document.body.offsetHeight;
-            
-            if (scrollPosition >= documentHeight - 5) {
-                isPaused = true;
-                setTimeout(() => {
-                    window.scrollTo({ top: 0, behavior: 'smooth' }); 
-                    setTimeout(() => {
-                        isPaused = false;
-                        requestAnimationFrame(scrollStep);
-                    }, 2000); 
-                }, 3000);
-                return;
-            }
-            
-            requestAnimationFrame(scrollStep);
-        }
-        
-        setTimeout(() => {
-            requestAnimationFrame(scrollStep);
-        }, 4000);
     }
 });
