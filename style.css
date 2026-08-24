@@ -758,3 +758,47 @@ body.tv-mode .pizza-number { font-size: 0.85rem; padding: 4px; min-width: 32px; 
 body.tv-mode .pizza-title { font-size: 0.85rem; margin-bottom: 0; }
 body.tv-mode .pizza-ingredients { font-size: 0.7rem; line-height: 1.1; margin-top: 2px;}
 body.tv-mode .pizza-price { font-size: 0.85rem; }
+/* ==========================================================================
+   Πλαίσιο Πληροφοριών & Social (ΜΟΝΟ για TV Mode)
+   ========================================================================== */
+body.tv-mode .tv-poster-info {
+    grid-column: 2 / 4; /* Γεμίζει ακριβώς τις 2 άδειες στήλες δίπλα στην 16η πίτσα */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    background-color: var(--card-bg);
+    border: 2px dashed var(--text-muted); /* Διακεκομμένο περίγραμμα για να ταιριάζει με το Family Pizza */
+    border-radius: 8px;
+    padding: 5px;
+}
+
+body.tv-mode .tv-allergy {
+    font-size: 0.9rem;
+    font-weight: 800;
+    color: #e31837; /* Κόκκινο για να τραβάει την προσοχή */
+    margin: 0;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+body.tv-mode .tv-socials {
+    display: flex;
+    gap: 15px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text-color);
+}
+
+body.tv-mode .tv-socials div {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+body.tv-mode .tv-socials i {
+    font-size: 1.1rem;
+}
