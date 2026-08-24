@@ -835,3 +835,27 @@ body.dark-mode .main-logo { filter: invert(1); }
         font-size: 1.2rem;
     }
 }
+/* ==========================================================================
+   13. TV / Kiosk Mode (.tv-mode)
+   ========================================================================== */
+body.tv-mode {
+    padding-bottom: 20px !important; /* Αφαιρεί το μεγάλο κενό του footer */
+    overflow: hidden; /* Κρύβει τη μπάρα κύλισης (scrollbar) για πιο καθαρή εικόνα */
+}
+
+/* Κρύβουμε όλα τα περιττά στοιχεία στην τηλεόραση */
+body.tv-mode #dark-mode-toggle,
+body.tv-mode .language-switcher,
+body.tv-mode .store-status-container,
+body.tv-mode #promo-container,
+body.tv-mode .legal-info,
+body.tv-mode .menu-footer {
+    display: none !important;
+}
+
+/* Κάνουμε την κορυφή (header) λίγο πιο συμπαγή για να εξοικονομήσουμε χώρο */
+body.tv-mode .menu-header {
+    padding-top: 15px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--text-muted);
+}
