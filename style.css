@@ -691,12 +691,12 @@ body.dark-mode .main-logo { filter: invert(1); }
 }
 
 /* ==========================================================================
-   13. TV / Kiosk Mode (.tv-mode) - Προσαρμογή σε 1 οθόνη (Fit to Screen)
+   13. TV / Kiosk Mode (.tv-mode) - Προσαρμογή σε 1 οθόνη (Συμπιεσμένο)
    ========================================================================== */
 body.tv-mode {
-    padding-bottom: 0 !important; 
+    padding-bottom: 5px !important; 
     overflow: hidden !important; 
-    height: 100vh; /* Κλειδώνει το ύψος ακριβώς στο μέγεθος της τηλεόρασης */
+    height: 100vh; /* Κλειδώνει στο ύψος της οθόνης */
     display: flex;
     flex-direction: column;
 }
@@ -711,49 +711,51 @@ body.tv-mode .menu-footer {
     display: none !important;
 }
 
+/* ΔΡΑΣΤΙΚΗ ΜΕΙΩΣΗ στα κενά της κορυφής */
 body.tv-mode .menu-header {
-    padding-top: 15px;
+    padding-top: 5px;
     margin-bottom: 5px;
-    border-bottom: 2px solid var(--text-muted);
+    border-bottom: 1px solid var(--text-muted);
     flex-shrink: 0;
 }
 
-/* Μικραίνουμε λίγο το λογότυπο και τους τίτλους για να δώσουμε χώρο στις πίτσες */
 body.tv-mode .main-logo {
-    width: 140px !important; /* Πιο συμπαγές λογότυπο */
+    width: 80px !important; /* Πολύ μικρότερο λογότυπο για να μη χάνουμε χώρο */
     margin: 0 auto;
 }
 
-body.tv-mode .menu-header h1 { font-size: 1.5rem; margin-top: 5px; }
-body.tv-mode .menu-header h2 { font-size: 1rem; }
+body.tv-mode .menu-header h1 { font-size: 1.2rem; margin-top: 3px; margin-bottom: 0; }
+body.tv-mode .menu-header h2 { font-size: 0.85rem; margin-bottom: 0; letter-spacing: 3px; }
 body.tv-mode .tagline-wrapper { margin-bottom: 2px; }
+body.tv-mode .waving-flag { font-size: 0.85rem; }
 
 body.tv-mode .menu-container {
     flex-grow: 1;
-    max-width: 95%; /* Απλώνεται σε όλο το πλάτος της τηλεόρασης */
+    max-width: 98%;
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Κεντράρει το μενού κάθετα στη μέση της οθόνης */
+    justify-content: center;
 }
 
-/* Μικραίνουμε ελαφρώς το πλαίσιο της Family Pizza */
+/* Μικραίνουμε το πλαίσιο της Family Pizza */
 body.tv-mode .family-pizza-banner {
-    padding: 8px 15px;
-    margin-bottom: 12px;
-    font-size: 1rem;
+    padding: 6px 10px;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
 }
 
-/* Προσαρμογή Πιτσών */
+/* Στύψιμο των Πιτσών για να χωρέσουν 5 γραμμές */
 body.tv-mode .pizza-grid {
-    grid-template-columns: repeat(2, 1fr); /* 2 στήλες */
-    gap: 12px; /* Μικρότερο κενό ανάμεσα στις κάρτες */
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px; /* Ελάχιστο κενό μεταξύ των καρτών */
 }
 
 body.tv-mode .pizza-card {
-    padding: 8px 10px;
-    gap: 10px;
+    padding: 5px 8px; /* Πολύ μικρότερο padding εσωτερικά */
+    gap: 8px;
 }
 
-body.tv-mode .pizza-title { font-size: 0.95rem; }
-body.tv-mode .pizza-ingredients { font-size: 0.75rem; }
-body.tv-mode .pizza-price { font-size: 0.95rem; }
+body.tv-mode .pizza-number { font-size: 0.85rem; padding: 4px; min-width: 32px; margin-right: 0;}
+body.tv-mode .pizza-title { font-size: 0.9rem; margin-bottom: 0; }
+body.tv-mode .pizza-ingredients { font-size: 0.7rem; line-height: 1.1; margin-top: 2px;}
+body.tv-mode .pizza-price { font-size: 0.9rem; }
