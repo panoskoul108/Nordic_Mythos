@@ -196,6 +196,25 @@ function renderMenu(lang) {
         container.innerHTML += cardHTML;
     }
 
+    // === ΝΕΟ: Προσθήκη Πλαισίου Αλλεργιών & Social στο TV Mode ===
+    if (window.location.href.includes('tv=1')) {
+        let allergyText = "Allergi? Spørg venligst personalet.";
+        if (lang === 'en') allergyText = "Allergies? Please ask our staff.";
+        if (lang === 'el') allergyText = "Αλλεργίες; Ρωτήστε το προσωπικό μας.";
+
+        const tvInfoHTML = `
+            <div class="tv-poster-info">
+                <p class="tv-allergy"><i class="fas fa-exclamation-triangle"></i> ${allergyText}</p>
+                <div class="tv-socials">
+                    <div><i class="fas fa-globe"></i> nordicmythos.dk</div>
+                    <div><i class="fab fa-instagram"></i> nordic.mythos</div>
+                    <div><i class="fab fa-facebook"></i> Nordic Mythos</div>
+                </div>
+            </div>`;
+        container.innerHTML += tvInfoHTML;
+    }
+    // === ΤΕΛΟΣ ΝΕΟΥ ΚΟΜΜΑΤΙΟΥ ===
+
     setupModalEvents();
 
     const cards = document.querySelectorAll('.pizza-card');
