@@ -37,51 +37,49 @@ body {
     background-color: var(--bg-color); 
     color: var(--text-color); 
     line-height: 1.4;
-    padding-bottom: 180px; /* Κενό στο κάτω μέρος για να μην κρύβεται το μενού πίσω από το sticky footer */
+    padding-bottom: 180px; 
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* ==========================================================================
-   2. Header & Logo (Desktop & Base)
+   2. Header & Logo
    ========================================================================== */
 .menu-header {
     background-color: var(--bg-color);
     color: var(--text-color);
     text-align: center;
-    padding: 5px 20px 5px 20px; /* Μειώσαμε δραστικά το κενό πάνω και κάτω */
+    padding: 5px 20px 5px 20px; 
     border-bottom: 3px solid var(--text-color); 
-    margin-bottom: 15px; /* Φέρνει τις πίτσες 15px πιο κοντά στη γραμμή */
+    margin-bottom: 15px; 
     position: relative;
 }
 
-.logo-container {
-    margin-bottom: 0;
-}
+.logo-container { margin-bottom: 0; }
 
 .main-logo {
-    width: 220px; /* Ελαφρώς μικρότερο για να μην σπρώχνει το μενού πολύ κάτω */
+    width: 220px; 
     height: auto; 
     display: block;
-    margin: 5px auto 5px auto; /* Ελάχιστος αέρας πάνω και κάτω από το λογότυπο */
+    margin: 5px auto 5px auto; 
 }
 
 body.dark-mode .main-logo { filter: invert(1); }
 
 .menu-header h1 {
-    font-size: 2rem; /* Ελαφρώς πιο κομψό μέγεθος (από 2.2rem) */
+    font-size: 2rem; 
     font-weight: 800;
     letter-spacing: 3px;
     margin-top: 0;
-    margin-bottom: 2px; /* Πιο κοντά ο τίτλος στο λογότυπο */
+    margin-bottom: 2px; 
     color: var(--text-color);
 }
 
 .menu-header h2 {
-    font-size: 1.15rem; /* Ελαφρώς πιο κομψό (από 1.3rem) */
+    font-size: 1.15rem; 
     font-weight: 700;
     letter-spacing: 5px;
     color: var(--text-color);
-    margin-bottom: 4px; /* Πιο κοντά στον υπότιτλο */
+    margin-bottom: 4px; 
 }
 
 .tagline {
@@ -91,7 +89,6 @@ body.dark-mode .main-logo { filter: invert(1); }
     margin-bottom: 5px;
 }
 
-/* Dark Mode Button */
 #dark-mode-toggle {
     position: absolute;
     top: 20px;
@@ -110,7 +107,7 @@ body.dark-mode .main-logo { filter: invert(1); }
 }
 
 /* ==========================================================================
-   3. Language Switcher (Dropdown Style)
+   3. Language Switcher
    ========================================================================== */
 .language-switcher.dropdown {
     position: absolute;
@@ -135,9 +132,7 @@ body.dark-mode .main-logo { filter: invert(1); }
     transition: all 0.2s ease;
 }
 
-.dropbtn:hover {
-    background-color: var(--card-hover);
-}
+.dropbtn:hover { background-color: var(--card-hover); }
 
 .dropdown-content {
     display: none;
@@ -168,9 +163,7 @@ body.dark-mode .main-logo { filter: invert(1); }
     color: #e31837;
 }
 
-.language-switcher.dropdown:hover .dropdown-content {
-    display: block;
-}
+.language-switcher.dropdown:hover .dropdown-content { display: block; }
 
 /* ==========================================================================
    4. Menu Container & Grid
@@ -216,9 +209,7 @@ body.dark-mode .main-logo { filter: invert(1); }
     transform: translateY(0);
 }
 
-.pizza-card.clickable {
-    cursor: pointer;
-}
+.pizza-card.clickable { cursor: pointer; }
 
 .pizza-card.clickable:hover {
     transform: translateY(-2px);
@@ -316,9 +307,7 @@ body.dark-mode .main-logo { filter: invert(1); }
     transition: transform 0.15s ease;
 }
 
-.close-modal:hover {
-    transform: scale(1.1);
-}
+.close-modal:hover { transform: scale(1.1); }
 
 .modal-image-container {
     width: 100%;
@@ -332,9 +321,7 @@ body.dark-mode .main-logo { filter: invert(1); }
     object-fit: cover; 
 }
 
-.modal-details {
-    padding: 25px 20px;
-}
+.modal-details { padding: 25px 20px; }
 
 .modal-header-row {
     display: flex;
@@ -363,7 +350,7 @@ body.dark-mode .main-logo { filter: invert(1); }
 }
 
 /* ==========================================================================
-   7. Footer (Sticky) & Contacts
+   7. Footer (Sticky)
    ========================================================================== */
 .menu-footer {
     position: fixed;
@@ -403,11 +390,8 @@ body.dark-mode .main-logo { filter: invert(1); }
 }
 
 .footer-link:hover, 
-.footer-link:active {
-    opacity: 0.6; 
-}
+.footer-link:active { opacity: 0.6; }
 
-/* Wolt Button */
 .wolt-btn {
     background-color: #00c2e8; 
     color: #ffffff !important; 
@@ -467,13 +451,8 @@ body.dark-mode .main-logo { filter: invert(1); }
     color: white;
 }
 
-.social-icon.facebook {
-    background-color: #1877F2;
-}
-
-.social-icon.instagram {
-    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-}
+.social-icon.facebook { background-color: #1877F2; }
+.social-icon.instagram { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
 
 /* ==========================================================================
    10. Floating Promo Bubble & Ένδειξη Ωραρίου
@@ -481,7 +460,7 @@ body.dark-mode .main-logo { filter: invert(1); }
 .promo-container {
     position: fixed;
     right: 20px;
-    bottom: 120px; /* Πάνω από το sticky footer στο Desktop */
+    bottom: 120px; 
     z-index: 999;
     display: flex;
     flex-direction: column;
@@ -523,9 +502,7 @@ body.dark-mode .main-logo { filter: invert(1); }
     color: #ffffff;
 }
 
-.close-promo:hover {
-    opacity: 1;
-}
+.close-promo:hover { opacity: 1; }
 
 .promo-trigger {
     background-color: #f39c12;
@@ -607,18 +584,11 @@ body.dark-mode .main-logo { filter: invert(1); }
 }
 
 /* ==========================================================================
-   9. Mobile Optimization (max-width: 768px)
+   9. Mobile Optimization
    ========================================================================== */
 @media (max-width: 768px) {
-    body {
-        padding-bottom: 230px; 
-    }
-
-    .menu-header {
-        padding: 8px 10px 5px 10px; 
-        margin-bottom: 10px; 
-    }
-    
+    body { padding-bottom: 230px; }
+    .menu-header { padding: 8px 10px 5px 10px; margin-bottom: 10px; }
     .main-logo {
         width: 105px !important; 
         height: 105px !important; 
@@ -628,168 +598,63 @@ body.dark-mode .main-logo { filter: invert(1); }
         margin-bottom: 2px !important; 
         border-radius: 50%;
     }
-    
-    .menu-header h1 {
-        font-size: 1.4rem; 
-        margin-top: 5px;
-        margin-bottom: 2px;
-        letter-spacing: 1.5px;
-    }
-    
-    .menu-header h2 {
-        font-size: 1rem;
-        margin-bottom: 3px;
-        letter-spacing: 3px;
-    }
-    
-    .tagline {
-        font-size: 0.8rem;
-        margin-bottom: 8px;
-    }
-    
-    .language-switcher.dropdown {
-        top: 10px;
-        right: 10px;
-    }
-    
-    #dark-mode-toggle {
-        top: 10px;
-        left: 10px;
-    }
-
-    .dropbtn {
-        padding: 5px 10px;
-        font-size: 11px;
-    }
-
-    .icon-btn {
-        width: 30px;
-        height: 30px;
-        font-size: 13px;
-        padding: 5px;
-    }
-
-    .dropdown-content {
-        min-width: 110px;
-    }
-
-    .dropdown-content a {
-        padding: 8px 12px;
-        font-size: 11px;
-    }
-
-    #menu-container {
-        gap: 8px; 
-        padding: 5px 5px;
-    }
-
-    .pizza-card {
-        padding: 8px 10px; 
-        gap: 8px;
-        border-radius: 8px;
-    }
-
-    .pizza-number {
-        font-size: 0.9rem; 
-        min-width: 32px;
-        padding: 3px 5px;
-        margin-right: 2px;
-    }
-
-    .pizza-title {
-        font-size: 0.9rem; 
-        margin-bottom: 1px;
-    }
-
-    .pizza-ingredients {
-        font-size: 0.72rem; 
-        line-height: 1.2;
-    }
-
-    .pizza-price {
-        font-size: 0.9rem;
-        padding-left: 5px;
-    }
-
-    .menu-footer {
-        padding: 12px 10px;
-    }
-    
-    .footer-info {
-        gap: 6px; 
-    }
-
-    .footer-link {
-        font-size: 0.8rem;
-    }
-    
-    .wolt-btn {
-        padding: 8px 15px;
-        font-size: 12px;
-        width: 100%; 
-        box-sizing: border-box;
-    }
-    
-    .social-links {
-        margin-top: 8px;
-        padding-top: 8px;
-        gap: 12px;
-    }
-    
-    .social-icon {
-        width: 34px;  
-        height: 34px;
-        font-size: 15px;
-    }
-
-    /* Σωστή θέση για το συννεφάκι στα κινητά */
-    .promo-container {
-        right: 15px;
-        bottom: 200px; 
-    }
+    .menu-header h1 { font-size: 1.4rem; margin-top: 5px; margin-bottom: 2px; letter-spacing: 1.5px; }
+    .menu-header h2 { font-size: 1rem; margin-bottom: 3px; letter-spacing: 3px; }
+    .tagline { font-size: 0.8rem; margin-bottom: 8px; }
+    .language-switcher.dropdown { top: 10px; right: 10px; }
+    #dark-mode-toggle { top: 10px; left: 10px; }
+    .dropbtn { padding: 5px 10px; font-size: 11px; }
+    .icon-btn { width: 30px; height: 30px; font-size: 13px; padding: 5px; }
+    .dropdown-content { min-width: 110px; }
+    .dropdown-content a { padding: 8px 12px; font-size: 11px; }
+    #menu-container { gap: 8px; padding: 5px 5px; }
+    .pizza-card { padding: 8px 10px; gap: 8px; border-radius: 8px; }
+    .pizza-number { font-size: 0.9rem; min-width: 32px; padding: 3px 5px; margin-right: 2px; }
+    .pizza-title { font-size: 0.9rem; margin-bottom: 1px; }
+    .pizza-ingredients { font-size: 0.72rem; line-height: 1.2; }
+    .pizza-price { font-size: 0.9rem; padding-left: 5px; }
+    .menu-footer { padding: 12px 10px; }
+    .footer-info { gap: 6px; }
+    .footer-link { font-size: 0.8rem; }
+    .wolt-btn { padding: 8px 15px; font-size: 12px; width: 100%; box-sizing: border-box; }
+    .social-links { margin-top: 8px; padding-top: 8px; gap: 12px; }
+    .social-icon { width: 34px; height: 34px; font-size: 15px; }
+    .promo-container { right: 15px; bottom: 200px; }
 }
+
 /* ==========================================================================
-   11. Νομικά Στοιχεία (Κάτω από τον Κατάλογο)
+   11. Νομικά Στοιχεία
    ========================================================================== */
 .legal-info {
     text-align: center;
-    margin-top: 50px;       /* Αφήνει αρκετό κενό από την τελευταία πίτσα */
+    margin-top: 50px;       
     margin-bottom: 20px;
     padding-top: 20px;
-    border-top: 1px solid var(--modal-border); /* Μια διακριτική οριζόντια γραμμή */
+    border-top: 1px solid var(--modal-border); 
     font-size: 0.8rem;
     color: var(--text-muted);
     font-weight: 500;
     letter-spacing: 0.5px;
 }
+
 /* ==========================================================================
-   Waving Flags (Δίπλα στο Tagline)
+   Waving Flags
    ========================================================================== */
 .tagline-wrapper {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px; /* Η απόσταση μεταξύ των σημαιών και του κειμένου */
+    gap: 8px; 
     margin-bottom: 5px;
 }
-
-.tagline-wrapper .tagline {
-    margin-bottom: 0; /* Αφαιρούμε το κενό του κειμένου γιατί το αναλαμβάνει το wrapper */
-}
-
+.tagline-wrapper .tagline { margin-bottom: 0; }
 .waving-flag {
-    font-size: 1.1rem; /* Μέγεθος που δένει αρμονικά με το κείμενο */
+    font-size: 1.1rem; 
     display: inline-block;
     animation: waveAnimation 2.5s ease-in-out infinite;
     transform-origin: bottom center;
 }
-
-/* Καθυστέρηση στη δεύτερη σημαία για να μην κουνιούνται εντελώς ταυτόχρονα (πιο φυσικό) */
-.waving-flag:last-child {
-    animation-delay: 0.4s;
-}
-
-/* Το εφέ κυματισμού */
+.waving-flag:last-child { animation-delay: 0.4s; }
 @keyframes waveAnimation {
     0% { transform: rotate(0deg) translateY(0); }
     25% { transform: rotate(8deg) translateY(-1px); }
@@ -802,9 +667,9 @@ body.dark-mode .main-logo { filter: invert(1); }
    12. Family Pizza Banner 
    ========================================================================== */
 .family-pizza-banner {
-    background-color: var(--card-bg); /* Προσαρμόζεται στο Dark Mode */
+    background-color: var(--card-bg); 
     border: 2px dashed #f97316; 
-    color: var(--text-color); /* Προσαρμόζεται στο Dark Mode */
+    color: var(--text-color); 
     text-align: center;
     padding: 14px 20px;
     border-radius: 10px;
@@ -819,31 +684,20 @@ body.dark-mode .main-logo { filter: invert(1); }
     box-shadow: 0 4px 12px rgba(0,0,0,0.08);
     letter-spacing: 0.5px;
 }
-
-.family-pizza-banner i {
-    color: #8b4513; 
-    font-size: 1.5rem;
-}
-
+.family-pizza-banner i { color: #8b4513; font-size: 1.5rem; }
 @media (max-width: 768px) {
-    .family-pizza-banner {
-        font-size: 0.95rem;
-        padding: 10px 15px;
-        margin-bottom: 15px;
-    }
-    .family-pizza-banner i {
-        font-size: 1.2rem;
-    }
+    .family-pizza-banner { font-size: 0.95rem; padding: 10px 15px; margin-bottom: 15px; }
+    .family-pizza-banner i { font-size: 1.2rem; }
 }
+
 /* ==========================================================================
    13. TV / Kiosk Mode (.tv-mode)
    ========================================================================== */
 body.tv-mode {
-    padding-bottom: 20px !important; /* Αφαιρεί το μεγάλο κενό του footer */
-    overflow: hidden; /* Κρύβει τη μπάρα κύλισης (scrollbar) για πιο καθαρή εικόνα */
+    padding-bottom: 20px !important; 
+    overflow: hidden !important; 
 }
 
-/* Κρύβουμε όλα τα περιττά στοιχεία στην τηλεόραση */
 body.tv-mode #dark-mode-toggle,
 body.tv-mode .language-switcher,
 body.tv-mode .store-status-container,
@@ -853,7 +707,6 @@ body.tv-mode .menu-footer {
     display: none !important;
 }
 
-/* Κάνουμε την κορυφή (header) λίγο πιο συμπαγή για να εξοικονομήσουμε χώρο */
 body.tv-mode .menu-header {
     padding-top: 15px;
     margin-bottom: 20px;
