@@ -196,24 +196,53 @@ function renderMenu(lang) {
         container.innerHTML += cardHTML;
     }
 
-    // === ΝΕΟ: Προσθήκη Πλαισίου Αλλεργιών & Social στο TV Mode ===
+    // ==============================================================
+    // ΝΕΟ: ΕΙΔΙΚΗ ΔΟΜΗ ΜΟΝΟ ΓΙΑ ΤΟ TV MODE (Αντιγραφή της εικόνας)
+    // ==============================================================
     if (window.location.href.includes('tv=1')) {
-        let allergyText = "Allergi? Spørg venligst personalet.";
-        if (lang === 'en') allergyText = "Allergies? Please ask our staff.";
-        if (lang === 'el') allergyText = "Αλλεργίες; Ρωτήστε το προσωπικό μας.";
+        
+        // 1. Εξαφάνιση της αρχικής πάνω μπάρας
+        const oldBanner = document.querySelector('.family-pizza-banner');
+        if (oldBanner) oldBanner.style.display = 'none';
 
-        const tvInfoHTML = `
-            <div class="tv-poster-info">
-                <p class="tv-allergy"><i class="fas fa-exclamation-triangle"></i> ${allergyText}</p>
-                <div class="tv-socials">
-                    <div><i class="fas fa-globe"></i> nordicmythos.dk</div>
-                    <div><i class="fab fa-instagram"></i> nordic.mythos</div>
-                    <div><i class="fab fa-facebook"></i> Nordic Mythos</div>
-                </div>
-            </div>`;
-        container.innerHTML += tvInfoHTML;
+        // 2. Δημιουργία της μεγάλης κάρτας Family Pizza
+        const tvFamilyBox = document.createElement('div');
+        tvFamilyBox.className = 'tv-family-box';
+        tvFamilyBox.innerHTML = `
+            <div class="tv-family-icon">
+                <i class="fas fa-pizza-slice"></i>
+            </div>
+            <div class="tv-family-text">
+                <div class="tv-f-title1">EXTRA TILVALG</div>
+                <div class="tv-f-title2">FAMILY SIZE OPGRADERING</div>
+                <div class="tv-f-title3">Gør din pizza til <strong>FAMILY SIZE!</strong> (+89 KR)</div>
+            </div>
+        `;
+        container.appendChild(tvFamilyBox); // Μπαίνει στο τέλος του πλέγματος (grid)
+
+        // 3. Μαθηματικά για να πηγαίνει η αρίθμηση κάθετα (1-7 αριστερά, 8-13 δεξιά)
+        const totalItems = container.children.length; // (13 πίτσες + 1 family box = 14)
+        const rows = Math.ceil(totalItems / 2); // (14 / 2 = 7 γραμμές)
+        container.style.gridTemplateRows = `repeat(${rows}, auto)`;
+        container.style.gridAutoFlow = 'column';
+
+        // 4. Προσθήκη του Custom Footer στο τέλος της σελίδας
+        const tvFooter = document.createElement('div');
+        tvFooter.className = 'tv-footer';
+        tvFooter.innerHTML = `
+            <div class="tv-footer-top">
+                <span><i class="fas fa-phone-alt"></i> 93949755</span>
+                <span><i class="fab fa-facebook"></i> Nordic Mythos</span>
+                <span><i class="fab fa-instagram"></i> nordic.mythos</span>
+            </div>
+            <div class="tv-footer-bottom">
+                <strong>Vigtig Allergeninformation:</strong> Mange af vores retter indeholder allergener som gluten, mælkeprodukter, nødder, æg, frø osv. Hvis du har en fødevareallergi, bedes du spørge personalet for detaljer.
+            </div>
+        `;
+        // Το βάζουμε στο <section> για να εμφανιστεί τέρμα κάτω
+        document.querySelector('.menu-section').appendChild(tvFooter);
     }
-    // === ΤΕΛΟΣ ΝΕΟΥ ΚΟΜΜΑΤΙΟΥ ===
+    // ==============================================================
 
     setupModalEvents();
 
@@ -269,12 +298,10 @@ function setupModalEvents() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Εκκίνηση Δεδομένων
     const savedLang = localStorage.getItem('selectedLang') || 'da';
     setLanguage(savedLang); 
     fetchMenuData(); 
 
-    // 2. Dark Mode
     const darkModeToggle = document.getElementById('dark-mode-toggle');
     const body = document.body;
 
@@ -294,7 +321,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // 3. Promo Bubble
     const promoTrigger = document.getElementById('promo-trigger');
     const promoBubble = document.getElementById('promo-bubble');
     const closePromo = document.getElementById('close-promo');
@@ -310,9 +336,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-   // ==========================================
-    // 4. TV Mode (Εντελώς Σταθερό - Χωρίς Κύλιση)
-    // ==========================================
+    // Εκκίνηση TV Mode CSS
     if (window.location.href.includes('tv=1')) {
         document.body.classList.add('tv-mode');
     }
