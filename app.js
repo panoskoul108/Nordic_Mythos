@@ -358,3 +358,56 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.classList.add('tv-mode');
     }
 });
+// ==========================================
+    // 5. GDPR Cookie Banner & Analytics Logic
+    // ==========================================
+    const cookieBanner = document.getElementById('cookie-banner');
+    const cookieConsent = localStorage.getItem('cookieConsent');
+    const isTvMode = window.location.href.includes('tv=1');
+
+    function loadGoogleAnalytics() {
+        const trackingId = 'G-CWT6XJN5JY'; // <-- ΒΑΛΕ ΤΟΝ ΔΙΚΟ ΣΟΥ ΚΩΔΙΚΟ ΕΔΩ!
+        
+        const script = document.createElement('script');
+        script.src = `https://www.googletagmanager.com/gtag/js?id=${trackingId}`;
+        script.async = true;
+        document.head.appendChild(script);
+
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        
+        // anonymize_ip: Αποκρύπτει την ταυτότητα του χρήστη για να είσαι 100% GDPR compliant
+        gtag('config', trackingId, { 'anonymize_ip': true }); 
+    }
+
+    // Αν είμαστε σε TV Mode, κρύβουμε το banner ούτως ή άλλως. 
+    // Αλλιώς, αν δεν έχει απαντήσει, του το δείχνουμε.
+    if (!cookieConsent && !isTvMode) {
+        cookieBanner.style.display = 'flex';
+    } else if (cookieConsent === 'accepted' && !isTvMode) {
+        // Αν έχει πατήσει αποδοχή παλιότερα, φορτώνουμε το Analytics
+        loadGoogleAnalytics();
+    }
+
+    document.getElementById('accept-cookies')?.addEventListener('click', () => {
+        localStorage.setItem('cookieConsent', 'accepted');
+        cookieBanner.style.display = 'none';
+        loadGoogleAnalytics(); // Το ενεργοποιούμε ΜΟΝΟ αφού πατήσει Accept
+    });
+
+    document.getElementById('decline-cookies')?.addEventListener('click', () => {
+        localStorage.setItem('cookieConsent', 'declined');
+        cookieBanner.style.display = 'none';
+        // Δεν φορτώνουμε τίποτα απολύτως!
+    });
+
+    // Λειτουργία του παραθύρου Privacy Policy
+    const privacyModal = document.getElementById('privacy-modal');
+    document.getElementById('open-privacy')?.addEventListener('click', (e) => {
+        e.preventDefault();
+        privacyModal.style.display = 'flex';
+    });
+    document.querySelector('.close-privacy')?.addEventListener('click', () => {
+        privacyModal.style.display = 'none';
+    });
