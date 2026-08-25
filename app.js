@@ -196,11 +196,12 @@ function renderMenu(lang) {
         container.innerHTML += cardHTML;
     }
 
-        // ==============================================================
+    // ==============================================================
     // ΝΕΟ: ΕΙΔΙΚΗ ΔΟΜΗ ΜΟΝΟ ΓΙΑ ΤΟ TV MODE
     // ==============================================================
     if (window.location.href.includes('tv=1')) {
         
+        // Εξαφάνιση της αρχικής μπάρας
         const oldBanner = document.querySelector('.family-pizza-banner');
         if (oldBanner) oldBanner.style.display = 'none';
 
@@ -235,13 +236,13 @@ function renderMenu(lang) {
         container.appendChild(tvAllergenBox);
 
         // 3. Μαθηματικά για να πηγαίνει η αρίθμηση κάθετα 
-        // Τώρα έχουμε 16 Πίτσες + 1 Family Box + 1 Allergen Box = 18 στοιχεία. (Ακριβώς 9 γραμμές!)
+        // 16 Πίτσες + 1 Family Box + 1 Allergen Box = 18 στοιχεία (9 γραμμές ανά στήλη)
         const totalItems = container.children.length; 
         const rows = Math.ceil(totalItems / 2); 
         container.style.gridTemplateRows = `repeat(${rows}, auto)`;
         container.style.gridAutoFlow = 'column';
 
-        // 4. Το Footer (Μόνο με τα Social/Τηλέφωνο πλέον, άρα κερδίζουμε χώρο!)
+        // 4. Το Footer (Μόνο με τα Social & το τηλέφωνο)
         const tvFooter = document.createElement('div');
         tvFooter.className = 'tv-footer';
         tvFooter.innerHTML = `
@@ -254,3 +255,106 @@ function renderMenu(lang) {
         document.querySelector('.menu-section').appendChild(tvFooter);
     }
     // ==============================================================
+
+    setupModalEvents();
+
+    const cards = document.querySelectorAll('.pizza-card');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target); 
+            }
+        });
+    }, { threshold: 0.1 }); 
+
+    cards.forEach(card => observer.observe(card));
+}
+
+function setupModalEvents() {
+    const modal = document.getElementById('pizza-modal');
+    const closeBtn = document.querySelector('.close-modal');
+    const modalImage = document.getElementById('modal-image');
+    const modalNumber = document.getElementById('modal-number');
+    const modalTitle = document.getElementById('modal-title');
+    const modalPrice = document.getElementById('modal-price');
+    const modalIngredients = document.getElementById('modal-ingredients');
+
+    document.querySelectorAll('.pizza-card.clickable').forEach(card => {
+        const newCard = card.cloneNode(true);
+        card.parentNode.replaceChild(newCard, card);
+
+        newCard.addEventListener('click', () => {
+            modalImage.src = newCard.getAttribute('data-image');
+            modalNumber.textContent = newCard.getAttribute('data-number');
+            modalTitle.textContent = newCard.getAttribute('data-title');
+            modalPrice.textContent = newCard.getAttribute('data-price');
+            modalIngredients.textContent = newCard.getAttribute('data-ingredients');
+
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden'; 
+        });
+    });
+
+    closeBtn.addEventListener('click', () => {
+        modal.style.display = 'none';
+        document.body.style.overflow = ''; 
+    });
+
+    window.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.style.display = 'none';
+            document.body.style.overflow = ''; 
+        }
+    });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. Εκκίνηση Δεδομένων
+    const savedLang = localStorage.getItem('selectedLang') || 'da';
+    setLanguage(savedLang); 
+    fetchMenuData(); 
+
+    // 2. Dark Mode
+    const darkModeToggle = document.getElementById('dark-mode-toggle');
+    const body = document.body;
+
+    if (localStorage.getItem('darkMode') === 'enabled') {
+        body.classList.add('dark-mode');
+        darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+    }
+
+    darkModeToggle.addEventListener('click', () => {
+        body.classList.toggle('dark-mode');
+        if (body.classList.contains('dark-mode')) {
+            localStorage.setItem('darkMode', 'enabled');
+            darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        } else {
+            localStorage.setItem('darkMode', 'disabled');
+            darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+        }
+    });
+
+    // 3. Promo Bubble
+    const promoTrigger = document.getElementById('promo-trigger');
+    const promoBubble = document.getElementById('promo-bubble');
+    const closePromo = document.getElementById('close-promo');
+    const notifBadge = document.querySelector('.notification-badge');
+
+    if (promoTrigger && promoBubble && closePromo) {
+        promoTrigger.addEventListener('click', () => {
+            promoBubble.classList.toggle('hidden');
+            if (notifBadge) notifBadge.style.display = 'none'; 
+        });
+        closePromo.addEventListener('click', () => {
+            promoBubble.classList.add('hidden');
+        });
+    }
+
+    // ==========================================
+    // 4. TV Mode (Εντελώς Σταθερό)
+    // ==========================================
+    if (window.location.href.includes('tv=1')) {
+        document.body.classList.add('tv-mode');
+    }
+});
