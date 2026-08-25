@@ -691,10 +691,12 @@ body.dark-mode .main-logo { filter: invert(1); }
 }
 
 /* ==========================================================================
-   13. TV / Kiosk Mode (.tv-mode) - MAXIMUM FIT (16 Items & Bigger Logo)
+   13. TV / Kiosk Mode (.tv-mode) - SAFE ZONE & OVERSCAN FIX
    ========================================================================== */
 body.tv-mode {
-    padding-bottom: 0 !important; 
+    /* ΕΔΩ ΕΙΝΑΙ Η ΛΥΣΗ: 45px κενό στο κάτω μέρος για να μην κόβει το πλαίσιο της τηλεόρασης! */
+    padding: 10px 10px 45px 10px !important; 
+    box-sizing: border-box !important;
     overflow: hidden !important; 
     height: 100vh !important; 
     display: flex;
@@ -715,18 +717,19 @@ body.tv-mode .menu-section {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
+    height: 100%; 
 }
 
-/* --- ΕΠΙ ΚΕΦΑΛΙΔΑ (Μεγαλύτερο Logo, Λιγότερο Κενό) --- */
+/* --- ΕΠΙ ΚΕΦΑΛΙΔΑ --- */
 body.tv-mode .menu-header {
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 6px; /* Μικρότερο padding */
+    padding: 2px; /* Μειώσαμε τον αέρα */
     border-bottom: 2px solid #ddd;
-    margin-bottom: 6px; /* Μικρότερο κενό από κάτω */
+    margin-bottom: 4px;
     flex-shrink: 0;
 }
 
@@ -738,39 +741,37 @@ body.tv-mode .logo-container {
     margin: 0;
 }
 
-/* ΕΔΩ ΜΕΓΑΛΩΣΑΜΕ ΤΟ LOGO */
-body.tv-mode .main-logo {
-    width: 115px !important; 
-}
+body.tv-mode .main-logo { width: 105px !important; }
 
-body.tv-mode .menu-header h1 { font-size: 1.45rem; margin: 0; color: #1a202c; letter-spacing: 2px;}
-body.tv-mode .menu-header h2 { font-size: 0.95rem; margin: 2px 0 0 0; letter-spacing: 3px; color: #4a5568;}
-body.tv-mode .tagline-wrapper { margin-bottom: 0; margin-top: 2px;}
-body.tv-mode .waving-flag { font-size: 0.85rem; }
+body.tv-mode .menu-header h1 { font-size: 1.4rem; margin: 0; color: #1a202c; letter-spacing: 2px;}
+body.tv-mode .menu-header h2 { font-size: 0.9rem; margin: 0; letter-spacing: 3px; color: #4a5568;}
+body.tv-mode .tagline-wrapper { margin-bottom: 0; margin-top: 0px;}
+body.tv-mode .waving-flag { font-size: 0.8rem; }
 
-/* --- ΠΛΕΓΜΑ ΠΙΤΣΩΝ (Τέρμα Στρυμωγμένο για να χωράει) --- */
+/* --- ΠΛΕΓΜΑ ΠΙΤΣΩΝ --- */
 body.tv-mode .menu-container {
     flex-grow: 1;
     max-width: 98%;
-    padding: 0 15px;
+    padding: 0 10px;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    min-height: 0; /* Βοηθάει στη συμπίεση */
 }
 
 body.tv-mode .pizza-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 6px; /* Μικρότερο κενό μεταξύ των καρτών (από 10 σε 6) */
+    gap: 4px; /* Ακόμα μικρότερο κενό (από 6 σε 4) */
 }
 
 /* --- ΚΑΡΤΕΣ ΠΙΤΣΩΝ --- */
 body.tv-mode .pizza-card {
-    padding: 4px 10px; /* Μειώσαμε τον εσωτερικό "αέρα" */
+    padding: 2px 8px; /* Πολύ σφιχτό padding */
     gap: 8px;
     background-color: #ffffff;
     border: 2px solid #cbd5e1;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.03);
 }
 
 body.tv-mode .pizza-number { 
@@ -778,55 +779,57 @@ body.tv-mode .pizza-number {
     color: #ffffff;
     border: none;
     border-radius: 6px;
-    font-size: 0.9rem; 
-    padding: 4px 6px; 
-    min-width: 32px; 
+    font-size: 0.85rem; 
+    padding: 3px 5px; 
+    min-width: 30px; 
     margin-right: 0;
 }
 
-body.tv-mode .pizza-title { font-size: 0.95rem; margin-bottom: 1px; color: #1e293b;}
-body.tv-mode .pizza-ingredients { font-size: 0.72rem; color: #64748b; line-height: 1.1;}
-body.tv-mode .pizza-price { font-size: 0.95rem; }
+body.tv-mode .pizza-title { font-size: 0.9rem; margin-bottom: 0px; color: #1e293b;}
+body.tv-mode .pizza-ingredients { font-size: 0.68rem; color: #64748b; line-height: 1.05;}
+body.tv-mode .pizza-price { font-size: 0.9rem; }
 
 /* --- CUSTOM FAMILY BOX --- */
 body.tv-mode .tv-family-box {
     background-color: #fcf4f0; 
     border: 2px solid #e2c9bc;
-    border-radius: 8px;
+    border-radius: 6px;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
-    padding: 4px 10px; /* Μικρότερο padding για να γλυτώσουμε ύψος */
+    padding: 2px 8px; 
 }
 
 body.tv-mode .tv-family-icon i {
-    font-size: 2.3rem; /* Ελαφρώς μικρότερο εικονίδιο */
+    font-size: 2rem; 
     color: #e04a3a;
 }
 
 body.tv-mode .tv-family-text { display: flex; flex-direction: column; text-align: left; }
-body.tv-mode .tv-f-title1 { font-size: 0.7rem; font-weight: 800; color: #a15c48; letter-spacing: 1px;}
-body.tv-mode .tv-f-title2 { font-size: 0.9rem; font-weight: 800; color: #2d3748; margin-top: 1px;}
-body.tv-mode .tv-f-title3 { font-size: 0.8rem; color: #4a5568; margin-top: 2px;}
+body.tv-mode .tv-f-title1 { font-size: 0.65rem; font-weight: 800; color: #a15c48; letter-spacing: 1px;}
+body.tv-mode .tv-f-title2 { font-size: 0.85rem; font-weight: 800; color: #2d3748; margin-top: 1px;}
+body.tv-mode .tv-f-title3 { font-size: 0.75rem; color: #4a5568; margin-top: 1px;}
 
-/* --- CUSTOM TV FOOTER --- */
+/* --- CUSTOM TV FOOTER (ΕΔΩ ΕΙΝΑΙ ΤΑ SOCIAL & ΤΑ ΑΛΛΕΡΓΙΟΓΟΝΑ) --- */
 body.tv-mode .tv-footer {
-    margin-top: auto;
+    margin-top: 6px;
     background-color: #f1f5f9;
-    border-top: 1px solid #cbd5e1;
-    padding: 6px 20px; /* Σφίξαμε και το κάτω μέρος */
+    border: 1px solid #cbd5e1; /* Προστέθηκε περίγραμμα για να ξεχωρίζει */
+    border-radius: 8px;
+    padding: 4px 15px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 4px;
+    gap: 2px;
+    flex-shrink: 0;
 }
 
 body.tv-mode .tv-footer-top {
     display: flex;
     justify-content: center;
-    gap: 50px;
-    font-size: 1.05rem;
+    gap: 40px;
+    font-size: 0.95rem;
     font-weight: 800;
     color: #0f172a;
 }
@@ -837,10 +840,10 @@ body.tv-mode .tv-footer-top span {
     gap: 6px;
 }
 
-body.tv-mode .tv-footer-top i { color: #334155; font-size: 1.15rem;}
+body.tv-mode .tv-footer-top i { color: #334155; font-size: 1.05rem;}
 
 body.tv-mode .tv-footer-bottom {
-    font-size: 0.75rem;
+    font-size: 0.72rem;
     font-weight: 600;
     color: #475569;
     text-align: center;
