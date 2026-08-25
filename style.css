@@ -691,6 +691,62 @@ body.dark-mode .main-logo { filter: invert(1); }
 }
 
 /* ==========================================================================
+   14. Cookie Banner & Privacy
+   ========================================================================== */
+.cookie-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--card-bg);
+    border-top: 3px solid var(--text-color);
+    z-index: 10000;
+    padding: 15px 20px;
+    box-shadow: 0 -5px 15px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: center;
+}
+
+.cookie-content {
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    text-align: center;
+}
+
+@media (min-width: 768px) {
+    .cookie-content {
+        flex-direction: row;
+        text-align: left;
+        justify-content: space-between;
+        width: 100%;
+    }
+}
+
+.cookie-content p { font-size: 0.85rem; margin: 0; color: var(--text-color); }
+.cookie-content a { color: #00c2e8; font-weight: 800; text-decoration: none;}
+.cookie-content a:hover { text-decoration: underline; }
+
+.cookie-buttons { display: flex; gap: 10px; }
+
+.cookie-btn {
+    padding: 8px 16px;
+    border: 2px solid var(--text-color);
+    border-radius: 6px;
+    font-weight: 800;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.cookie-btn.accept { background-color: var(--text-color); color: var(--bg-color); }
+.cookie-btn.accept:hover { background-color: #00c2e8; border-color: #00c2e8; color: white; }
+.cookie-btn.decline { background-color: transparent; color: var(--text-color); }
+.cookie-btn.decline:hover { background-color: var(--card-hover); }
+/* ==========================================================================
    13. TV / Kiosk Mode (.tv-mode) - ULTRA COMPRESSED
    ========================================================================== */
 body.tv-mode {
