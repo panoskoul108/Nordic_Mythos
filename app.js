@@ -249,7 +249,7 @@ function renderMenu(lang) {
             <div class="tv-footer-top">
                 <span><i class="fas fa-phone-alt"></i> 93949755</span>
                 <span><i class="fab fa-facebook"></i> Nordic Mythos</span>
-                <span><i class="fab fa-instagram"></i> nordic.mythos</span>
+                <span><i class="fab fa-instagram"></i> @nordic.mythos</span>
             </div>
         `;
         document.querySelector('.menu-section').appendChild(tvFooter);
