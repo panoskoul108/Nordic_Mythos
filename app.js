@@ -47,7 +47,7 @@ function fetchMenuData() {
         .then(text => {
             const jsonText = text.substring(47).slice(0, -2);
             const data = JSON.parse(jsonText);
-            
+
             data.table.rows.forEach(row => {
                 if (row && row.c && row.c[0] && row.c[1]) {
                     const key = row.c[0].v ? row.c[0].v.toString().trim() : '';
@@ -62,14 +62,14 @@ function fetchMenuData() {
 function renderSettings(lang) {
     const promoContainer = document.getElementById('promo-container');
     const promoText = document.getElementById('promo-text');
-    
+
     const rawBannerActive = globalSettings['banner_active'] ? globalSettings['banner_active'].toString().toUpperCase().trim() : 'NO';
     const isBannerActive = rawBannerActive === 'YES';
-    
+
     if (isBannerActive && globalSettings['banner'] && globalSettings['banner'].trim() !== '') {
         let bannerContent = globalSettings['banner'];
         const langPrefix = lang.toUpperCase() + ":";
-        
+
         if (bannerContent.includes(langPrefix)) {
             const parts = bannerContent.split(',');
             const currentPart = parts.find(p => p.trim().startsWith(langPrefix));
@@ -84,24 +84,24 @@ function renderSettings(lang) {
 
     const statusIndicator = document.getElementById('store-status-indicator');
     const statusText = document.getElementById('store-status-text');
-    
+
     if (statusIndicator && statusText) {
         statusIndicator.className = 'status-dot'; 
-        
+
         const daysMap = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
         const now = new Date();
         const dkTimeStr = now.toLocaleString("en-US", { timeZone: "Europe/Copenhagen" });
         const dkTime = new Date(dkTimeStr);
-        
+
         const currentDay = dkTime.getDay();
         const currentTotalMinutes = dkTime.getHours() * 60 + dkTime.getMinutes();
-        
+
         const todayKey = daysMap[currentDay];
         const todaySchedule = globalSettings[todayKey] || 'CLOSED';
         const prevDay = (currentDay === 0) ? 6 : currentDay - 1;
         const prevDayKey = daysMap[prevDay];
         const prevDaySchedule = globalSettings[prevDayKey] || 'CLOSED';
-        
+
         function isTimeInShift(schedule, checkYesterday) {
             if (schedule.toUpperCase() === 'CLOSED') return false;
             const parts = schedule.split('-');
@@ -173,13 +173,14 @@ function renderMenu(lang) {
         if (number.toString().toLowerCase() === 'number' || titleDA.toString().toLowerCase() === 'title') continue;
 
         // =======================================================
-        // ΕΔΩ ΓΙΝΕΤΑΙ Η ΜΑΓΕΙΑ ΜΕ ΤΑ EMOJIS ΚΑΙ ΤΗΝ ΤΕΛΕΙΑ
+        // ΑΣΦΑΛΗΣ ΜΕΤΑΦΡΑΣΗ EMOJIS ΚΑΙ ΤΕΛΕΙΑΣ
         // =======================================================
-        let finalIngredients = activeIngredients;
-        if (finalIngredients) {
-            let items = finalIngredients.split(',');
+        let finalIngredients = '';
+        if (activeIngredients) {
+            let ingredientsStr = String(activeIngredients); // Ασφαλής μετατροπή σε κείμενο
+            let items = ingredientsStr.split(',');
             finalIngredients = items.map(item => {
-                let text = item.trim();
+                let text = String(item).trim();
                 let lower = text.toLowerCase();
                 let emoji = '🔸'; 
 
@@ -374,7 +375,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function loadGoogleAnalytics() {
         const trackingId = 'G-XXXXXXXXXX'; // <-- ΒΑΛΕ ΤΟΝ ΔΙΚΟ ΣΟΥ ΚΩΔΙΚΟ (G-...) ΕΔΩ!
-        
+
         const script = document.createElement('script');
         script.src = `https://www.googletagmanager.com/gtag/js?id=${trackingId}`;
         script.async = true;
@@ -383,7 +384,7 @@ document.addEventListener('DOMContentLoaded', () => {
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-        
+
         gtag('config', trackingId, { 'anonymize_ip': true }); 
     }
 
