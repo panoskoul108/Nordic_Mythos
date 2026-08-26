@@ -698,7 +698,7 @@ body.dark-mode .main-logo { filter: invert(1); }
     bottom: 0;
     left: 0;
     width: 100%;
-    box-sizing: border-box; /* ΑΥΤΗ Η ΓΡΑΜΜΗ ΛΥΝΕΙ ΤΟ ΠΡΟΒΛΗΜΑ */
+    box-sizing: border-box; 
     background-color: var(--card-bg);
     border-top: 3px solid var(--text-color);
     z-index: 10000;
@@ -747,11 +747,12 @@ body.dark-mode .main-logo { filter: invert(1); }
 .cookie-btn.accept:hover { background-color: #00c2e8; border-color: #00c2e8; color: white; }
 .cookie-btn.decline { background-color: transparent; color: var(--text-color); }
 .cookie-btn.decline:hover { background-color: var(--card-hover); }
+
 /* ==========================================================================
-   13. TV / Kiosk Mode (.tv-mode) - THE SWEET SPOT (Η Χρυσή Τομή)
+   13. TV / Kiosk Mode (.tv-mode) - THE SWEET SPOT (Από τον 2ο Κώδικα)
    ========================================================================== */
 body.tv-mode {
-    padding: 5px 10px 12px 10px !important; /* 12px κενό ασφαλείας κάτω-κάτω */
+    padding: 5px 10px 12px 10px !important; 
     box-sizing: border-box !important;
     overflow: hidden !important; 
     height: 100vh !important; 
@@ -794,7 +795,7 @@ body.tv-mode .menu-header {
 }
 
 body.tv-mode .logo-container { position: absolute; left: 40px; top: 50%; transform: translateY(-50%); margin: 0; }
-body.tv-mode .main-logo { width: 95px !important; } /* Το τέλειο ενδιάμεσο μέγεθος! */
+body.tv-mode .main-logo { width: 95px !important; } 
 body.tv-mode .menu-header h1 { font-size: 1.4rem; margin: 0; color: #000000; font-weight: 900; letter-spacing: 2px;} 
 body.tv-mode .tagline-wrapper { margin-bottom: 2px; margin-top: 0px;}
 
@@ -811,12 +812,12 @@ body.tv-mode .menu-container {
 
 body.tv-mode .pizza-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 4px 8px; /* Σφιχτό κάθετο κενό (4px) για εξοικονόμηση ύψους */
+    gap: 4px 8px; 
 }
 
 /* --- ΚΑΡΤΕΣ ΠΙΤΣΩΝ --- */
 body.tv-mode .pizza-card {
-    padding: 2px 8px; /* Slim κάρτες: Μικρός αέρας πάνω-κάτω (2px), αρκετός δεξιά-αριστερά (8px) */
+    padding: 2px 8px; 
     gap: 6px;
     background-color: #ffffff;
     border: 2px solid #94a3b8; 
@@ -843,7 +844,7 @@ body.tv-mode .pizza-title {
     margin-bottom: 0px;
 }
 body.tv-mode .pizza-ingredients { 
-    font-size: 0.65rem; /* Το μαγικό νούμερο για να μη σπάνε οι γραμμές! */
+    font-size: 0.65rem; 
     font-weight: 700; 
     color: #1e293b; 
     line-height: 1.05; 
