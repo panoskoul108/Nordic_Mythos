@@ -32,6 +32,12 @@ body.dark-mode {
     padding: 0;
 }
 
+/* Προσθέτουμε αυτό το μπλοκ για να κλειδώσουμε το πλάτος */
+html, body {
+    max-width: 100%;
+    overflow-x: hidden; 
+}
+
 body {
     font-family: 'Montserrat', sans-serif;
     background-color: var(--bg-color); 
