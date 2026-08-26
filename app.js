@@ -98,7 +98,6 @@ function renderSettings(lang) {
         
         const todayKey = daysMap[currentDay];
         const todaySchedule = globalSettings[todayKey] || 'CLOSED';
-        
         const prevDay = (currentDay === 0) ? 6 : currentDay - 1;
         const prevDayKey = daysMap[prevDay];
         const prevDaySchedule = globalSettings[prevDayKey] || 'CLOSED';
@@ -107,12 +106,10 @@ function renderSettings(lang) {
             if (schedule.toUpperCase() === 'CLOSED') return false;
             const parts = schedule.split('-');
             if (parts.length !== 2) return false;
-            
             const startParts = parts[0].split(':');
             const endParts = parts[1].split(':');
             const startMins = parseInt(startParts[0]) * 60 + parseInt(startParts[1]);
             const endMins = parseInt(endParts[0]) * 60 + parseInt(endParts[1]);
-            
             if (checkYesterday) {
                 if (endMins <= startMins && endMins !== 0) {
                     if (currentTotalMinutes < endMins) return true;
@@ -130,7 +127,6 @@ function renderSettings(lang) {
         }
 
         let isOpen = false;
-        
         if (globalSettings['force_close'] && globalSettings['force_close'].toUpperCase() === 'YES') {
             isOpen = false;
         } else {
@@ -140,10 +136,8 @@ function renderSettings(lang) {
                 isOpen = true;
             }
         }
-
         const statusString = isOpen ? translations[lang].open : translations[lang].closed;
         const displayHours = todaySchedule.toUpperCase() !== 'CLOSED' ? todaySchedule : '';
-        
         statusIndicator.classList.add(isOpen ? 'open' : 'closed');
         statusText.textContent = `${statusString} ${displayHours ? '| ' + displayHours : ''}`;
     }
@@ -178,6 +172,37 @@ function renderMenu(lang) {
         if (number.toString().length === 1 && !isNaN(number)) number = '0' + number;
         if (number.toString().toLowerCase() === 'number' || titleDA.toString().toLowerCase() === 'title') continue;
 
+        // =======================================================
+        // ΕΔΩ ΓΙΝΕΤΑΙ Η ΜΑΓΕΙΑ ΜΕ ΤΑ EMOJIS ΚΑΙ ΤΗΝ ΤΕΛΕΙΑ
+        // =======================================================
+        let finalIngredients = activeIngredients;
+        if (finalIngredients) {
+            let items = finalIngredients.split(',');
+            finalIngredients = items.map(item => {
+                let text = item.trim();
+                let lower = text.toLowerCase();
+                let emoji = '🔸'; 
+
+                if (lower.includes('ost') || lower.includes('feta') || lower.includes('mozzarella') || lower.includes('halloumi')) emoji = '🧀';
+                else if (lower.includes('tomat')) emoji = '🍅';
+                else if (lower.includes('oregano') || lower.includes('basilikum')) emoji = '🌿';
+                else if (lower.includes('skinke')) emoji = '🍖';
+                else if (lower.includes('bacon')) emoji = '🥓';
+                else if (lower.includes('pepperoni') || lower.includes('kebab')) emoji = '🥩';
+                else if (lower.includes('kylling')) emoji = '🍗';
+                else if (lower.includes('majs')) emoji = '🌽';
+                else if (lower.includes('bbq')) emoji = '🥫';
+                else if (lower.includes('løg') || lower.includes('log') || lower.includes('lbg')) emoji = '🧅';
+                else if (lower.includes('ananas')) emoji = '🍍';
+                else if (lower.includes('oliven')) emoji = '🫒';
+                else if (lower.includes('champignon')) emoji = '🍄';
+                else if (lower.includes('jalapeño') || lower.includes('japaleño') || lower.includes('chili')) emoji = '🌶️';
+                else if (lower.includes('hvidløg') || lower.includes('hvidlog')) emoji = '🧄';
+
+                return `${emoji} ${text}`;
+            }).join(' • '); // Τα ενώνει ξανά με την τελεία!
+        }
+
         const hasImage = imageName !== '';
         const clickableClass = hasImage ? 'clickable' : '';
         const imagePath = hasImage ? `images/${imageName}` : '';
@@ -185,27 +210,21 @@ function renderMenu(lang) {
         const cardHTML = `
             <div class="pizza-card ${clickableClass}" 
                  data-number="${number}" data-title="${activeTitle}" 
-                 data-ingredients="${activeIngredients}" data-price="${price}" data-image="${imagePath}">
+                 data-ingredients="${finalIngredients}" data-price="${price}" data-image="${imagePath}">
                 <div class="pizza-number">${number}</div>
                 <div class="pizza-details">
                     <h3 class="pizza-title">${activeTitle}</h3>
-                    <p class="pizza-ingredients">${activeIngredients}</p>
+                    <p class="pizza-ingredients">${finalIngredients}</p>
                 </div>
                 <div class="pizza-price">${price}</div>
             </div>`;
         container.innerHTML += cardHTML;
     }
 
-    // ==============================================================
-    // ΝΕΟ: ΕΙΔΙΚΗ ΔΟΜΗ ΜΟΝΟ ΓΙΑ ΤΟ TV MODE
-    // ==============================================================
     if (window.location.href.includes('tv=1')) {
-        
-        // Εξαφάνιση της αρχικής μπάρας
         const oldBanner = document.querySelector('.family-pizza-banner');
         if (oldBanner) oldBanner.style.display = 'none';
 
-        // 1. Δημιουργία της μεγάλης κάρτας Family Pizza
         const tvFamilyBox = document.createElement('div');
         tvFamilyBox.className = 'tv-family-box';
         tvFamilyBox.innerHTML = `
@@ -220,7 +239,6 @@ function renderMenu(lang) {
         `;
         container.appendChild(tvFamilyBox); 
 
-        // 2. Δημιουργία Κάρτας Αλλεργιογόνων (Μπαίνει στην άδεια τρύπα του Grid)
         let allergyText = "Vigtig: Mange af vores retter indeholder allergener som gluten, mælk, nødder osv. Spørg personalet.";
         if (lang === 'en') allergyText = "Important: Many dishes contain allergens (gluten, dairy, nuts, etc.). Please ask our staff.";
         if (lang === 'el') allergyText = "Σημαντικό: Πολλά πιάτα περιέχουν αλλεργιογόνα (γλουτένη, γαλακτοκομικά κ.ά.). Ρωτήστε μας.";
@@ -235,26 +253,22 @@ function renderMenu(lang) {
         `;
         container.appendChild(tvAllergenBox);
 
-        // 3. Μαθηματικά για να πηγαίνει η αρίθμηση κάθετα 
-        // 16 Πίτσες + 1 Family Box + 1 Allergen Box = 18 στοιχεία (9 γραμμές ανά στήλη)
         const totalItems = container.children.length; 
         const rows = Math.ceil(totalItems / 2); 
         container.style.gridTemplateRows = `repeat(${rows}, auto)`;
         container.style.gridAutoFlow = 'column';
 
-        // 4. Το Footer (Μόνο με τα Social & το τηλέφωνο)
         const tvFooter = document.createElement('div');
         tvFooter.className = 'tv-footer';
         tvFooter.innerHTML = `
             <div class="tv-footer-top">
                 <span><i class="fas fa-phone-alt"></i> 93949755</span>
                 <span><i class="fab fa-facebook"></i> Nordic Mythos</span>
-                <span><i class="fab fa-instagram"></i> @nordic.mythos</span>
+                <span><i class="fab fa-instagram"></i> nordic.mythos</span>
             </div>
         `;
         document.querySelector('.menu-section').appendChild(tvFooter);
     }
-    // ==============================================================
 
     setupModalEvents();
 
@@ -267,7 +281,6 @@ function renderMenu(lang) {
             }
         });
     }, { threshold: 0.1 }); 
-
     cards.forEach(card => observer.observe(card));
 }
 
@@ -310,12 +323,10 @@ function setupModalEvents() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Εκκίνηση Δεδομένων
     const savedLang = localStorage.getItem('selectedLang') || 'da';
     setLanguage(savedLang); 
     fetchMenuData(); 
 
-    // 2. Dark Mode
     const darkModeToggle = document.getElementById('dark-mode-toggle');
     const body = document.body;
 
@@ -335,7 +346,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // 3. Promo Bubble
     const promoTrigger = document.getElementById('promo-trigger');
     const promoBubble = document.getElementById('promo-bubble');
     const closePromo = document.getElementById('close-promo');
@@ -351,14 +361,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ==========================================
-    // 4. TV Mode (Εντελώς Σταθερό)
-    // ==========================================
     if (window.location.href.includes('tv=1')) {
         document.body.classList.add('tv-mode');
     }
-});
-// ==========================================
+
+    // ==========================================
     // 5. GDPR Cookie Banner & Analytics Logic
     // ==========================================
     const cookieBanner = document.getElementById('cookie-banner');
@@ -366,7 +373,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const isTvMode = window.location.href.includes('tv=1');
 
     function loadGoogleAnalytics() {
-        const trackingId = 'G-CWT6XJN5JY'; // <-- ΒΑΛΕ ΤΟΝ ΔΙΚΟ ΣΟΥ ΚΩΔΙΚΟ ΕΔΩ!
+        const trackingId = 'G-XXXXXXXXXX'; // <-- ΒΑΛΕ ΤΟΝ ΔΙΚΟ ΣΟΥ ΚΩΔΙΚΟ (G-...) ΕΔΩ!
         
         const script = document.createElement('script');
         script.src = `https://www.googletagmanager.com/gtag/js?id=${trackingId}`;
@@ -377,37 +384,32 @@ document.addEventListener('DOMContentLoaded', () => {
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
         
-        // anonymize_ip: Αποκρύπτει την ταυτότητα του χρήστη για να είσαι 100% GDPR compliant
         gtag('config', trackingId, { 'anonymize_ip': true }); 
     }
 
-    // Αν είμαστε σε TV Mode, κρύβουμε το banner ούτως ή άλλως. 
-    // Αλλιώς, αν δεν έχει απαντήσει, του το δείχνουμε.
     if (!cookieConsent && !isTvMode) {
-        cookieBanner.style.display = 'flex';
+        if(cookieBanner) cookieBanner.style.display = 'flex';
     } else if (cookieConsent === 'accepted' && !isTvMode) {
-        // Αν έχει πατήσει αποδοχή παλιότερα, φορτώνουμε το Analytics
         loadGoogleAnalytics();
     }
 
     document.getElementById('accept-cookies')?.addEventListener('click', () => {
         localStorage.setItem('cookieConsent', 'accepted');
-        cookieBanner.style.display = 'none';
-        loadGoogleAnalytics(); // Το ενεργοποιούμε ΜΟΝΟ αφού πατήσει Accept
+        if(cookieBanner) cookieBanner.style.display = 'none';
+        loadGoogleAnalytics(); 
     });
 
     document.getElementById('decline-cookies')?.addEventListener('click', () => {
         localStorage.setItem('cookieConsent', 'declined');
-        cookieBanner.style.display = 'none';
-        // Δεν φορτώνουμε τίποτα απολύτως!
+        if(cookieBanner) cookieBanner.style.display = 'none';
     });
 
-    // Λειτουργία του παραθύρου Privacy Policy
     const privacyModal = document.getElementById('privacy-modal');
     document.getElementById('open-privacy')?.addEventListener('click', (e) => {
         e.preventDefault();
-        privacyModal.style.display = 'flex';
+        if(privacyModal) privacyModal.style.display = 'flex';
     });
     document.querySelector('.close-privacy')?.addEventListener('click', () => {
-        privacyModal.style.display = 'none';
+        if(privacyModal) privacyModal.style.display = 'none';
     });
+});
