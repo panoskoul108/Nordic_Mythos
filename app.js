@@ -173,35 +173,35 @@ function renderMenu(lang) {
         if (number.toString().toLowerCase() === 'number' || titleDA.toString().toLowerCase() === 'title') continue;
 
         // =======================================================
-        // ΑΣΦΑΛΗΣ ΜΕΤΑΦΡΑΣΗ EMOJIS ΚΑΙ ΤΕΛΕΙΑΣ
+        // ΠΟΛΥΓΛΩΣΣΗ ΑΣΦΑΛΗΣ ΜΕΤΑΦΡΑΣΗ EMOJIS ΚΑΙ ΤΕΛΕΙΑΣ
         // =======================================================
         let finalIngredients = '';
         if (activeIngredients) {
-            let ingredientsStr = String(activeIngredients); // Ασφαλής μετατροπή σε κείμενο
+            let ingredientsStr = String(activeIngredients); 
             let items = ingredientsStr.split(',');
             finalIngredients = items.map(item => {
                 let text = String(item).trim();
                 let lower = text.toLowerCase();
                 let emoji = '🔸'; 
 
-                if (lower.includes('ost') || lower.includes('feta') || lower.includes('mozzarella') || lower.includes('halloumi')) emoji = '🧀';
-                else if (lower.includes('tomat')) emoji = '🍅';
-                else if (lower.includes('oregano') || lower.includes('basilikum')) emoji = '🌿';
-                else if (lower.includes('skinke')) emoji = '🍖';
-                else if (lower.includes('bacon')) emoji = '🥓';
-                else if (lower.includes('pepperoni') || lower.includes('kebab')) emoji = '🥩';
-                else if (lower.includes('kylling')) emoji = '🍗';
-                else if (lower.includes('majs')) emoji = '🌽';
+                if (lower.includes('ost') || lower.includes('cheese') || lower.includes('τυρί') || lower.includes('feta') || lower.includes('φέτα') || lower.includes('mozzarella') || lower.includes('μοτσαρέλα') || lower.includes('halloumi') || lower.includes('χαλούμι')) emoji = '🧀';
+                else if (lower.includes('tomat') || lower.includes('ντομάτα')) emoji = '🍅';
+                else if (lower.includes('oregano') || lower.includes('ρίγανη') || lower.includes('basilikum') || lower.includes('basil') || lower.includes('βασιλικός')) emoji = '🌿';
+                else if (lower.includes('skinke') || lower.includes('ham') || lower.includes('ζαμπόν')) emoji = '🍖';
+                else if (lower.includes('bacon') || lower.includes('μπέικον')) emoji = '🥓';
+                else if (lower.includes('pepperoni') || lower.includes('πεπερόνι') || lower.includes('kebab') || lower.includes('κεμπάπ') || lower.includes('meat') || lower.includes('κρέας')) emoji = '🥩';
+                else if (lower.includes('kylling') || lower.includes('chicken') || lower.includes('κοτόπουλο')) emoji = '🍗';
+                else if (lower.includes('majs') || lower.includes('corn') || lower.includes('καλαμπόκι')) emoji = '🌽';
                 else if (lower.includes('bbq')) emoji = '🥫';
-                else if (lower.includes('løg') || lower.includes('log') || lower.includes('lbg')) emoji = '🧅';
-                else if (lower.includes('ananas')) emoji = '🍍';
-                else if (lower.includes('oliven')) emoji = '🫒';
-                else if (lower.includes('champignon')) emoji = '🍄';
-                else if (lower.includes('jalapeño') || lower.includes('japaleño') || lower.includes('chili')) emoji = '🌶️';
-                else if (lower.includes('hvidløg') || lower.includes('hvidlog')) emoji = '🧄';
+                else if (lower.includes('løg') || lower.includes('log') || lower.includes('lbg') || lower.includes('onion') || lower.includes('κρεμμύδι')) emoji = '🧅';
+                else if (lower.includes('ananas') || lower.includes('pineapple') || lower.includes('ανανάς')) emoji = '🍍';
+                else if (lower.includes('oliven') || lower.includes('olive') || lower.includes('ελιά') || lower.includes('ελιές')) emoji = '🫒';
+                else if (lower.includes('champignon') || lower.includes('mushroom') || lower.includes('μανιτάρι') || lower.includes('μανιτάρια')) emoji = '🍄';
+                else if (lower.includes('jalapeño') || lower.includes('japaleño') || lower.includes('chili') || lower.includes('τσίλι')) emoji = '🌶️';
+                else if (lower.includes('hvidløg') || lower.includes('hvidlog') || lower.includes('garlic') || lower.includes('σκόρδο')) emoji = '🧄';
 
                 return `${emoji} ${text}`;
-            }).join(' • '); // Τα ενώνει ξανά με την τελεία!
+            }).join(' • '); 
         }
 
         const hasImage = imageName !== '';
@@ -263,7 +263,7 @@ function renderMenu(lang) {
         tvFooter.className = 'tv-footer';
         tvFooter.innerHTML = `
             <div class="tv-footer-top">
-                <span><i class="fas fa-phone-alt"></i> 93949755</span>
+                <span><i class="fas fa-phone-alt fa-flip-horizontal"></i> 93949755</span>
                 <span><i class="fab fa-facebook"></i> Nordic Mythos</span>
                 <span><i class="fab fa-instagram"></i> nordic.mythos</span>
             </div>
