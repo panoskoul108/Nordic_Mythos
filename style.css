@@ -698,6 +698,7 @@ body.dark-mode .main-logo { filter: invert(1); }
     bottom: 0;
     left: 0;
     width: 100%;
+    box-sizing: border-box; /* ΑΥΤΗ Η ΓΡΑΜΜΗ ΛΥΝΕΙ ΤΟ ΠΡΟΒΛΗΜΑ */
     background-color: var(--card-bg);
     border-top: 3px solid var(--text-color);
     z-index: 10000;
