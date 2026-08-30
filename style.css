@@ -795,9 +795,21 @@ body.tv-mode .menu-header {
     align-items: center;
     justify-content: center;
     padding: 2px; 
-    border-bottom: 2px solid #cbd5e1;
+    border-bottom: none !important; /* Καταργούμε το κλασικό περίγραμμα που περνάει από κάτω */
     margin-bottom: 3px; 
     flex-shrink: 0;
+}
+
+/* Δημιουργούμε τη γραμμή ανεξάρτητα, ώστε να περνάει ΠΑΝΩ από το λογότυπο */
+body.tv-mode .menu-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #cbd5e1;
+    z-index: 10; 
 }
 
 body.tv-mode .logo-container { 
@@ -806,26 +818,13 @@ body.tv-mode .logo-container {
     top: 50%; 
     transform: translateY(-50%); 
     margin: 0; 
-    z-index: 1; /* Το στέλνουμε μια θέση πίσω (στο επίπεδο 1) */
+    z-index: 1; /* Το λογότυπο μένει ακριβώς στην κανονική του θέση */
 }
+
 body.tv-mode .main-logo { width: 95px !important; } 
 
-body.tv-mode .menu-header h1 { 
-    font-size: 1.4rem; 
-    margin: 0; 
-    color: #000000; 
-    font-weight: 900; 
-    letter-spacing: 2px;
-    position: relative;
-    z-index: 2; /* Φέρνουμε τα γράμματα μια θέση μπροστά (επίπεδο 2) */
-} 
-
-body.tv-mode .tagline-wrapper { 
-    margin-bottom: 2px; 
-    margin-top: 0px;
-    position: relative;
-    z-index: 2; /* Φέρνουμε και τη δεύτερη γραμμή μπροστά */
-}
+body.tv-mode .menu-header h1 { font-size: 1.4rem; margin: 0; color: #000000; font-weight: 900; letter-spacing: 2px;} 
+body.tv-mode .tagline-wrapper { margin-bottom: 2px; margin-top: 0px;}
 
 /* --- ΠΛΕΓΜΑ ΠΙΤΣΩΝ --- */
 body.tv-mode .menu-container {
