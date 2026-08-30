@@ -171,8 +171,7 @@ function renderMenu(lang) {
 
         if (number.toString().length === 1 && !isNaN(number)) number = '0' + number;
         if (number.toString().toLowerCase() === 'number' || titleDA.toString().toLowerCase() === 'title') continue;
-
-        // =======================================================
+// =======================================================
         // ΠΟΛΥΓΛΩΣΣΗ ΑΣΦΑΛΗΣ ΜΕΤΑΦΡΑΣΗ EMOJIS ΚΑΙ ΤΕΛΕΙΑΣ
         // =======================================================
         let finalIngredients = '';
@@ -184,7 +183,12 @@ function renderMenu(lang) {
                 let lower = text.toLowerCase();
                 let emoji = '🔸'; 
 
-                if (lower.includes('ost') || lower.includes('cheese') || lower.includes('τυρί') || lower.includes('feta') || lower.includes('φέτα') || lower.includes('mozzarella') || lower.includes('μοτσαρέλα') || lower.includes('halloumi') || lower.includes('χαλούμι')) emoji = '🧀';
+                // Ξεχωριστοί κανόνες για τα τυριά
+                if (lower.includes('mozzarella') || lower.includes('μοτσαρέλα')) emoji = '⚪️';
+                else if (lower.includes('feta') || lower.includes('φέτα')) emoji = '⬜️';
+                else if (lower.includes('ost') || lower.includes('cheese') || lower.includes('τυρί') || lower.includes('halloumi') || lower.includes('χαλούμι')) emoji = '🧀';
+                
+                // Υπόλοιπα υλικά
                 else if (lower.includes('tomat') || lower.includes('ντομάτα')) emoji = '🍅';
                 else if (lower.includes('oregano') || lower.includes('ρίγανη') || lower.includes('basilikum') || lower.includes('basil') || lower.includes('βασιλικός')) emoji = '🌿';
                 else if (lower.includes('skinke') || lower.includes('ham') || lower.includes('ζαμπόν')) emoji = '🍖';
