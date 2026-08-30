@@ -790,17 +790,17 @@ body.tv-mode .menu-section {
 /* --- ΕΠΙ ΚΕΦΑΛΙΔΑ --- */
 body.tv-mode .menu-header {
     position: relative;
+    z-index: 1; /* Κρατάμε όλη την κεφαλίδα στο πίσω επίπεδο (1) */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 2px; 
-    border-bottom: none !important; /* Καταργούμε το κλασικό περίγραμμα που περνάει από κάτω */
+    border-bottom: none !important; 
     margin-bottom: 3px; 
     flex-shrink: 0;
 }
 
-/* Δημιουργούμε τη γραμμή ανεξάρτητα, ώστε να περνάει ΠΑΝΩ από το λογότυπο */
 body.tv-mode .menu-header::after {
     content: '';
     position: absolute;
@@ -818,7 +818,7 @@ body.tv-mode .logo-container {
     top: 50%; 
     transform: translateY(-50%); 
     margin: 0; 
-    z-index: 1; /* Το λογότυπο μένει ακριβώς στην κανονική του θέση */
+    z-index: 1; 
 }
 
 body.tv-mode .main-logo { width: 95px !important; } 
