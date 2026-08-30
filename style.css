@@ -1,4 +1,4 @@
-σε/* ==========================================================================
+/* ==========================================================================
    CSS Variables (Light & Dark Mode)
    ========================================================================== */
 :root {
@@ -32,18 +32,17 @@ body.dark-mode {
     padding: 0;
 }
 
-/* Προσθέτουμε αυτό το μπλοκ για να κλειδώσουμε το πλάτος */
 html, body {
     max-width: 100%;
-    overflow-x: hidden; 
+    overflow-x: hidden;
 }
 
 body {
     font-family: 'Montserrat', sans-serif;
-    background-color: var(--bg-color); 
-    color: var(--text-color); 
+    background-color: var(--bg-color);
+    color: var(--text-color);
     line-height: 1.4;
-    padding-bottom: 180px; 
+    padding-bottom: 180px;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
@@ -54,43 +53,43 @@ body {
     background-color: var(--bg-color);
     color: var(--text-color);
     text-align: center;
-    padding: 5px 20px 5px 20px; 
-    border-bottom: 3px solid var(--text-color); 
-    margin-bottom: 15px; 
+    padding: 5px 20px 5px 20px;
+    border-bottom: 3px solid var(--text-color);
+    margin-bottom: 15px;
     position: relative;
 }
 
 .logo-container { margin-bottom: 0; }
 
 .main-logo {
-    width: 220px; 
-    height: auto; 
+    width: 220px;
+    height: auto;
     display: block;
-    margin: 5px auto 5px auto; 
+    margin: 5px auto 5px auto;
 }
 
 body.dark-mode .main-logo { filter: invert(1); }
 
 .menu-header h1 {
-    font-size: 2rem; 
+    font-size: 2rem;
     font-weight: 800;
     letter-spacing: 3px;
     margin-top: 0;
-    margin-bottom: 2px; 
+    margin-bottom: 2px;
     color: var(--text-color);
 }
 
 .menu-header h2 {
-    font-size: 1.15rem; 
+    font-size: 1.15rem;
     font-weight: 700;
     letter-spacing: 5px;
     color: var(--text-color);
-    margin-bottom: 4px; 
+    margin-bottom: 4px;
 }
 
 .tagline {
     font-style: italic;
-    color: var(--text-muted); 
+    color: var(--text-muted);
     font-size: 0.9rem;
     margin-bottom: 5px;
 }
@@ -198,13 +197,13 @@ body.dark-mode .main-logo { filter: invert(1); }
    ========================================================================== */
 .pizza-card {
     background: var(--card-bg);
-    border: 2px solid var(--card-border); 
-    border-radius: 10px; 
-    padding: 10px 12px; 
+    border: 2px solid var(--card-border);
+    border-radius: 10px;
+    padding: 10px 12px;
     display: grid;
-    grid-template-columns: auto 1fr auto; 
-    gap: 12px; 
-    align-items: center; 
+    grid-template-columns: auto 1fr auto;
+    gap: 12px;
+    align-items: center;
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 0.5s ease-out, transform 0.5s ease-out, box-shadow 0.15s ease, background-color 0.15s ease;
@@ -224,7 +223,7 @@ body.dark-mode .main-logo { filter: invert(1); }
 }
 
 .pizza-number {
-    border: 2px solid var(--text-color); 
+    border: 2px solid var(--text-color);
     border-radius: 6px;
     padding: 5px 8px;
     font-weight: 800;
@@ -250,9 +249,9 @@ body.dark-mode .main-logo { filter: invert(1); }
 }
 
 .pizza-ingredients {
-    font-size: 0.75rem; 
-    color: var(--text-muted); 
-    text-transform: uppercase; 
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
     font-weight: 500;
     line-height: 1.3;
 }
@@ -261,7 +260,7 @@ body.dark-mode .main-logo { filter: invert(1); }
     font-weight: 800;
     font-size: 1rem;
     color: var(--text-color);
-    white-space: nowrap; 
+    white-space: nowrap;
     text-align: right;
 }
 
@@ -269,15 +268,15 @@ body.dark-mode .main-logo { filter: invert(1); }
    6. Modal (Popup) Design
    ========================================================================== */
 .modal {
-    display: none; 
-    position: fixed; 
-    z-index: 1000; 
+    display: none;
+    position: fixed;
+    z-index: 1000;
     left: 0;
     top: 0;
-    width: 100%; 
-    height: 100%; 
-    background-color: rgba(0, 0, 0, 0.75); 
-    backdrop-filter: blur(4px); 
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(4px);
     align-items: center;
     justify-content: center;
     padding: 20px;
@@ -288,11 +287,11 @@ body.dark-mode .main-logo { filter: invert(1); }
     border: 3px solid var(--card-border);
     border-radius: 16px;
     width: 100%;
-    max-width: 500px; 
+    max-width: 500px;
     overflow: hidden;
     position: relative;
     box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-    animation: zoomIn 0.25s ease-out; 
+    animation: zoomIn 0.25s ease-out;
 }
 
 @keyframes zoomIn {
@@ -309,7 +308,7 @@ body.dark-mode .main-logo { filter: invert(1); }
     font-weight: bold;
     cursor: pointer;
     z-index: 10;
-    text-shadow: 0 2px 6px rgba(0,0,0,0.8); 
+    text-shadow: 0 2px 6px rgba(0,0,0,0.8);
     transition: transform 0.15s ease;
 }
 
@@ -317,14 +316,14 @@ body.dark-mode .main-logo { filter: invert(1); }
 
 .modal-image-container {
     width: 100%;
-    height: 320px; 
+    height: 320px;
     background-color: #f0f0f0;
 }
 
 #modal-image {
     width: 100%;
     height: 100%;
-    object-fit: cover; 
+    object-fit: cover;
 }
 
 .modal-details { padding: 25px 20px; }
@@ -366,7 +365,7 @@ body.dark-mode .main-logo { filter: invert(1); }
     background-color: var(--bg-color);
     color: var(--text-color);
     padding: 15px 20px;
-    border-top: 2.5px solid var(--text-color); 
+    border-top: 2.5px solid var(--text-color);
     z-index: 100;
 }
 
@@ -390,24 +389,24 @@ body.dark-mode .main-logo { filter: invert(1); }
 }
 
 .footer-link {
-    color: inherit; 
-    text-decoration: none; 
+    color: inherit;
+    text-decoration: none;
     transition: opacity 0.2s ease;
 }
 
-.footer-link:hover, 
+.footer-link:hover,
 .footer-link:active { opacity: 0.6; }
 
 .wolt-btn {
-    background-color: #00c2e8; 
-    color: #ffffff !important; 
+    background-color: #00c2e8;
+    color: #ffffff !important;
     text-decoration: none;
     font-weight: 800;
     text-transform: uppercase;
     font-size: 0.85rem;
     letter-spacing: 1px;
     padding: 10px 22px;
-    border-radius: 25px; 
+    border-radius: 25px;
     box-shadow: 0 4px 10px rgba(0, 194, 232, 0.3);
     transition: transform 0.2s ease, background-color 0.2s ease;
     text-align: center;
@@ -421,8 +420,8 @@ body.dark-mode .main-logo { filter: invert(1); }
 
 @media (max-width: 599px) {
     .wolt-btn {
-        width: 100%; 
-        order: -1; 
+        width: 100%;
+        order: -1;
     }
 }
 
@@ -435,7 +434,7 @@ body.dark-mode .main-logo { filter: invert(1); }
     gap: 15px;
     margin-top: 15px;
     padding-top: 10px;
-    border-top: 1px solid var(--modal-border); 
+    border-top: 1px solid var(--modal-border);
 }
 
 .social-icon {
@@ -444,7 +443,7 @@ body.dark-mode .main-logo { filter: invert(1); }
     justify-content: center;
     width: 45px;
     height: 45px;
-    border-radius: 50%; 
+    border-radius: 50%;
     color: white;
     font-size: 22px;
     text-decoration: none;
@@ -452,8 +451,8 @@ body.dark-mode .main-logo { filter: invert(1); }
 }
 
 .social-icon:hover {
-    transform: translateY(-4px); 
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2); 
+    transform: translateY(-4px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
     color: white;
 }
 
@@ -466,7 +465,7 @@ body.dark-mode .main-logo { filter: invert(1); }
 .promo-container {
     position: fixed;
     right: 20px;
-    bottom: 120px; 
+    bottom: 120px;
     z-index: 999;
     display: flex;
     flex-direction: column;
@@ -596,12 +595,12 @@ body.dark-mode .main-logo { filter: invert(1); }
     body { padding-bottom: 230px; }
     .menu-header { padding: 8px 10px 5px 10px; margin-bottom: 10px; }
     .main-logo {
-        width: 105px !important; 
-        height: 105px !important; 
+        width: 105px !important;
+        height: 105px !important;
         max-width: 105px !important;
         clip-path: none !important;
         margin-top: 0 !important;
-        margin-bottom: 2px !important; 
+        margin-bottom: 2px !important;
         border-radius: 50%;
     }
     .menu-header h1 { font-size: 1.4rem; margin-top: 5px; margin-bottom: 2px; letter-spacing: 1.5px; }
@@ -633,10 +632,10 @@ body.dark-mode .main-logo { filter: invert(1); }
    ========================================================================== */
 .legal-info {
     text-align: center;
-    margin-top: 50px;       
+    margin-top: 50px;
     margin-bottom: 20px;
     padding-top: 20px;
-    border-top: 1px solid var(--modal-border); 
+    border-top: 1px solid var(--modal-border);
     font-size: 0.8rem;
     color: var(--text-muted);
     font-weight: 500;
@@ -650,12 +649,12 @@ body.dark-mode .main-logo { filter: invert(1); }
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px; 
+    gap: 8px;
     margin-bottom: 5px;
 }
 .tagline-wrapper .tagline { margin-bottom: 0; }
 .waving-flag {
-    font-size: 1.1rem; 
+    font-size: 1.1rem;
     display: inline-block;
     animation: waveAnimation 2.5s ease-in-out infinite;
     transform-origin: bottom center;
@@ -673,9 +672,9 @@ body.dark-mode .main-logo { filter: invert(1); }
    12. Family Pizza Banner 
    ========================================================================== */
 .family-pizza-banner {
-    background-color: var(--card-bg); 
-    border: 2px dashed #f97316; 
-    color: var(--text-color); 
+    background-color: var(--card-bg);
+    border: 2px dashed #f97316;
+    color: var(--text-color);
     text-align: center;
     padding: 14px 20px;
     border-radius: 10px;
@@ -704,7 +703,7 @@ body.dark-mode .main-logo { filter: invert(1); }
     bottom: 0;
     left: 0;
     width: 100%;
-    box-sizing: border-box; 
+    box-sizing: border-box;
     background-color: var(--card-bg);
     border-top: 3px solid var(--text-color);
     z-index: 10000;
@@ -755,13 +754,13 @@ body.dark-mode .main-logo { filter: invert(1); }
 .cookie-btn.decline:hover { background-color: var(--card-hover); }
 
 /* ==========================================================================
-   13. TV / Kiosk Mode (.tv-mode) - THE SWEET SPOT (Από τον 2ο Κώδικα)
+   13. TV / Kiosk Mode (.tv-mode) 
    ========================================================================== */
 body.tv-mode {
-    padding: 5px 10px 12px 10px !important; 
+    padding: 5px 10px 12px 10px !important;
     box-sizing: border-box !important;
-    overflow: hidden !important; 
-    height: 100vh !important; 
+    overflow: hidden !important;
+    height: 100vh !important;
     display: flex;
     flex-direction: column;
     background-color: #f7f9fc;
@@ -784,20 +783,20 @@ body.tv-mode .menu-section {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
-    height: 100%; 
+    height: 100%;
 }
 
 /* --- ΕΠΙ ΚΕΦΑΛΙΔΑ --- */
 body.tv-mode .menu-header {
     position: relative;
-    z-index: 1; /* Κρατάμε όλη την κεφαλίδα στο πίσω επίπεδο (1) */
+    z-index: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 2px; 
-    border-bottom: none !important; 
-    margin-bottom: 3px; 
+    padding: 2px;
+    border-bottom: none !important;
+    margin-bottom: 3px;
     flex-shrink: 0;
 }
 
@@ -809,89 +808,88 @@ body.tv-mode .menu-header::after {
     width: 100%;
     height: 2px;
     background-color: #cbd5e1;
-    z-index: 10; 
+    z-index: 10;
 }
 
-body.tv-mode .logo-container { 
-    position: absolute; 
-    left: 40px; 
-    top: 40%; /* Το τραβάμε ελαφρώς πιο πάνω για να μην κρέμεται τόσο */
-    transform: translateY(-50%); 
-    margin: 0; 
-    z-index: 0; /* Τέρμα πίσω */
+body.tv-mode .logo-container {
+    position: absolute;
+    left: 40px;
+    top: 40%;
+    transform: translateY(-50%);
+    margin: 0;
+    z-index: 0;
 }
-
-
-body.tv-mode .main-logo { width: 95px !important; } 
-
-body.tv-mode .menu-header h1 { font-size: 1.4rem; margin: 0; color: #000000; font-weight: 900; letter-spacing: 2px;} 
+body.tv-mode .main-logo { width: 95px !important; }
+body.tv-mode .menu-header h1 { font-size: 1.4rem; margin: 0; color: #000000; font-weight: 900; letter-spacing: 2px;}
 body.tv-mode .tagline-wrapper { margin-bottom: 2px; margin-top: 0px;}
 
 /* --- ΠΛΕΓΜΑ ΠΙΤΣΩΝ --- */
 body.tv-mode .menu-container {
+    position: relative;
+    z-index: 20;
     flex-grow: 1;
     max-width: 98%;
     padding: 0 10px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    min-height: 0; 
+    min-height: 0;
 }
 
 body.tv-mode .pizza-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 4px 8px; 
+    gap: 4px 8px;
 }
 
 /* --- ΚΑΡΤΕΣ ΠΙΤΣΩΝ --- */
 body.tv-mode .pizza-card {
-    position: relative; /* Απαραίτητο για να δουλέψει το επίπεδο */
-    z-index: 50; /* Φέρνουμε την κάθε κάρτα ξεχωριστά ΠΑΝΩ από όλα! */
-    padding: 2px 8px; 
+    position: relative;
+    z-index: 50;
+    padding: 2px 8px;
     gap: 6px;
     background-color: #ffffff;
-    border: 2px solid #94a3b8; 
+    border: 2px solid #94a3b8;
     border-radius: 6px;
     box-shadow: 0 1px 2px rgba(0,0,0,0.05);
     align-items: center;
 }
 
-body.tv-mode .pizza-number { 
-    background-color: #0f172a; 
+body.tv-mode .pizza-number {
+    background-color: #0f172a;
     color: #ffffff;
     border: none;
     border-radius: 4px;
-    font-size: 0.82rem; 
+    font-size: 0.82rem;
     font-weight: 800;
-    padding: 2px 6px; 
-    min-width: 28px; 
+    padding: 2px 6px;
+    min-width: 28px;
 }
 
-body.tv-mode .pizza-title { 
-    font-size: 0.88rem; 
-    font-weight: 900; 
-    color: #000000; 
+body.tv-mode .pizza-title {
+    font-size: 0.88rem;
+    font-weight: 900;
+    color: #000000;
     margin-bottom: 0px;
 }
-body.tv-mode .pizza-ingredients { 
-    font-size: 0.65rem; 
-    font-weight: 700; 
-    color: #1e293b; 
-    line-height: 1.05; 
+body.tv-mode .pizza-ingredients {
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: #1e293b;
+    line-height: 1.05;
     margin-top: 0px;
 }
 body.tv-mode .pizza-price { font-size: 0.88rem; font-weight: 900; color: #000000; }
 
 /* --- CUSTOM FAMILY BOX --- */
 body.tv-mode .tv-family-box {
-    background-color: #fff1f2; 
+    background-color: #fff1f2;
     border: 2px solid #fecdd3;
     border-radius: 6px;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
-    padding: 3px 8px; 
+    padding: 3px 8px;
 }
 
 body.tv-mode .tv-family-icon i { font-size: 1.5rem; color: #e11d48; }
@@ -909,7 +907,7 @@ body.tv-mode .tv-allergen-box {
     align-items: center;
     justify-content: center;
     gap: 8px;
-    padding: 3px 8px; 
+    padding: 3px 8px;
 }
 body.tv-mode .tv-allergen-icon i { font-size: 1.3rem; color: #f59e0b; }
 body.tv-mode .tv-allergen-text { font-size: 0.62rem; font-weight: 700; color: #334155; line-height: 1.1; text-align: left; }
@@ -920,7 +918,7 @@ body.tv-mode .tv-footer {
     background-color: #ffffff;
     border: 2px solid #cbd5e1;
     border-radius: 6px;
-    padding: 4px 15px; 
+    padding: 4px 15px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -932,7 +930,7 @@ body.tv-mode .tv-footer-top {
     justify-content: center;
     gap: 45px;
     font-size: 0.9rem;
-    font-weight: 900; 
+    font-weight: 900;
     color: #000000;
 }
 
