@@ -800,10 +800,32 @@ body.tv-mode .menu-header {
     flex-shrink: 0;
 }
 
-body.tv-mode .logo-container { position: absolute; left: 40px; top: 50%; transform: translateY(-50%); margin: 0; }
+body.tv-mode .logo-container { 
+    position: absolute; 
+    left: 40px; 
+    top: 50%; 
+    transform: translateY(-50%); 
+    margin: 0; 
+    z-index: 1; /* Το στέλνουμε μια θέση πίσω (στο επίπεδο 1) */
+}
 body.tv-mode .main-logo { width: 95px !important; } 
-body.tv-mode .menu-header h1 { font-size: 1.4rem; margin: 0; color: #000000; font-weight: 900; letter-spacing: 2px;} 
-body.tv-mode .tagline-wrapper { margin-bottom: 2px; margin-top: 0px;}
+
+body.tv-mode .menu-header h1 { 
+    font-size: 1.4rem; 
+    margin: 0; 
+    color: #000000; 
+    font-weight: 900; 
+    letter-spacing: 2px;
+    position: relative;
+    z-index: 2; /* Φέρνουμε τα γράμματα μια θέση μπροστά (επίπεδο 2) */
+} 
+
+body.tv-mode .tagline-wrapper { 
+    margin-bottom: 2px; 
+    margin-top: 0px;
+    position: relative;
+    z-index: 2; /* Φέρνουμε και τη δεύτερη γραμμή μπροστά */
+}
 
 /* --- ΠΛΕΓΜΑ ΠΙΤΣΩΝ --- */
 body.tv-mode .menu-container {
