@@ -815,11 +815,12 @@ body.tv-mode .menu-header::after {
 body.tv-mode .logo-container { 
     position: absolute; 
     left: 40px; 
-    top: 50%; 
+    top: 40%; /* Το τραβάμε ελαφρώς πιο πάνω για να μην κρέμεται τόσο */
     transform: translateY(-50%); 
     margin: 0; 
-    z-index: 1; 
+    z-index: 0; /* Τέρμα πίσω */
 }
+
 
 body.tv-mode .main-logo { width: 95px !important; } 
 
