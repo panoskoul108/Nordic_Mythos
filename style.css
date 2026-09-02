@@ -936,6 +936,7 @@ body.tv-mode .tv-footer-top {
 
 body.tv-mode .tv-footer-top span { display: flex; align-items: center; gap: 5px; }
 body.tv-mode .tv-footer-top i { color: #1e293b; font-size: 1.05rem;}
+
 /* ==========================================================================
    PROMO MODE (Happy Hour: /?promo=1) - SPLIT SCREEN ΓΙΑ ΤΗΛΕΟΡΑΣΗ
    ========================================================================== */
@@ -1109,4 +1110,17 @@ body.promo-mode .promo-takeaway-badge {
 
 body.promo-mode .promo-takeaway-badge i {
     color: #e31837; /* Κόκκινη λεπτομέρεια στο εικονίδιο */
+}
+
+/* ==========================================================================
+   15. ΑΣΦΑΛΕΙΑ ΓΙΑ ΤΟ TV MODE (Να μην κρύβεται ο κατάλογος)
+   ========================================================================== */
+body.tv-mode .menu-container {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+body.tv-mode #promo-screen {
+    display: none !important;
 }
