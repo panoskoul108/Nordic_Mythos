@@ -937,20 +937,17 @@ body.tv-mode .tv-footer-top {
 body.tv-mode .tv-footer-top span { display: flex; align-items: center; gap: 5px; }
 body.tv-mode .tv-footer-top i { color: #1e293b; font-size: 1.05rem;}
 /* ==========================================================================
-   PROMO MODE (Happy Hour: /?promo=1)
+   PROMO MODE (Happy Hour: /?promo=1) - SPLIT SCREEN ΓΙΑ ΤΗΛΕΟΡΑΣΗ
    ========================================================================== */
 body.promo-mode {
     overflow: hidden !important;
     height: 100vh !important;
     margin: 0;
     padding: 0 !important;
-    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    background-color: #ffffff; /* Καθαρό λευκό όπως το μαγαζί */
 }
 
-/* Κρύβουμε ΟΛΑ τα στοιχεία του κανονικού μενού */
+/* Κρύβουμε το κανονικό μενού */
 body.promo-mode .menu-header,
 body.promo-mode .menu-container,
 body.promo-mode .menu-footer,
@@ -961,50 +958,132 @@ body.promo-mode .cookie-banner {
     display: none !important;
 }
 
-/* Εμφανίζουμε ΜΟΝΟ την οθόνη του promo */
 body.promo-mode #promo-screen {
     display: flex !important;
+    width: 100vw;
+    height: 100vh;
+}
+
+/* --- ΑΡΙΣΤΕΡΗ ΠΛΕΥΡΑ (ΦΩΤΟΓΡΑΦΙΑ) --- */
+body.promo-mode .promo-image-side {
+    flex: 1.2;
+    /* ΒΑΛΕ ΕΔΩ ΤΟ ΟΝΟΜΑ ΤΗΣ ΦΩΤΟΓΡΑΦΙΑΣ ΣΟΥ (π.χ. pizza-promo.jpg) */
+    background: url('images/hero-bg.jpg') center/cover no-repeat;
+    background-color: #cbd5e1; /* Χρώμα αναμονής αν δεν βρει τη φώτο */
+    position: relative;
+    box-shadow: 10px 0 30px rgba(0,0,0,0.15);
+    z-index: 2;
+}
+
+body.promo-mode .image-overlay-text {
+    position: absolute;
+    top: 40px;
+    left: 40px;
+    background-color: #e31837;
+    color: white;
+    padding: 10px 25px;
+    font-size: 2rem;
+    font-weight: 900;
+    border-radius: 50px;
+    box-shadow: 0 5px 15px rgba(227, 24, 55, 0.4);
+    letter-spacing: 2px;
+}
+
+/* --- ΔΕΞΙΑ ΠΛΕΥΡΑ (ΚΕΙΜΕΝΑ) --- */
+body.promo-mode .promo-text-side {
+    flex: 1;
+    display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
-    width: 100%;
-    height: 100%;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 40px;
     text-align: center;
+    position: relative;
 }
 
-body.promo-mode .promo-content {
-    padding: 50px;
-    border: 3px solid #e31837;
-    border-radius: 24px;
-    background: rgba(15, 23, 42, 0.9);
-    box-shadow: 0 0 40px rgba(227, 24, 55, 0.3);
-    max-width: 90%;
-    animation: pulseBorder 2s infinite alternate;
+body.promo-mode .promo-logo {
+    width: 140px;
+    margin-bottom: 20px;
 }
 
-body.promo-mode .promo-content h1 {
-    color: #f59e0b;
+body.promo-mode h1 {
+    font-size: 5.5rem;
+    font-weight: 900;
+    color: #000000;
+    margin: 0;
+    line-height: 1;
+    letter-spacing: 3px;
+}
+
+body.promo-mode .promo-time {
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: #e31837;
+    margin-top: 10px;
+    margin-bottom: 40px;
+}
+
+/* Καρτέλες Προσφορών */
+body.promo-mode .promo-card {
+    width: 85%;
+    border: 4px solid #cbd5e1;
+    border-radius: 20px;
+    padding: 25px 20px;
+    margin-bottom: 25px;
+    background-color: #f8fafc;
+}
+
+body.promo-mode .promo-card h2 {
+    font-size: 2.5rem;
+    font-weight: 900;
+    margin-bottom: 10px;
+    color: #000000;
+}
+
+body.promo-mode .promo-price {
     font-size: 4.5rem;
     font-weight: 900;
-    margin-bottom: 40px;
-    letter-spacing: 6px;
-    text-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
+    color: #e31837;
+    line-height: 1;
 }
 
-body.promo-mode .promo-box {
-    background: rgba(255, 255, 255, 0.05);
-    padding: 25px 40px;
-    border-radius: 16px;
-    margin-bottom: 25px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+body.promo-mode .promo-price span {
+    font-size: 2rem;
+    color: #000000;
 }
 
-body.promo-mode .promo-time { color: #00c2e8; font-size: 1.8rem; font-weight: 800; display: block; margin-bottom: 10px; }
-body.promo-mode .promo-title { font-size: 2.8rem; font-weight: 900; color: #ffffff; display: block; line-height: 1.1; }
-body.promo-mode .promo-price { color: #e31837; font-size: 3.5rem; font-weight: 900; display: block; margin-top: 10px; }
-body.promo-mode .promo-desc { font-size: 1.2rem; color: #cbd5e1; margin-top: 10px; display: block; font-weight: 600; }
+/* Καρτέλα 2+1 (Με κόκκινο θέμα) */
+body.promo-mode .promo-card.highlight {
+    border-color: #e31837;
+    background-color: #fff1f2;
+    position: relative;
+    padding-top: 35px;
+}
 
-@keyframes pulseBorder {
-    0% { box-shadow: 0 0 20px rgba(227, 24, 55, 0.3); transform: scale(1); }
-    100% { box-shadow: 0 0 50px rgba(227, 24, 55, 0.6); transform: scale(1.02); }
+body.promo-mode .badge-gratis {
+    position: absolute;
+    top: -18px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #e31837;
+    color: white;
+    padding: 5px 25px;
+    font-size: 1.4rem;
+    font-weight: 900;
+    border-radius: 20px;
+    letter-spacing: 1px;
+}
+
+body.promo-mode .promo-card p {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #1e293b;
+    margin-bottom: 5px;
+}
+
+body.promo-mode .greek-sub {
+    font-size: 1.1rem !important;
+    font-style: italic;
+    color: #64748b !important;
 }
