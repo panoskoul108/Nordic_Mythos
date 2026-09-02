@@ -74,20 +74,31 @@
 </head>
 <body>
 
-    <!-- HAPPY HOUR PROMO SCREEN -->
+   <!-- HAPPY HOUR PROMO SCREEN (TV OPTIMIZED) -->
     <div id="promo-screen" style="display: none;">
-        <div class="promo-content">
-            <h1>HAPPY HOUR</h1>
+        <!-- Αριστερή πλευρά: Φωτογραφία -->
+        <div class="promo-image-side">
+            <!-- Εδώ βάζουμε ένα ωραίο μήνυμα πάνω στη φωτογραφία -->
+            <div class="image-overlay-text">FROKOST TILBUD</div>
+        </div>
+        
+        <!-- Δεξιά πλευρά: Προσφορές -->
+        <div class="promo-text-side">
+            <img src="logo.jpg" alt="Nordic Mythos" class="promo-logo">
             
-            <div class="promo-box">
-                <span class="promo-time"><i class="fas fa-clock"></i> 11:00 - 12:00</span>
-                <span class="promo-title">PIZZA SLICE</span>
-                <span class="promo-price">35 KR.</span>
+            <h1>HAPPY HOUR</h1>
+            <div class="promo-time"><i class="fas fa-clock"></i> 11:00 - 12:00</div>
+            
+            <div class="promo-card">
+                <h2>PIZZA SLICE</h2>
+                <div class="promo-price">35 <span>KR.</span></div>
             </div>
             
-            <div class="promo-box special-offer">
-                <span class="promo-title">2+1 GRATIS</span>
-                <span class="promo-desc">Køb 2 pizzaer og få 1 gratis! <br>(Αγοράζεις 2, παίρνεις 1 δώρο)</span>
+            <div class="promo-card highlight">
+                <div class="badge-gratis">GAVE</div>
+                <h2>2+1 GRATIS</h2>
+                <p>Køb 2 pizzaer og få 1 gratis!</p>
+                <p class="greek-sub">(Αγοράζεις 2, παίρνεις 1 δώρο)</p>
             </div>
         </div>
     </div>
