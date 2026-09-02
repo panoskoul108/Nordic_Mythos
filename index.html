@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- Προσθήκη έκδοσης για να καθαρίζει η cache του CSS -->
-    <link rel="stylesheet" href="style.css?v=38">
+    <link rel="stylesheet" href="style.css?v=39">
     
     <link rel="icon" type="image/jpeg" href="images/favicon.jpg">
     <meta name="description" content="Nordic Mythos i Aalborg - Se vores lækre pizzakatalog online. Bestil nemt og hurtigt den bedste pizza i Aalborg via Wolt!">
@@ -73,6 +73,24 @@
 </div>
 </head>
 <body>
+
+    <!-- HAPPY HOUR PROMO SCREEN -->
+    <div id="promo-screen" style="display: none;">
+        <div class="promo-content">
+            <h1>HAPPY HOUR</h1>
+            
+            <div class="promo-box">
+                <span class="promo-time"><i class="fas fa-clock"></i> 11:00 - 12:00</span>
+                <span class="promo-title">PIZZA SLICE</span>
+                <span class="promo-price">35 KR.</span>
+            </div>
+            
+            <div class="promo-box special-offer">
+                <span class="promo-title">2+1 GRATIS</span>
+                <span class="promo-desc">Køb 2 pizzaer og få 1 gratis! <br>(Αγοράζεις 2, παίρνεις 1 δώρο)</span>
+            </div>
+        </div>
+    </div>
 
     <!-- Floating Promo Bubble (Το νέο Συννεφάκι) -->
     <div id="promo-container" class="promo-container" style="display: none;">
@@ -185,7 +203,20 @@
         </div>
     </footer>
 
-    <!-- ΕΔΩ ΕΙΝΑΙ Η ΛΥΣΗ: Το ?v=18 αναγκάζει τον browser να ξεκολλήσει και να φορτώσει το σωστό αρχείο -->
-    <script src="app.js?v=38"></script>
+    <!-- Έλεγχος για τα URLs (?promo=1 ή ?tv=1) -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        
+        if (urlParams.get('promo') === '1') {
+            document.body.classList.add('promo-mode');
+        } else if (urlParams.get('tv') === '1') {
+            document.body.classList.add('tv-mode');
+        }
+    });
+    </script>
+
+    <!-- ΕΔΩ ΕΙΝΑΙ Η ΛΥΣΗ: Το ?v=39 αναγκάζει τον browser να ξεκολλήσει και να φορτώσει το σωστό αρχείο -->
+    <script src="app.js?v=39"></script>
 </body>
 </html>
