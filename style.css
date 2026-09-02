@@ -936,3 +936,73 @@ body.tv-mode .tv-footer-top {
 
 body.tv-mode .tv-footer-top span { display: flex; align-items: center; gap: 5px; }
 body.tv-mode .tv-footer-top i { color: #1e293b; font-size: 1.05rem;}
+/* ==========================================================================
+   PROMO MODE (Happy Hour: /?promo=1)
+   ========================================================================== */
+body.promo-mode {
+    overflow: hidden !important;
+    height: 100vh !important;
+    margin: 0;
+    padding: 0 !important;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+body.promo-mode .menu-header,
+body.promo-mode .menu-container,
+body.promo-mode .menu-footer,
+body.promo-mode .language-switcher,
+body.promo-mode #dark-mode-toggle,
+body.promo-mode .promo-container,
+body.promo-mode .cookie-banner {
+    display: none !important;
+}
+
+body.promo-mode #promo-screen {
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+body.promo-mode .promo-content {
+    padding: 50px;
+    border: 3px solid #e31837;
+    border-radius: 24px;
+    background: rgba(15, 23, 42, 0.9);
+    box-shadow: 0 0 40px rgba(227, 24, 55, 0.3);
+    max-width: 90%;
+    animation: pulseBorder 2s infinite alternate;
+}
+
+body.promo-mode .promo-content h1 {
+    color: #f59e0b;
+    font-size: 4.5rem;
+    font-weight: 900;
+    margin-bottom: 40px;
+    letter-spacing: 6px;
+    text-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
+}
+
+body.promo-mode .promo-box {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 25px 40px;
+    border-radius: 16px;
+    margin-bottom: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+body.promo-mode .promo-time { color: #00c2e8; font-size: 1.8rem; font-weight: 800; display: block; margin-bottom: 10px; }
+body.promo-mode .promo-title { font-size: 2.8rem; font-weight: 900; color: #ffffff; display: block; line-height: 1.1; }
+body.promo-mode .promo-price { color: #e31837; font-size: 3.5rem; font-weight: 900; display: block; margin-top: 10px; }
+body.promo-mode .promo-desc { font-size: 1.2rem; color: #cbd5e1; margin-top: 10px; display: block; font-weight: 600; }
+
+@keyframes pulseBorder {
+    0% { box-shadow: 0 0 20px rgba(227, 24, 55, 0.3); transform: scale(1); }
+    100% { box-shadow: 0 0 50px rgba(227, 24, 55, 0.6); transform: scale(1.02); }
+}
