@@ -6,6 +6,7 @@
     <title>Nordic Mythos</title>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Αλλαγή σε v=41 για να σπάσει η cache -->
     <link rel="stylesheet" href="style.css?v=41">
     <link rel="icon" type="image/jpeg" href="images/favicon.jpg">
     
@@ -47,7 +48,6 @@
 </head>
 <body>
 
-    <!-- GDPR Cookie Banner (Τώρα είναι σωστά μέσα στο body) -->
     <div id="cookie-banner" class="cookie-banner" style="display: none;">
         <div class="cookie-content">
             <p><strong>🍪 Vi bruger cookies!</strong> Vi bruger cookies for at forbedre din oplevelse og analysere vores trafik. <a href="#" id="open-privacy">Læs vores privatlivspolitik</a>.</p>
@@ -58,7 +58,6 @@
         </div>
     </div>
 
-    <!-- Privacy Policy Modal -->
     <div id="privacy-modal" class="modal">
         <div class="modal-content">
             <span class="close-privacy close-modal">×</span>
@@ -72,10 +71,8 @@
         </div>
     </div>
 
-        <!-- HAPPY HOUR PROMO SCREEN (TV OPTIMIZED) -->
     <div id="promo-screen" style="display: none;">
         <div class="promo-image-side">
-            <!-- Αλλαγή σε Νυχτερινή Προσφορά -->
             <div class="image-overlay-text">NATTILBUD</div>
         </div>
         
@@ -83,7 +80,6 @@
             <img src="logo.jpg" alt="Nordic Mythos" class="promo-logo">
             
             <h1>HAPPY HOUR</h1>
-            <!-- Αλλαγή σε 24ωρη μορφή για να καταλαβαίνουν οι Δανοί ότι είναι βράδυ -->
             <div class="promo-time"><i class="fas fa-clock"></i> 23:00 - 00:00</div>
             
             <div class="promo-takeaway-badge">
@@ -103,7 +99,6 @@
         </div>
     </div>
 
-    <!-- Floating Promo Bubble -->
     <div id="promo-container" class="promo-container" style="display: none;">
         <div id="promo-bubble" class="promo-bubble hidden">
             <span id="close-promo" class="close-promo"><i class="fas fa-times"></i></span>
@@ -207,7 +202,6 @@
         </div>
     </footer>
 
-    <!-- Έλεγχος μόνο για το Promo. Το TV το αναλαμβάνει το app.js -->
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         const urlParams = new URLSearchParams(window.location.search);
@@ -217,6 +211,7 @@
     });
     </script>
 
+    <!-- Αλλαγή σε v=41 για να σπάσει η cache -->
     <script src="app.js?v=41"></script>
 </body>
 </html>
