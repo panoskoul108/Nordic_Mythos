@@ -936,3 +936,191 @@ body.tv-mode .tv-footer-top {
 
 body.tv-mode .tv-footer-top span { display: flex; align-items: center; gap: 5px; }
 body.tv-mode .tv-footer-top i { color: #1e293b; font-size: 1.05rem;}
+
+/* ==========================================================================
+   PROMO MODE (Happy Hour: /?promo=1) - SPLIT SCREEN ΓΙΑ ΤΗΛΕΟΡΑΣΗ
+   ========================================================================== */
+body.promo-mode {
+    overflow: hidden !important;
+    height: 100vh !important;
+    margin: 0;
+    padding: 0 !important;
+    background-color: #ffffff; /* Καθαρό λευκό όπως το μαγαζί */
+}
+
+/* Κρύβουμε το κανονικό μενού */
+body.promo-mode .menu-header,
+body.promo-mode .menu-container,
+body.promo-mode .menu-footer,
+body.promo-mode .language-switcher,
+body.promo-mode #dark-mode-toggle,
+body.promo-mode .promo-container,
+body.promo-mode .cookie-banner {
+    display: none !important;
+}
+
+body.promo-mode #promo-screen {
+    display: flex !important;
+    width: 100vw;
+    height: 100vh;
+}
+
+/* --- ΑΡΙΣΤΕΡΗ ΠΛΕΥΡΑ (ΦΩΤΟΓΡΑΦΙΑ) --- */
+body.promo-mode .promo-image-side {
+    flex: 1.2;
+    background-image: url('images/promo2.png'); /* Βάζουμε τη νέα, καθαρή εικόνα */
+    background-color: #000000; 
+    background-position: center; /* Την κεντράρουμε τέλεια */
+    background-size: cover; /* Την αναγκάζουμε να καλύψει 100% το κουτί της χωρίς κενά */
+    background-repeat: no-repeat;
+    position: relative;
+    box-shadow: 10px 0 30px rgba(0,0,0,0.15); /* Ρίχνει μια ωραία σκιά πάνω στο λευκό κείμενο */
+    z-index: 2;
+}
+
+body.promo-mode .image-overlay-text {
+    position: absolute;
+    top: 40px;
+    left: 40px;
+    background-color: #e31837;
+    color: white;
+    padding: 10px 25px;
+    font-size: 2rem;
+    font-weight: 900;
+    border-radius: 50px;
+    box-shadow: 0 5px 15px rgba(227, 24, 55, 0.4);
+    letter-spacing: 2px;
+}
+
+/* --- ΔΕΞΙΑ ΠΛΕΥΡΑ (ΚΕΙΜΕΝΑ) --- */
+body.promo-mode .promo-text-side {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 40px;
+    text-align: center;
+    position: relative;
+}
+
+body.promo-mode .promo-logo {
+    width: 140px;
+    margin-bottom: 20px;
+}
+
+body.promo-mode h1 {
+    font-size: 5.5rem;
+    font-weight: 900;
+    color: #000000;
+    margin: 0;
+    line-height: 1;
+    letter-spacing: 3px;
+}
+
+body.promo-mode .promo-time {
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: #e31837;
+    margin-top: 10px;
+    margin-bottom: 40px;
+}
+
+/* Καρτέλες Προσφορών */
+body.promo-mode .promo-card {
+    width: 85%;
+    border: 4px solid #cbd5e1;
+    border-radius: 20px;
+    padding: 25px 20px;
+    margin-bottom: 25px;
+    background-color: #f8fafc;
+}
+
+body.promo-mode .promo-card h2 {
+    font-size: 2.5rem;
+    font-weight: 900;
+    margin-bottom: 10px;
+    color: #000000;
+}
+
+body.promo-mode .promo-price {
+    font-size: 4.5rem;
+    font-weight: 900;
+    color: #e31837;
+    line-height: 1;
+}
+
+body.promo-mode .promo-price span {
+    font-size: 2rem;
+    color: #000000;
+}
+
+/* Καρτέλα 2+1 (Με κόκκινο θέμα) */
+body.promo-mode .promo-card.highlight {
+    border-color: #e31837;
+    background-color: #fff1f2;
+    position: relative;
+    padding-top: 35px;
+}
+
+body.promo-mode .badge-gratis {
+    position: absolute;
+    top: -18px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #e31837;
+    color: white;
+    padding: 5px 25px;
+    font-size: 1.4rem;
+    font-weight: 900;
+    border-radius: 20px;
+    letter-spacing: 1px;
+}
+
+body.promo-mode .promo-card p {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #1e293b;
+    margin-bottom: 5px;
+}
+
+body.promo-mode .greek-sub {
+    font-size: 1.1rem !important;
+    font-style: italic;
+    color: #64748b !important;
+}
+
+/* Ταμπελάκι Takeaway */
+body.promo-mode .promo-takeaway-badge {
+    background-color: #1e293b; /* Σκούρο premium χρώμα */
+    color: #ffffff;
+    padding: 10px 25px;
+    border-radius: 30px;
+    font-size: 1.2rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    margin-top: -20px; /* Το φέρνει πιο κοντά στο ωράριο */
+    margin-bottom: 35px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+body.promo-mode .promo-takeaway-badge i {
+    color: #e31837; /* Κόκκινη λεπτομέρεια στο εικονίδιο */
+}
+
+/* ==========================================================================
+   15. ΑΣΦΑΛΕΙΑ ΓΙΑ ΤΟ TV MODE (Να μην κρύβεται ο κατάλογος)
+   ========================================================================== */
+body.tv-mode .menu-container {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+body.tv-mode #promo-screen {
+    display: none !important;
+}

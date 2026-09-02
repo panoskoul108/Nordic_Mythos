@@ -6,11 +6,9 @@
     <title>Nordic Mythos</title>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Προσθήκη έκδοσης για να καθαρίζει η cache του CSS -->
-    <link rel="stylesheet" href="style.css?v=38">
-    
+    <link rel="stylesheet" href="style.css?v=40">
     <link rel="icon" type="image/jpeg" href="images/favicon.jpg">
+    
     <meta name="description" content="Nordic Mythos i Aalborg - Se vores lækre pizzakatalog online. Bestil nemt og hurtigt den bedste pizza i Aalborg via Wolt!">
     <meta name="keywords" content="pizza, pizzeria, Aalborg, pizzakatalog, takeaway, mad, Ved Stranden, Wolt, Nordic Mythos">
     <meta name="robots" content="index, follow">
@@ -46,42 +44,69 @@
       ]
     }
     </script>
-
-    <!-- GDPR Cookie Banner -->
-<div id="cookie-banner" class="cookie-banner" style="display: none;">
-    <div class="cookie-content">
-        <p><strong>🍪 Vi bruger cookies!</strong> Vi bruger cookies for at forbedre din oplevelse og analysere vores trafik. <a href="#" id="open-privacy">Læs vores privatlivspolitik</a>.</p>
-        <div class="cookie-buttons">
-            <button id="accept-cookies" class="cookie-btn accept">Accepter</button>
-            <button id="decline-cookies" class="cookie-btn decline">Afvis</button>
-        </div>
-    </div>
-</div>
-
-<!-- Privacy Policy Modal -->
-<div id="privacy-modal" class="modal">
-    <div class="modal-content">
-        <span class="close-privacy close-modal">×</span>
-        <h2 style="margin-bottom: 15px; font-size: 1.3rem;">Privatlivspolitik</h2>
-        <p style="font-size: 0.85rem; line-height: 1.5; color: var(--text-muted); text-align: left;">
-            <strong>1. Dataansvarlig:</strong> Nordic Mythos (CVR: 46347048).<br><br>
-            <strong>2. Hvilke data indsamler vi?</strong> Vi bruger Google Analytics til at indsamle anonyme statistikker om, hvordan vores hjemmeside bruges. IP-adresser anonymiseres automatisk.<br><br>
-            <strong>3. Tredjeparter:</strong> Alle online bestillinger foregår gennem Wolt. Se Wolts privatlivspolitik for information om deres datahåndtering.<br><br>
-            <strong>4. Dine rettigheder:</strong> Du kan til enhver tid slette cookies via din browsers indstillinger.
-        </p>
-    </div>
-</div>
 </head>
 <body>
 
-    <!-- Floating Promo Bubble (Το νέο Συννεφάκι) -->
+    <!-- GDPR Cookie Banner (Τώρα είναι σωστά μέσα στο body) -->
+    <div id="cookie-banner" class="cookie-banner" style="display: none;">
+        <div class="cookie-content">
+            <p><strong>🍪 Vi bruger cookies!</strong> Vi bruger cookies for at forbedre din oplevelse og analysere vores trafik. <a href="#" id="open-privacy">Læs vores privatlivspolitik</a>.</p>
+            <div class="cookie-buttons">
+                <button id="accept-cookies" class="cookie-btn accept">Accepter</button>
+                <button id="decline-cookies" class="cookie-btn decline">Afvis</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Privacy Policy Modal -->
+    <div id="privacy-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-privacy close-modal">×</span>
+            <h2 style="margin-bottom: 15px; font-size: 1.3rem;">Privatlivspolitik</h2>
+            <p style="font-size: 0.85rem; line-height: 1.5; color: var(--text-muted); text-align: left;">
+                <strong>1. Dataansvarlig:</strong> Nordic Mythos (CVR: 46347048).<br><br>
+                <strong>2. Hvilke data indsamler vi?</strong> Vi bruger Google Analytics til at indsamle anonyme statistikker om, hvordan vores hjemmeside bruges. IP-adresser anonymiseres automatisk.<br><br>
+                <strong>3. Tredjeparter:</strong> Alle online bestillinger foregår gennem Wolt. Se Wolts privatlivspolitik for information om deres datahåndtering.<br><br>
+                <strong>4. Dine rettigheder:</strong> Du kan til enhver tid slette cookies via din browsers indstillinger.
+            </p>
+        </div>
+    </div>
+
+    <!-- HAPPY HOUR PROMO SCREEN (TV OPTIMIZED) -->
+    <div id="promo-screen" style="display: none;">
+        <div class="promo-image-side">
+            <div class="image-overlay-text">FROKOSTTILBUD</div>
+        </div>
+        
+        <div class="promo-text-side">
+            <img src="logo.jpg" alt="Nordic Mythos" class="promo-logo">
+            
+            <h1>HAPPY HOUR</h1>
+            <div class="promo-time"><i class="fas fa-clock"></i> 11:00 - 12:00</div>
+            
+            <div class="promo-takeaway-badge">
+                <i class="fas fa-shopping-bag"></i> KUN TAKEAWAY
+            </div>
+            
+            <div class="promo-card">
+                <h2>PIZZA SLICE</h2>
+                <div class="promo-price">35 <span>KR.</span></div>
+            </div>
+            
+            <div class="promo-card highlight">
+                <div class="badge-gratis">TILBUD</div>
+                <h2>2+1 GRATIS</h2>
+                <p>Køb 2 pizzaer, få den 3. gratis!</p>
+            </div>
+        </div>
+    </div>
+        
+    <!-- Floating Promo Bubble -->
     <div id="promo-container" class="promo-container" style="display: none;">
-        <!-- Το συννεφάκι που ανοίγει -->
         <div id="promo-bubble" class="promo-bubble hidden">
             <span id="close-promo" class="close-promo"><i class="fas fa-times"></i></span>
             <div id="promo-text">...</div>
         </div>
-        <!-- Το εικονίδιο δώρου -->
         <button id="promo-trigger" class="promo-trigger" aria-label="View Offer">
             <i class="fas fa-gift"></i>
             <span class="notification-badge">1</span>
@@ -89,12 +114,10 @@
     </div>
 
     <header class="menu-header">
-        <!-- Dark Mode Button (Αριστερά) -->
         <button id="dark-mode-toggle" class="dropbtn icon-btn" aria-label="Toggle Dark Mode">
             <i class="fas fa-moon"></i>
         </button>
         
-        <!-- Γλώσσα (Δεξιά) -->
         <div class="language-switcher dropdown">
             <button id="current-lang-btn" class="dropbtn">
                 🇩🇰 DA <i class="fas fa-chevron-down"></i>
@@ -117,16 +140,15 @@
             <span class="waving-flag">🇩🇰</span>
         </div>
 
-        <!-- Δυναμική Ένδειξη Ωραρίου / Κατάστασης -->
         <div class="store-status-container">
             <div id="store-status-indicator" class="status-dot"></div>
             <span id="store-status-text">...</span>
         </div>
     </header>
+    
     <main class="menu-container">
         <section class="menu-section">
             
-            <!-- ΝΕΟ: Πλαίσιο Family Pizza (Γραφικό Layout) -->
             <div class="family-pizza-banner">
                 <i class="fas fa-pizza-slice"></i>
                 <span data-i18n="familyPizza">Family pizza της επιλογής σας +89 KR.</span>
@@ -138,7 +160,6 @@
                 </p>
             </div>
 
-            <!-- Νομικά Στοιχεία / Legal Info & Smiley -->
             <div class="legal-info">
                 Nordic Mythos | CVR: 46347048 | Email: <a href="mailto:nordicmythos@gmail.com" style="color: inherit; text-decoration: underline;">nordicmythos@gmail.com</a> | <a href="https://www.findsmiley.dk/app/1523452" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">😊 Smiley-rapport</a>
             </div>
@@ -174,7 +195,6 @@
                 <span class="address">📍 VED STRANDEN 19, 9000 AALBORG</span>
             </a>
         </div>
-
         <div class="social-links">
             <a href="https://www.facebook.com/share/1T1uzixrSJ/" target="_blank" rel="noopener noreferrer" class="social-icon facebook" aria-label="Facebook">
                 <i class="fab fa-facebook-f"></i>
@@ -185,7 +205,16 @@
         </div>
     </footer>
 
-    <!-- ΕΔΩ ΕΙΝΑΙ Η ΛΥΣΗ: Το ?v=18 αναγκάζει τον browser να ξεκολλήσει και να φορτώσει το σωστό αρχείο -->
-    <script src="app.js?v=38"></script>
+    <!-- Έλεγχος μόνο για το Promo. Το TV το αναλαμβάνει το app.js -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('promo') === '1') {
+            document.body.classList.add('promo-mode');
+        }
+    });
+    </script>
+
+    <script src="app.js?v=40"></script>
 </body>
 </html>
