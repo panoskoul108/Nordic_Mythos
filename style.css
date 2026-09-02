@@ -950,6 +950,7 @@ body.promo-mode {
     justify-content: center;
 }
 
+/* Κρύβουμε ΟΛΑ τα στοιχεία του κανονικού μενού */
 body.promo-mode .menu-header,
 body.promo-mode .menu-container,
 body.promo-mode .menu-footer,
@@ -960,6 +961,7 @@ body.promo-mode .cookie-banner {
     display: none !important;
 }
 
+/* Εμφανίζουμε ΜΟΝΟ την οθόνη του promo */
 body.promo-mode #promo-screen {
     display: flex !important;
     flex-direction: column;
