@@ -1019,12 +1019,28 @@ body.promo-mode h1 {
     letter-spacing: 2px;
 }
 
+/* --- ΝΕΟ: Πρόγραμμα Happy Hour (Μέρες και Ώρα) --- */
+body.promo-mode .promo-schedule {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5vh; /* Μικρό κενό ανάμεσα στις μέρες και την ώρα */
+}
+
+body.promo-mode .promo-days {
+    font-size: 2.5vh;
+    font-weight: 800;
+    color: #1e293b;
+    letter-spacing: 2px;
+}
+
 body.promo-mode .promo-time {
     font-size: 4vh;
     font-weight: 900;
     color: #e31837;
     margin: 0;
 }
+
 
 /* Ταμπελάκι Takeaway */
 body.promo-mode .promo-takeaway-badge {
