@@ -71,6 +71,7 @@
         </div>
     </div>
 
+    <!-- HAPPY HOUR PROMO SCREEN (TV OPTIMIZED) -->
     <div id="promo-screen" style="display: none;">
         <div class="promo-image-side">
             <div class="image-overlay-text">NATTILBUD</div>
@@ -79,14 +80,17 @@
         <div class="promo-text-side">
             <img src="logo.jpg" alt="Nordic Mythos" class="promo-logo">
             
-                      <h1>HAPPY HOUR</h1>
+            <h1>HAPPY HOUR</h1>
             
-            <!-- Ομαδοποίηση ημερών και ώρας -->
+            <!-- Ομαδοποίηση ημερών, ώρας και αντίστροφης μέτρησης -->
             <div class="promo-schedule">
                 <div class="promo-days">MANDAG - TORSDAG</div>
-                <div class="promo-time"><i class="fas fa-clock"></i> 23:00 - 00:00</div>
+                <div class="promo-time"><i class="fas fa-clock"></i> 23:00 - TIL LUKKETID</div>
+                
+                <!-- Το κουτί της αντίστροφης μέτρησης -->
+                <div id="promo-countdown" class="promo-countdown">Starter om: <span>--:--:--</span></div>
             </div>
-
+            
             <div class="promo-takeaway-badge">
                 <i class="fas fa-shopping-bag"></i> KUN TAKEAWAY
             </div>
@@ -96,14 +100,16 @@
                 <div class="promo-price">35 <span>KR.</span></div>
             </div>
             
-           <div class="promo-card highlight">
+            <div class="promo-card highlight">
                 <div class="badge-gratis">TILBUD</div>
                 <h2>2+1 GRATIS</h2>
                 <p>Køb 2 pizzaer, få den 3. gratis!</p>
-                <!-- ΝΕΟ: Διακριτικός όρος προσφοράς -->
                 <span class="promo-disclaimer">*Den gratis pizza er altid den billigste</span>
             </div>
+        </div> <!-- ΕΔΩ ΕΛΕΙΠΕ ΤΟ ΚΛΕΙΣΙΜΟ ΤΟΥ promo-text-side -->
+    </div> <!-- ΕΔΩ ΕΛΕΙΠΕ ΤΟ ΚΛΕΙΣΙΜΟ ΤΟΥ promo-screen -->
 
+    <!-- Floating Promo Bubble -->
     <div id="promo-container" class="promo-container" style="display: none;">
         <div id="promo-bubble" class="promo-bubble hidden">
             <span id="close-promo" class="close-promo"><i class="fas fa-times"></i></span>
@@ -207,16 +213,54 @@
         </div>
     </footer>
 
+   <!-- Έλεγχος Promo & Λειτουργία Αντίστροφης Μέτρησης -->
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         const urlParams = new URLSearchParams(window.location.search);
+        
         if (urlParams.get('promo') === '1') {
             document.body.classList.add('promo-mode');
+            
+            // Ξεκινάει το χρονόμετρο μόνο αν είμαστε στο Promo Mode
+            setInterval(updatePromoTimer, 1000);
+            updatePromoTimer();
+        }
+
+        function updatePromoTimer() {
+            const timerElement = document.getElementById('promo-countdown');
+            if (!timerElement) return;
+
+            const now = new Date();
+            const currentHours = now.getHours();
+
+            // Αν η ώρα είναι 23:00 ή μετά τα μεσάνυχτα (μέχρι τις 04:00 το πρωί)
+            if (currentHours >= 23 || currentHours < 4) {
+                timerElement.innerHTML = "NU I GANG! 🎉";
+                timerElement.classList.add('active'); // Ενεργοποιεί το εφέ αναβοσβήσματος/zoom
+                return;
+            }
+
+            // Υπολογισμός χρόνου που απομένει μέχρι τις 23:00 σήμερα
+            const targetTime = new Date();
+            targetTime.setHours(23, 0, 0, 0);
+
+            const diff = targetTime - now;
+            
+            const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const m = Math.floor((diff / 1000 / 60) % 60);
+            const s = Math.floor((diff / 1000) % 60);
+
+            // Μορφοποίηση σε XX:XX:XX με μηδενικά μπροστά αν χρειάζεται
+            const formattedH = h.toString().padStart(2, '0');
+            const formattedM = m.toString().padStart(2, '0');
+            const formattedS = s.toString().padStart(2, '0');
+
+            timerElement.classList.remove('active');
+            timerElement.innerHTML = `Starter om: <span style="font-weight: 900; letter-spacing: 2px;">${formattedH}:${formattedM}:${formattedS}</span>`;
         }
     });
     </script>
 
-    <!-- Αλλαγή σε v=41 για να σπάσει η cache -->
     <script src="app.js?v=41"></script>
 </body>
 </html>
