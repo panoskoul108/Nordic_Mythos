@@ -4,12 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nordic Mythos</title>
-    
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Αλλαγή σε v=41 για να σπάσει η cache -->
-    <link rel="stylesheet" href="style.css?v=41">
+    <link rel="stylesheet" href="style.css?v=42">
     <link rel="icon" type="image/jpeg" href="images/favicon.jpg">
-    
+
     <meta name="description" content="Nordic Mythos i Aalborg - Se vores lækre pizzakatalog online. Bestil nemt og hurtigt den bedste pizza i Aalborg via Wolt!">
     <meta name="keywords" content="pizza, pizzeria, Aalborg, pizzakatalog, takeaway, mad, Ved Stranden, Wolt, Nordic Mythos">
     <meta name="robots" content="index, follow">
@@ -20,7 +19,7 @@
     <meta property="og:image" content="logo.jpg">
     <meta property="og:url" content="https://nordicmythos.dk">
     <meta property="og:type" content="website">
-    
+
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;800&display=swap" rel="stylesheet">
 
     <script type="application/ld+json">
@@ -76,38 +75,38 @@
         <div class="promo-image-side">
             <div class="image-overlay-text">NATTILBUD</div>
         </div>
-        
+
         <div class="promo-text-side">
             <img src="logo.jpg" alt="Nordic Mythos" class="promo-logo">
-            
+
             <h1>HAPPY HOUR</h1>
-            
-            <!-- Ομαδοποίηση ημερών, ώρας και αντίστροφης μέτρησης -->
+
+            <!-- Ομαδοποίηση ημερών, ώρας και αντίστροφης μέτρησης (με IDs για αλλαγή στο Promo 2) -->
             <div class="promo-schedule">
-                <div class="promo-days">MANDAG - TORSDAG</div>
-                <div class="promo-time"><i class="fas fa-clock"></i> 23:00 - TIL LUKKETID</div>
-                
+                <div id="promo-days-display" class="promo-days">SØNDAG - TORSDAG</div>
+                <div id="promo-time-display" class="promo-time"><i class="fas fa-clock"></i> 23:00 - 00:00</div>
+
                 <!-- Το κουτί της αντίστροφης μέτρησης -->
                 <div id="promo-countdown" class="promo-countdown">Starter om: <span>--:--:--</span></div>
             </div>
-            
+
             <div class="promo-takeaway-badge">
                 <i class="fas fa-shopping-bag"></i> KUN TAKEAWAY
             </div>
-            
+
             <div class="promo-card">
                 <h2>PIZZA SLICE</h2>
                 <div class="promo-price">35 <span>KR.</span></div>
             </div>
-            
+
             <div class="promo-card highlight">
                 <div class="badge-gratis">TILBUD</div>
                 <h2>2+1 GRATIS</h2>
                 <p>Køb 2 pizzaer, få den 3. gratis!</p>
                 <span class="promo-disclaimer">*Den gratis pizza er altid den billigste</span>
             </div>
-        </div> <!-- ΕΔΩ ΕΛΕΙΠΕ ΤΟ ΚΛΕΙΣΙΜΟ ΤΟΥ promo-text-side -->
-    </div> <!-- ΕΔΩ ΕΛΕΙΠΕ ΤΟ ΚΛΕΙΣΙΜΟ ΤΟΥ promo-screen -->
+        </div>
+    </div>
 
     <!-- Floating Promo Bubble -->
     <div id="promo-container" class="promo-container" style="display: none;">
@@ -125,7 +124,7 @@
         <button id="dark-mode-toggle" class="dropbtn icon-btn" aria-label="Toggle Dark Mode">
             <i class="fas fa-moon"></i>
         </button>
-        
+
         <div class="language-switcher dropdown">
             <button id="current-lang-btn" class="dropbtn">
                 🇩🇰 DA <i class="fas fa-chevron-down"></i>
@@ -153,10 +152,10 @@
             <span id="store-status-text">...</span>
         </div>
     </header>
-    
+
     <main class="menu-container">
         <section class="menu-section">
-            
+
             <div class="family-pizza-banner">
                 <i class="fas fa-pizza-slice"></i>
                 <span data-i18n="familyPizza">Family pizza της επιλογής σας +89 KR.</span>
@@ -213,44 +212,88 @@
         </div>
     </footer>
 
-   <!-- Έλεγχος Promo & Λειτουργία Αντίστροφης Μέτρησης -->
+    <!-- Έλεγχος Promo 1 & Promo 2 & Λειτουργία Αντίστροφης Μέτρησης -->
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         const urlParams = new URLSearchParams(window.location.search);
+        const promoType = urlParams.get('promo');
         
-        if (urlParams.get('promo') === '1') {
+        // Αν το URL έχει ?promo=1 Ή ?promo=2
+        if (promoType === '1' || promoType === '2') {
             document.body.classList.add('promo-mode');
             
-            // Ξεκινάει το χρονόμετρο μόνο αν είμαστε στο Promo Mode
-            setInterval(updatePromoTimer, 1000);
-            updatePromoTimer();
+            // Αν είναι το Promo 2 (Ξενύχτι), αλλάζουμε αυτόματα τα κείμενα στην οθόνη
+            if (promoType === '2') {
+                document.getElementById('promo-days-display').innerText = "KUN I NAT"; 
+                document.getElementById('promo-time-display').innerHTML = '<i class="fas fa-clock"></i> 04:30 - 05:00';
+            }
+
+            setInterval(() => updatePromoTimer(promoType), 1000);
+            updatePromoTimer(promoType);
         }
 
-        function updatePromoTimer() {
+        function updatePromoTimer(type) {
             const timerElement = document.getElementById('promo-countdown');
             if (!timerElement) return;
 
             const now = new Date();
-            const currentHours = now.getHours();
+            const day = now.getDay(); // 0=Κυρ, 1=Δευ, 2=Τρι, 3=Τετ, 4=Πεμ, 5=Παρ, 6=Σαβ
+            const hours = now.getHours();
+            const minutes = now.getMinutes();
+            const timeFloat = hours + minutes / 60;
 
-            // Αν η ώρα είναι 23:00 ή μετά τα μεσάνυχτα (μέχρι τις 04:00 το πρωί)
-            if (currentHours >= 23 || currentHours < 4) {
+            let isActive = false;
+            let targetTime = new Date();
+
+            if (type === '1') {
+                // PROMO 1: Κυριακή έως Πέμπτη (23:00 - 00:00)
+                if (day >= 0 && day <= 4 && hours === 23) {
+                    isActive = true;
+                }
+                
+                // Υπολογισμός Επόμενου Στόχου
+                if (day >= 1 && day <= 4) {
+                    targetTime.setHours(23, 0, 0, 0);
+                    if (hours >= 23) targetTime.setDate(targetTime.getDate() + 1); 
+                } else if (day === 5) {
+                    targetTime.setDate(targetTime.getDate() + 2); // Από Παρασκευή, πάει Κυριακή
+                    targetTime.setHours(23, 0, 0, 0);
+                } else if (day === 6) {
+                    targetTime.setDate(targetTime.getDate() + 1); // Από Σάββατο, πάει Κυριακή
+                    targetTime.setHours(23, 0, 0, 0);
+                } else if (day === 0) {
+                    targetTime.setHours(23, 0, 0, 0);
+                    if (hours >= 23) targetTime.setDate(targetTime.getDate() + 1);
+                }
+            } 
+            else if (type === '2') {
+                // PROMO 2: Κάθε ξημέρωμα (04:30 - 05:00)
+                if (timeFloat >= 4.5 && timeFloat < 5) {
+                    isActive = true;
+                }
+
+                // Υπολογισμός Επόμενου Στόχου
+                if (timeFloat < 4.5) {
+                    targetTime.setHours(4, 30, 0, 0);
+                } else {
+                    targetTime.setDate(targetTime.getDate() + 1); // Έχει περάσει 05:00
+                    targetTime.setHours(4, 30, 0, 0);
+                }
+            }
+
+            if (isActive) {
                 timerElement.innerHTML = "NU I GANG! 🎉";
-                timerElement.classList.add('active'); // Ενεργοποιεί το εφέ αναβοσβήσματος/zoom
+                timerElement.classList.add('active');
                 return;
             }
 
-            // Υπολογισμός χρόνου που απομένει μέχρι τις 23:00 σήμερα
-            const targetTime = new Date();
-            targetTime.setHours(23, 0, 0, 0);
-
             const diff = targetTime - now;
-            
-            const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            if (diff < 0) return; 
+
+            const h = Math.floor(diff / (1000 * 60 * 60));
             const m = Math.floor((diff / 1000 / 60) % 60);
             const s = Math.floor((diff / 1000) % 60);
 
-            // Μορφοποίηση σε XX:XX:XX με μηδενικά μπροστά αν χρειάζεται
             const formattedH = h.toString().padStart(2, '0');
             const formattedM = m.toString().padStart(2, '0');
             const formattedS = s.toString().padStart(2, '0');
@@ -261,6 +304,6 @@
     });
     </script>
 
-    <script src="app.js?v=41"></script>
+    <script src="app.js?v=42"></script>
 </body>
 </html>
