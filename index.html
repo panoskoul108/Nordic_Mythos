@@ -6,8 +6,8 @@
     <title>Nordic Mythos</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Αλλαγή σε v=41 για να σπάσει η cache -->
-    <link rel="stylesheet" href="style.css?v=42">
+    <!-- Αλλαγή σε v=43 για να σπάσει η cache -->
+    <link rel="stylesheet" href="style.css?v=43">
     <link rel="icon" type="image/jpeg" href="images/favicon.jpg">
 
     <meta name="description" content="Nordic Mythos i Aalborg - Se vores lækre pizzakatalog online. Bestil nemt og hurtigt den bedste pizza i Aalborg via Wolt!">
@@ -213,38 +213,66 @@
         </div>
     </footer>
 
-    <!-- Έλεγχος Promo 1 & Promo 2 & Λειτουργία Αντίστροφης Μέτρησης -->
+    <!-- Έλεγχος Promo (1, 2, auto) & Λειτουργία Αντίστροφης Μέτρησης -->
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         const urlParams = new URLSearchParams(window.location.search);
-        const promoType = urlParams.get('promo');
+        const promoType = urlParams.get('promo'); 
         
-        // Αν το URL έχει ?promo=1 Ή ?promo=2
-        if (promoType === '1' || promoType === '2') {
+        // Αν το URL έχει ?promo=1, ?promo=2, ή ?promo=auto
+        if (promoType === '1' || promoType === '2' || promoType === 'auto') {
             document.body.classList.add('promo-mode');
-            
-            // Αν είναι το Promo 2 (Ξενύχτι), αλλάζουμε αυτόματα τα κείμενα στην οθόνη
-            if (promoType === '2') {
-                document.getElementById('promo-days-display').innerText = "KUN I NAT"; 
-                document.getElementById('promo-time-display').innerHTML = '<i class="fas fa-clock"></i> 04:30 - 05:00';
-            }
-
-            setInterval(() => updatePromoTimer(promoType), 1000);
-            updatePromoTimer(promoType);
+            setInterval(handlePromoLogic, 1000);
+            handlePromoLogic();
         }
 
-        function updatePromoTimer(type) {
+        function handlePromoLogic() {
+            const now = new Date();
+            let currentActivePromo = promoType;
+
+            // Αν βάλαμε ?promo=auto, βρίσκει μόνο του ποιο είναι το επόμενο Happy Hour
+            if (promoType === 'auto') {
+                const day = now.getDay();
+                const timeFloat = now.getHours() + now.getMinutes() / 60;
+                
+                if (day === 5 || day === 6) {
+                    currentActivePromo = '2'; // Παρασκευή & Σάββατο πάμε για Ξενύχτι
+                } else if (day === 0 && timeFloat < 5) {
+                    currentActivePromo = '2'; // Κυριακή ξημερώματα πάμε για Ξενύχτι
+                } else {
+                    currentActivePromo = '1'; // Όλες τις άλλες μέρες πάμε για το κανονικό
+                }
+            }
+
+            // Αλλαγή των κειμένων στην οθόνη ανάλογα με το ποιο τρέχει (ή ποιο έρχεται)
+            const daysDisplay = document.getElementById('promo-days-display');
+            const timeDisplay = document.getElementById('promo-time-display');
+
+            if (currentActivePromo === '2') {
+                if (daysDisplay.innerText !== "KUN I NAT") {
+                    daysDisplay.innerText = "KUN I NAT";
+                    timeDisplay.innerHTML = '<i class="fas fa-clock"></i> 04:30 - 05:00';
+                }
+            } else {
+                if (daysDisplay.innerText !== "SØNDAG - TORSDAG") {
+                    daysDisplay.innerText = "SØNDAG - TORSDAG";
+                    timeDisplay.innerHTML = '<i class="fas fa-clock"></i> 23:00 - 00:00';
+                }
+            }
+
+            updatePromoTimer(currentActivePromo, now);
+        }
+
+        function updatePromoTimer(type, now) {
             const timerElement = document.getElementById('promo-countdown');
             if (!timerElement) return;
 
-            const now = new Date();
-            const day = now.getDay(); // 0=Κυρ, 1=Δευ, 2=Τρι, 3=Τετ, 4=Πεμ, 5=Παρ, 6=Σαβ
+            const day = now.getDay(); 
             const hours = now.getHours();
-            const minutes = now.getMinutes();
-            const timeFloat = hours + minutes / 60;
+            const timeFloat = hours + now.getMinutes() / 60;
 
             let isActive = false;
-            let targetTime = new Date();
+            let targetTime = new Date(now);
 
             if (type === '1') {
                 // PROMO 1: Κυριακή έως Πέμπτη (23:00 - 00:00)
@@ -252,15 +280,14 @@
                     isActive = true;
                 }
                 
-                // Υπολογισμός Επόμενου Στόχου
                 if (day >= 1 && day <= 4) {
                     targetTime.setHours(23, 0, 0, 0);
                     if (hours >= 23) targetTime.setDate(targetTime.getDate() + 1); 
                 } else if (day === 5) {
-                    targetTime.setDate(targetTime.getDate() + 2); // Από Παρασκευή, πάει Κυριακή
+                    targetTime.setDate(targetTime.getDate() + 2); 
                     targetTime.setHours(23, 0, 0, 0);
                 } else if (day === 6) {
-                    targetTime.setDate(targetTime.getDate() + 1); // Από Σάββατο, πάει Κυριακή
+                    targetTime.setDate(targetTime.getDate() + 1); 
                     targetTime.setHours(23, 0, 0, 0);
                 } else if (day === 0) {
                     targetTime.setHours(23, 0, 0, 0);
@@ -273,11 +300,10 @@
                     isActive = true;
                 }
 
-                // Υπολογισμός Επόμενου Στόχου
                 if (timeFloat < 4.5) {
                     targetTime.setHours(4, 30, 0, 0);
                 } else {
-                    targetTime.setDate(targetTime.getDate() + 1); // Έχει περάσει 05:00
+                    targetTime.setDate(targetTime.getDate() + 1); 
                     targetTime.setHours(4, 30, 0, 0);
                 }
             }
@@ -305,6 +331,7 @@
     });
     </script>
 
-    <script src="app.js?v=42"></script>
+    <!-- Αλλαγή σε v=43 για να σπάσει η cache -->
+    <script src="app.js?v=43"></script>
 </body>
 </html>
