@@ -6,8 +6,8 @@
     <title>Nordic Mythos</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Αλλαγή σε v=43 για να σπάσει η cache -->
-    <link rel="stylesheet" href="style.css?v=43">
+    <!-- Αλλαγή σε v=44 για να σπάσει η cache -->
+    <link rel="stylesheet" href="style.css?v=44">
     <link rel="icon" type="image/jpeg" href="images/favicon.jpg">
 
     <meta name="description" content="Nordic Mythos i Aalborg - Se vores lækre pizzakatalog online. Bestil nemt og hurtigt den bedste pizza i Aalborg via Wolt!">
@@ -85,7 +85,8 @@
             <!-- Ομαδοποίηση ημερών, ώρας και αντίστροφης μέτρησης -->
             <div class="promo-schedule">
                 <div id="promo-days-display" class="promo-days">SØNDAG - TORSDAG</div>
-                <div id="promo-time-display" class="promo-time"><i class="fas fa-clock"></i> 23:00 - 00:00</div>
+                <!-- Εδώ άλλαξε η προεπιλογή σε 21:00 -->
+                <div id="promo-time-display" class="promo-time"><i class="fas fa-clock"></i> 21:00 - 22:00</div>
 
                 <!-- Το κουτί της αντίστροφης μέτρησης -->
                 <div id="promo-countdown" class="promo-countdown">Starter om: <span>--:--:--</span></div>
@@ -244,7 +245,7 @@
                 }
             }
 
-            // Αλλαγή των κειμένων στην οθόνη ανάλογα με το ποιο τρέχει (ή ποιο έρχεται)
+            // Αλλαγή των κειμένων στην οθόνη
             const daysDisplay = document.getElementById('promo-days-display');
             const timeDisplay = document.getElementById('promo-time-display');
 
@@ -256,7 +257,8 @@
             } else {
                 if (daysDisplay.innerText !== "SØNDAG - TORSDAG") {
                     daysDisplay.innerText = "SØNDAG - TORSDAG";
-                    timeDisplay.innerHTML = '<i class="fas fa-clock"></i> 23:00 - 00:00';
+                    // Εδώ άλλαξε το κείμενο σε 21:00 - 22:00
+                    timeDisplay.innerHTML = '<i class="fas fa-clock"></i> 21:00 - 22:00';
                 }
             }
 
@@ -275,23 +277,23 @@
             let targetTime = new Date(now);
 
             if (type === '1') {
-                // PROMO 1: Κυριακή έως Πέμπτη (23:00 - 00:00)
-                if (day >= 0 && day <= 4 && hours === 23) {
+                // PROMO 1: Κυριακή έως Πέμπτη (21:00 - 22:00)
+                if (day >= 0 && day <= 4 && hours === 21) {
                     isActive = true;
                 }
                 
                 if (day >= 1 && day <= 4) {
-                    targetTime.setHours(23, 0, 0, 0);
-                    if (hours >= 23) targetTime.setDate(targetTime.getDate() + 1); 
+                    targetTime.setHours(21, 0, 0, 0);
+                    if (hours >= 21) targetTime.setDate(targetTime.getDate() + 1); 
                 } else if (day === 5) {
                     targetTime.setDate(targetTime.getDate() + 2); 
-                    targetTime.setHours(23, 0, 0, 0);
+                    targetTime.setHours(21, 0, 0, 0);
                 } else if (day === 6) {
                     targetTime.setDate(targetTime.getDate() + 1); 
-                    targetTime.setHours(23, 0, 0, 0);
+                    targetTime.setHours(21, 0, 0, 0);
                 } else if (day === 0) {
-                    targetTime.setHours(23, 0, 0, 0);
-                    if (hours >= 23) targetTime.setDate(targetTime.getDate() + 1);
+                    targetTime.setHours(21, 0, 0, 0);
+                    if (hours >= 21) targetTime.setDate(targetTime.getDate() + 1);
                 }
             } 
             else if (type === '2') {
@@ -331,7 +333,7 @@
     });
     </script>
 
-    <!-- Αλλαγή σε v=43 για να σπάσει η cache -->
-    <script src="app.js?v=43"></script>
+    <!-- Αλλαγή σε v=44 για να σπάσει η cache -->
+    <script src="app.js?v=44"></script>
 </body>
 </html>
