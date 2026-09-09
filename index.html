@@ -6,8 +6,8 @@
     <title>Nordic Mythos</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Αλλαγή σε v=44 για να σπάσει η cache -->
-    <link rel="stylesheet" href="style.css?v=44">
+    <!-- Αλλαγή σε v=45 για να σπάσει η cache -->
+    <link rel="stylesheet" href="style.css?v=45">
     <link rel="icon" type="image/jpeg" href="images/favicon.jpg">
 
     <meta name="description" content="Nordic Mythos i Aalborg - Se vores lækre pizzakatalog online. Bestil nemt og hurtigt den bedste pizza i Aalborg via Wolt!">
@@ -73,10 +73,8 @@
 
     <!-- HAPPY HOUR PROMO SCREEN (TV OPTIMIZED) -->
     <div id="promo-screen" style="display: none;">
-        <div class="promo-image-side">
-            <div class="image-overlay-text">NATTILBUD</div>
-        </div>
-
+        
+        <!-- 1. ΚΕΙΜΕΝΑ (Αλλάξαμε σειρά: Τώρα είναι ΑΡΙΣΤΕΡΑ) -->
         <div class="promo-text-side">
             <img src="logo.jpg" alt="Nordic Mythos" class="promo-logo">
 
@@ -85,7 +83,6 @@
             <!-- Ομαδοποίηση ημερών, ώρας και αντίστροφης μέτρησης -->
             <div class="promo-schedule">
                 <div id="promo-days-display" class="promo-days">SØNDAG - TORSDAG</div>
-                <!-- Εδώ άλλαξε η προεπιλογή σε 21:00 -->
                 <div id="promo-time-display" class="promo-time"><i class="fas fa-clock"></i> 21:00 - 22:00</div>
 
                 <!-- Το κουτί της αντίστροφης μέτρησης -->
@@ -108,6 +105,12 @@
                 <span class="promo-disclaimer">*Den gratis pizza er altid den billigste</span>
             </div>
         </div>
+
+        <!-- 2. ΦΩΤΟΓΡΑΦΙΑ (Αλλάξαμε σειρά: Τώρα είναι ΔΕΞΙΑ) -->
+        <div class="promo-image-side">
+            <div class="image-overlay-text">NATTILBUD</div>
+        </div>
+
     </div>
 
     <!-- Floating Promo Bubble -->
@@ -257,7 +260,6 @@
             } else {
                 if (daysDisplay.innerText !== "SØNDAG - TORSDAG") {
                     daysDisplay.innerText = "SØNDAG - TORSDAG";
-                    // Εδώ άλλαξε το κείμενο σε 21:00 - 22:00
                     timeDisplay.innerHTML = '<i class="fas fa-clock"></i> 21:00 - 22:00';
                 }
             }
@@ -333,7 +335,7 @@
     });
     </script>
 
-    <!-- Αλλαγή σε v=44 για να σπάσει η cache -->
-    <script src="app.js?v=44"></script>
+    <!-- Αλλαγή σε v=45 για να σπάσει η cache -->
+    <script src="app.js?v=45"></script>
 </body>
 </html>
