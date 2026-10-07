@@ -74,7 +74,7 @@
     <!-- HAPPY HOUR PROMO SCREEN (TV OPTIMIZED) -->
     <div id="promo-screen" style="display: none;">
         
-        <!-- 1. ΚΕΙΜΕΝΑ (ΑΡΙΣΤΕΡΑ) -->
+        <!-- 1. ΚΕΙΜΕΝΑ (Αλλάξαμε σειρά: Τώρα είναι ΑΡΙΣΤΕΡΑ) -->
         <div class="promo-text-side">
             <img src="logo.jpg" alt="Nordic Mythos" class="promo-logo">
 
@@ -82,7 +82,7 @@
 
             <!-- Ομαδοποίηση ημερών, ώρας και αντίστροφης μέτρησης -->
             <div class="promo-schedule">
-                <div id="promo-days-display" class="promo-days">SØNDAG - ONSDAG</div>
+                <div id="promo-days-display" class="promo-days">SØNDAG - TORSDAG</div>
                 <div id="promo-time-display" class="promo-time"><i class="fas fa-clock"></i> 21:00 - 22:00</div>
 
                 <!-- Το κουτί της αντίστροφης μέτρησης -->
@@ -106,7 +106,7 @@
             </div>
         </div>
 
-        <!-- 2. ΦΩΤΟΓΡΑΦΙΑ (ΔΕΞΙΑ) -->
+        <!-- 2. ΦΩΤΟΓΡΑΦΙΑ (Αλλάξαμε σειρά: Τώρα είναι ΔΕΞΙΑ) -->
         <div class="promo-image-side">
             <div class="image-overlay-text">NATTILBUD</div>
         </div>
@@ -217,12 +217,13 @@
         </div>
     </footer>
 
-    <!-- Έλεγχος Promo (1, 2, auto) & Λειτουργία Αντίστροφης Μέτρησης (ΜΕ ΠΕΜΠΤΗ 23:00) -->
+    <!-- Έλεγχος Promo (1, 2, auto) & Λειτουργία Αντίστροφης Μέτρησης -->
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         const urlParams = new URLSearchParams(window.location.search);
         const promoType = urlParams.get('promo'); 
         
+        // Αν το URL έχει ?promo=1, ?promo=2, ή ?promo=auto
         if (promoType === '1' || promoType === '2' || promoType === 'auto') {
             document.body.classList.add('promo-mode');
             setInterval(handlePromoLogic, 1000);
@@ -238,18 +239,16 @@
                 const timeFloat = now.getHours() + now.getMinutes() / 60;
                 
                 if (day === 5 || day === 6) {
-                    currentActivePromo = '2'; // Παρασκευή & Σάββατο ξημερώματα
+                    currentActivePromo = '2'; // Παρασκευή & Σάββατο πάμε για Ξενύχτι
                 } else if (day === 0 && timeFloat < 5) {
-                    currentActivePromo = '2'; // Κυριακή ξημερώματα
+                    currentActivePromo = '2'; // Κυριακή ξημερώματα πάμε για Ξενύχτι
                 } else {
-                    currentActivePromo = '1'; 
+                    currentActivePromo = '1'; // Όλες τις άλλες μέρες
                 }
             }
 
             const daysDisplay = document.getElementById('promo-days-display');
             const timeDisplay = document.getElementById('promo-time-display');
-            const day = now.getDay();
-            const hours = now.getHours();
 
             if (currentActivePromo === '2') {
                 if (daysDisplay.innerText !== "KUN I NAT") {
@@ -257,12 +256,15 @@
                     timeDisplay.innerHTML = '<i class="fas fa-clock"></i> 04:30 - 05:00';
                 }
             } else {
-                // Έλεγχος αν η επόμενη προσφορά είναι αυτή της Πέμπτης
-                let isNextPromoThursday = false;
-                if (day === 4) isNextPromoThursday = true;
-                if (day === 3 && hours >= 21) isNextPromoThursday = true; // Τετάρτη βράδυ μετά τις 21:00, ο στόχος είναι η Πέμπτη
+                const day = now.getDay();
+                const hours = now.getHours();
+                
+                // Ελέγχουμε αν πάμε για το Happy Hour της Πέμπτης
+                let isThursdayPromo = false;
+                if (day === 4) isThursdayPromo = true;
+                if (day === 3 && hours >= 21) isThursdayPromo = true; // Από Τετάρτη βράδυ, δείχνουμε την Πέμπτη
 
-                if (isNextPromoThursday) {
+                if (isThursdayPromo) {
                     if (daysDisplay.innerText !== "TORSDAG") {
                         daysDisplay.innerText = "TORSDAG";
                         timeDisplay.innerHTML = '<i class="fas fa-clock"></i> 23:00 - 00:00';
@@ -290,31 +292,30 @@
             let targetTime = new Date(now);
 
             if (type === '1') {
-                // PROMO 1: Κυριακή έως Τετάρτη (21:00 - 22:00) & Πέμπτη (23:00 - 00:00)
+                // PROMO 1: Κυριακή - Τετάρτη (21:00 - 22:00) & Πέμπτη (23:00 - 00:00)
                 if (day >= 0 && day <= 3 && hours === 21) {
                     isActive = true;
                 } else if (day === 4 && hours === 23) {
                     isActive = true;
                 }
                 
-                // Υπολογισμός Επόμενου Στόχου
                 if (day >= 1 && day <= 3) {
                     targetTime.setHours(21, 0, 0, 0);
                     if (hours >= 21) {
                         targetTime.setDate(targetTime.getDate() + 1); 
-                        if (targetTime.getDay() === 4) targetTime.setHours(23, 0, 0, 0); // Αν ξημερώνει Πέμπτη, πάμε 23:00
+                        if (targetTime.getDay() === 4) targetTime.setHours(23, 0, 0, 0);
                     }
                 } else if (day === 4) {
                     targetTime.setHours(23, 0, 0, 0);
                     if (hours >= 23) {
-                        targetTime.setDate(targetTime.getDate() + 3); // Πάμε Κυριακή
+                        targetTime.setDate(targetTime.getDate() + 3); 
                         targetTime.setHours(21, 0, 0, 0);
                     }
                 } else if (day === 5) {
-                    targetTime.setDate(targetTime.getDate() + 2); // Πάμε Κυριακή
+                    targetTime.setDate(targetTime.getDate() + 2); 
                     targetTime.setHours(21, 0, 0, 0);
                 } else if (day === 6) {
-                    targetTime.setDate(targetTime.getDate() + 1); // Πάμε Κυριακή
+                    targetTime.setDate(targetTime.getDate() + 1); 
                     targetTime.setHours(21, 0, 0, 0);
                 } else if (day === 0) {
                     targetTime.setHours(21, 0, 0, 0);
@@ -322,7 +323,7 @@
                 }
             } 
             else if (type === '2') {
-                // PROMO 2: Κάθε ξημέρωμα Παρασκευής & Σαββάτου (04:30 - 05:00)
+                // PROMO 2: Κάθε ξημέρωμα (04:30 - 05:00)
                 if (timeFloat >= 4.5 && timeFloat < 5) {
                     isActive = true;
                 }
@@ -358,7 +359,6 @@
     });
     </script>
 
-    <!-- Αλλαγή σε v=46 για να σπάσει η cache -->
     <script src="app.js?v=46"></script>
 </body>
 </html>
