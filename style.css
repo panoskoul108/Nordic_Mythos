@@ -1079,11 +1079,15 @@ body.promo-mode .promo-card h2 {
     color: #000000;
 }
 
+/* --- ΝΕΟ: Το εφέ που χτυπάει σαν καρδιά στην τιμή 35 KR. --- */
 body.promo-mode .promo-price {
     font-size: 7.5vh;
     font-weight: 900;
     color: #e31837;
     line-height: 1;
+    text-shadow: 0px 4px 15px rgba(227, 24, 55, 0.4); /* Κόκκινη λάμψη */
+    animation: pulsePrice 1.5s infinite; /* Το εφέ */
+    display: inline-block;
 }
 
 body.promo-mode .promo-price span {
@@ -1142,7 +1146,7 @@ body.tv-mode #promo-screen {
     display: none !important;
 }
 /* ==========================================
-   Ρυθμίσεις Αντίστροφης Μέτρησης
+   Ρυθμίσεις Αντίστροφης Μέτρησης & Εφέ Καρδιάς
    ========================================== */
 body.promo-mode .promo-countdown {
     font-size: 2.2vh;
@@ -1156,9 +1160,9 @@ body.promo-mode .promo-countdown {
     transition: all 0.3s ease;
 }
 
-/* Όταν φτάσει 23:00 και μπει η κλάση .active */
+/* Όταν φτάσει η ώρα και μπει η κλάση .active */
 body.promo-mode .promo-countdown.active {
-    background-color: #e31837; /* Γίνεται κόκκινο σαν τον κωδικό του μαγαζιού */
+    background-color: #e31837; /* Γίνεται κόκκινο */
     color: #ffffff;
     border-color: #e31837;
     font-size: 3vh; /* Μεγαλώνει ελαφρώς η γραμματοσειρά */
@@ -1166,7 +1170,14 @@ body.promo-mode .promo-countdown.active {
     animation: promoPulseZoom 1.5s infinite; /* Το εφέ που ζήτησες */
 }
 
-/* Το Animation: Zoom in και out απαλά */
+/* Το Animation της Τιμής (Σαν Καρδιά) */
+@keyframes pulsePrice {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.06); } 
+    100% { transform: scale(1); }
+}
+
+/* Το Animation του Χρονομέτρου (Zoom in και out απαλά) */
 @keyframes promoPulseZoom {
     0% { transform: scale(1); box-shadow: 0 0 0 rgba(227, 24, 55, 0.4); }
     50% { transform: scale(1.15); box-shadow: 0 0 25px rgba(227, 24, 55, 0.8); }
