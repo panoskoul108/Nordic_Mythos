@@ -968,7 +968,7 @@ body.promo-mode #promo-screen {
 /* --- ΑΡΙΣΤΕΡΗ ΠΛΕΥΡΑ (ΦΩΤΟΓΡΑΦΙΑ) --- */
 body.promo-mode .promo-image-side {
     flex: 1.2;
-    background-image: url('images/promo2.png'); /* Βάζουμε τη νέα, καθαρή εικόνα */
+    background-image: url('images/promo2.jpg'); /* Βάζουμε τη νέα, καθαρή εικόνα */
     background-color: #000000; 
     background-position: center; /* Την κεντράρουμε τέλεια */
     background-size: cover; /* Την αναγκάζουμε να καλύψει 100% το κουτί της χωρίς κενά */
