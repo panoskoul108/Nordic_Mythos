@@ -1065,14 +1065,14 @@ body.promo-mode .promo-takeaway-badge i {
 }
 
 /* ==========================================================================
-   --- ΕΠΙΛΟΓΗ 3: Η ΓΙΓΑΝΤΙΑ ΚΟΚΚΙΝΗ ΣΦΡΑΓΙΔΑ (ΤΙΜΗ) --- 
+   --- ΕΠΙΛΟΓΗ 3 (ΕΝΙΣΧΥΜΕΝΗ): Η ΓΙΓΑΝΤΙΑ ΚΟΚΚΙΝΗ ΣΦΡΑΓΙΔΑ (ΤΙΜΗ) --- 
    ========================================================================== */
 body.promo-mode .promo-card:not(.highlight) {
     position: absolute;
     top: 50%;
-    right: -17.5vh; /* Τοποθετείται ΑΚΡΙΒΩΣ στη μέση (το μισό από το πλάτος του που είναι 35vh) */
-    width: 35vh;
-    height: 35vh;
+    right: -22.5vh; /* Κεντράρισμα: Το μισό του 45vh */
+    width: 45vh; /* Μεγαλύτερη διάμετρος σφραγίδας */
+    height: 45vh; /* Μεγαλύτερη διάμετρος σφραγίδας */
     border-radius: 50%;
     background-color: #e31837; /* Έντονο Κόκκινο */
     border: 8px solid #ffffff; /* Παχύ λευκό περίγραμμα για διαχωρισμό */
@@ -1090,7 +1090,7 @@ body.promo-mode .promo-card:not(.highlight) {
 
 /* Το κείμενο "PIZZA SLICE" μέσα στη σφραγίδα */
 body.promo-mode .promo-card:not(.highlight) h2 {
-    font-size: 3.5vh;
+    font-size: 4.5vh; /* Αρκετά μεγαλύτερο (από 3.5vh) */
     font-weight: 900;
     color: #ffffff;
     margin-bottom: 0;
@@ -1099,7 +1099,7 @@ body.promo-mode .promo-card:not(.highlight) h2 {
 
 /* Το "35 KR." μέσα στη σφραγίδα */
 body.promo-mode .promo-price {
-    font-size: 9.5vh; /* Τεράστιο μέγεθος */
+    font-size: 12vh; /* Τεράστιο μέγεθος (από 9.5vh) */
     font-weight: 900;
     color: #ffffff;
     line-height: 1;
@@ -1110,7 +1110,7 @@ body.promo-mode .promo-price {
 }
 
 body.promo-mode .promo-price span {
-    font-size: 3.5vh;
+    font-size: 4.5vh; /* Μεγάλωσε (από 3.5vh) */
     color: #ffffff;
     text-shadow: none; 
 }
