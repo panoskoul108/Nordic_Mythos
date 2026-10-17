@@ -1003,7 +1003,10 @@ body.promo-mode .promo-text-side {
     padding: 2vh 2vw;
     text-align: center;
     height: 100vh;
-    overflow: hidden;
+    /* Η ΠΡΟΣΘΗΚΗ ΓΙΑ ΤΗ ΣΦΡΑΓΙΔΑ: Βγάζουμε το overflow:hidden και βάζουμε position */
+    overflow: visible; 
+    position: relative;
+    z-index: 10;
 }
 
 body.promo-mode .promo-logo {
@@ -1041,7 +1044,6 @@ body.promo-mode .promo-time {
     margin: 0;
 }
 
-
 /* Ταμπελάκι Takeaway */
 body.promo-mode .promo-takeaway-badge {
     background-color: #1e293b;
@@ -1062,48 +1064,76 @@ body.promo-mode .promo-takeaway-badge i {
     color: #e31837;
 }
 
-/* Καρτέλες Προσφορών */
-body.promo-mode .promo-card {
+/* ==========================================================================
+   --- ΕΠΙΛΟΓΗ 3: Η ΓΙΓΑΝΤΙΑ ΚΟΚΚΙΝΗ ΣΦΡΑΓΙΔΑ (ΤΙΜΗ) --- 
+   ========================================================================== */
+body.promo-mode .promo-card:not(.highlight) {
+    position: absolute;
+    top: 50%;
+    right: -17.5vh; /* Τοποθετείται ΑΚΡΙΒΩΣ στη μέση (το μισό από το πλάτος του που είναι 35vh) */
+    width: 35vh;
+    height: 35vh;
+    border-radius: 50%;
+    background-color: #e31837; /* Έντονο Κόκκινο */
+    border: 8px solid #ffffff; /* Παχύ λευκό περίγραμμα για διαχωρισμό */
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4); /* Μεγάλη τρισδιάστατη σκιά */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    z-index: 50; /* Πάνω από όλα */
+    transform: translateY(-50%) rotate(-12deg); /* Την κεντράρει κάθετα και της δίνει κλίση σφραγίδας */
+    animation: stampFloat 4s ease-in-out infinite; /* Απαλή αιώρηση */
+}
+
+/* Το κείμενο "PIZZA SLICE" μέσα στη σφραγίδα */
+body.promo-mode .promo-card:not(.highlight) h2 {
+    font-size: 3.5vh;
+    font-weight: 900;
+    color: #ffffff;
+    margin-bottom: 0;
+    text-shadow: 2px 2px 0px rgba(0,0,0,0.2);
+}
+
+/* Το "35 KR." μέσα στη σφραγίδα */
+body.promo-mode .promo-price {
+    font-size: 9.5vh; /* Τεράστιο μέγεθος */
+    font-weight: 900;
+    color: #ffffff;
+    line-height: 1;
+    text-shadow: 3px 3px 0px rgba(0,0,0,0.3); 
+    animation: pulsePrice 1.2s infinite ease-in-out; /* Χτύπημα καρδιάς */
+    display: inline-block;
+    margin-top: 1vh;
+}
+
+body.promo-mode .promo-price span {
+    font-size: 3.5vh;
+    color: #ffffff;
+    text-shadow: none; 
+}
+
+/* ========================================================================== */
+
+/* Καρτέλα 2+1 (Με κόκκινο θέμα) */
+body.promo-mode .promo-card.highlight {
     width: 85%;
-    border: 4px solid #cbd5e1;
+    border: 4px solid #e31837;
     border-radius: 20px;
     padding: 2.5vh 2vw;
     margin: 0;
-    background-color: #f8fafc;
+    background-color: #fff1f2;
+    position: relative;
+    padding-top: 4vh;
 }
 
-body.promo-mode .promo-card h2 {
+body.promo-mode .promo-card.highlight h2 {
     font-size: 4vh;
     font-weight: 900;
     margin-bottom: 0.5vh;
     color: #000000;
-}
-
-/* --- ΕΦΕ ΤΙΜΗΣ: 3D Σκιά + Λάμψη + Έντονος Χτύπος (Επιλογές 2 & 3) --- */
-body.promo-mode .promo-price {
-    font-size: 7.5vh; /* Διατηρούμε το αρχικό μέγεθος */
-    font-weight: 900;
-    color: #e31837;
-    line-height: 1;
-    /* Επιλογή 2: Τρισδιάστατη σκιά (μαύρη) και κόκκινη λάμψη τριγύρω */
-    text-shadow: 3px 3px 0px rgba(0,0,0,0.15), 0px 0px 30px rgba(227, 24, 55, 0.7); 
-    /* Επιλογή 3: Πιο γρήγορος χτύπος (1.2 δευτερόλεπτα) */
-    animation: pulsePrice 1.2s infinite ease-in-out; 
-    display: inline-block;
-}
-
-body.promo-mode .promo-price span {
-    font-size: 3vh;
-    color: #000000;
-    text-shadow: none; /* Το KR παραμένει καθαρό χωρίς λάμψη */
-}
-
-/* Καρτέλα 2+1 (Με κόκκινο θέμα) */
-body.promo-mode .promo-card.highlight {
-    border-color: #e31837;
-    background-color: #fff1f2;
-    position: relative;
-    padding-top: 4vh;
 }
 
 body.promo-mode .badge-gratis {
@@ -1127,15 +1157,17 @@ body.promo-mode .promo-card p {
     color: #1e293b;
     margin: 0;
 }
+
 /* Διακριτικός όρος (Αστερίσκος) */
 body.promo-mode .promo-disclaimer {
     display: block;
-    font-size: 1.6vh; /* Πολύ μικρό και διακριτικό μέγεθος */
-    color: #64748b; /* Γκρι χρώμα για να μην τραβάει την προσοχή */
+    font-size: 1.6vh; 
+    color: #64748b; 
     font-weight: 600;
     margin-top: 1vh;
     font-style: italic;
 }
+
 /* ==========================================================================
    15. ΑΣΦΑΛΕΙΑ ΓΙΑ ΤΟ TV MODE (Να μην κρύβεται ο κατάλογος)
    ========================================================================== */
@@ -1150,13 +1182,13 @@ body.tv-mode #promo-screen {
 }
 
 /* ==========================================
-   Ρυθμίσεις Αντίστροφης Μέτρησης & Εφέ Καρδιάς
+   Ρυθμίσεις Αντίστροφης Μέτρησης & Animations
    ========================================== */
 body.promo-mode .promo-countdown {
     font-size: 2.2vh;
     font-weight: 800;
-    color: #f59e0b; /* Πορτοκαλί χρώμα αναμονής */
-    background-color: #1e293b; /* Σκούρο φόντο για να κάνει αντίθεση */
+    color: #f59e0b; 
+    background-color: #1e293b; 
     padding: 1vh 2vw;
     border-radius: 12px;
     margin-top: 1vh;
@@ -1164,50 +1196,32 @@ body.promo-mode .promo-countdown {
     transition: all 0.3s ease;
 }
 
-/* Όταν φτάσει η ώρα και μπει η κλάση .active */
 body.promo-mode .promo-countdown.active {
-    background-color: #e31837; /* Γίνεται κόκκινο */
+    background-color: #e31837; 
     color: #ffffff;
     border-color: #e31837;
-    font-size: 3vh; /* Μεγαλώνει ελαφρώς η γραμματοσειρά */
+    font-size: 3vh; 
     padding: 1.5vh 3vw;
-    animation: promoPulseZoom 1.5s infinite; /* Το εφέ που ζήτησες */
+    animation: promoPulseZoom 1.5s infinite; 
 }
 
-/* Επιλογή 3: Το animation τώρα μεγαλώνει πιο επιθετικά (έως 1.12) */
+/* Animation Τιμής (Σαν Καρδιά) */
 @keyframes pulsePrice {
     0% { transform: scale(1); }
     50% { transform: scale(1.12); } 
     100% { transform: scale(1); }
 }
 
-/* Το Animation του Χρονομέτρου (Zoom in και out απαλά) */
+/* Animation Χρονομέτρου */
 @keyframes promoPulseZoom {
     0% { transform: scale(1); box-shadow: 0 0 0 rgba(227, 24, 55, 0.4); }
     50% { transform: scale(1.15); box-shadow: 0 0 25px rgba(227, 24, 55, 0.8); }
     100% { transform: scale(1); box-shadow: 0 0 0 rgba(227, 24, 55, 0.4); }
 }
 
-/* --- ΕΠΙΛΟΓΗ 1: Αιώρηση και Λάμψη στο ίδιο το κουτί της τιμής --- */
-/* Στοχεύουμε ΜΟΝΟ το κουτί με την τιμή */
-body.promo-mode .promo-card:not(.highlight) {
-    border-color: #e31837; /* Αλλάζουμε το περίγραμμα σε κόκκινο */
-    background-color: #ffffff;
-    animation: floatAndGlow 3s ease-in-out infinite; /* Ενεργοποιεί την κίνηση */
-}
-
-/* Το εφέ αιώρησης και λάμψης */
-@keyframes floatAndGlow {
-    0% { 
-        transform: translateY(0); 
-        box-shadow: 0 5px 15px rgba(227, 24, 55, 0.2); 
-    }
-    50% { 
-        transform: translateY(-8px); /* Σηκώνεται ελαφρώς προς τα πάνω */
-        box-shadow: 0 15px 30px rgba(227, 24, 55, 0.6); /* Δυναμώνει η σκιά/λάμψη */
-    }
-    100% { 
-        transform: translateY(0); 
-        box-shadow: 0 5px 15px rgba(227, 24, 55, 0.2); 
-    }
+/* Απαλή Αιώρηση της Σφραγίδας */
+@keyframes stampFloat {
+    0% { transform: translateY(-50%) rotate(-12deg); }
+    50% { transform: translateY(-53%) rotate(-12deg); } /* Πάει ελαφρώς προς τα πάνω */
+    100% { transform: translateY(-50%) rotate(-12deg); }
 }
