@@ -6,8 +6,8 @@
     <title>Nordic Mythos</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Αλλαγή σε v=47 για να σπάσει η cache -->
-    <link rel="stylesheet" href="style.css?v=48">
+    <!-- Αλλαγή σε v=52 για να σπάσει η cache -->
+    <link rel="stylesheet" href="style.css?v=52">
     <link rel="icon" type="image/jpeg" href="images/favicon.jpg">
 
     <meta name="description" content="Nordic Mythos i Aalborg - Se vores lækre pizzakatalog online. Bestil nemt og hurtigt den bedste pizza i Aalborg via Wolt!">
@@ -82,7 +82,7 @@
 
             <!-- Ομαδοποίηση ημερών, ώρας και αντίστροφης μέτρησης -->
             <div class="promo-schedule">
-                <div id="promo-days-display" class="promo-days">SØNDAG - ONSDAG</div>
+                <div id="promo-days-display" class="promo-days">SØNDAG</div>
                 <div id="promo-time-display" class="promo-time"><i class="fas fa-clock"></i> 21:00 - 22:00</div>
 
                 <!-- Το κουτί της αντίστροφης μέτρησης -->
@@ -238,12 +238,11 @@
                 const day = now.getDay();
                 const timeFloat = now.getHours() + now.getMinutes() / 60;
                 
-                if (day === 5 || day === 6) {
-                    currentActivePromo = '2'; // Παρασκευή & Σάββατο πάμε για Ξενύχτι
-                } else if (day === 0 && timeFloat < 5) {
-                    currentActivePromo = '2'; // Κυριακή ξημερώματα πάμε για Ξενύχτι
+                // Παρασκευή μετά τη 01:00, Σάββατο, και Κυριακή πριν τις 05:00
+                if ((day === 5 && timeFloat >= 1) || day === 6 || (day === 0 && timeFloat < 5)) {
+                    currentActivePromo = '2'; 
                 } else {
-                    currentActivePromo = '1'; // Όλες τις άλλες μέρες πάμε στο κανονικό
+                    currentActivePromo = '1'; 
                 }
             }
 
@@ -260,20 +259,22 @@
                 const day = now.getDay();
                 const hours = now.getHours();
                 
-                // Ελέγχουμε αν πάμε για το Happy Hour της Πέμπτης
-                let isThursdayPromo = false;
-                if (day === 4) isThursdayPromo = true;
-                if (day === 3 && hours >= 22) isThursdayPromo = true; // Από Τετάρτη βράδυ (αφού τελειώσει), δείχνουμε Πέμπτη
-
-                if (isThursdayPromo) {
-                    if (daysDisplay.innerText !== "TORSDAG") {
-                        daysDisplay.innerText = "TORSDAG";
-                        timeDisplay.innerHTML = '<i class="fas fa-clock"></i> 23:00 - 00:00';
+                // Ελέγχουμε αν η επόμενη προσφορά είναι η Κυριακή
+                let isSundayPromo = false;
+                if (day === 0) isSundayPromo = true;
+                
+                // Αν είμαστε Παρασκευή/Σάββατο (πριν το NATTILBUD), ήδη δείχνει KUN I NAT, οπότε δεν μας νοιάζει. 
+                // Εδώ ελέγχουμε τι θα γράφει τις μέρες 1 (Δευτ) έως 4 (Πέμπτη) και 5 (Παρ. μέχρι τις 01:00).
+                
+                if (isSundayPromo) {
+                    if (daysDisplay.innerText !== "SØNDAG") {
+                        daysDisplay.innerText = "SØNDAG";
+                        timeDisplay.innerHTML = '<i class="fas fa-clock"></i> 21:00 - 22:00';
                     }
                 } else {
-                    if (daysDisplay.innerText !== "SØNDAG - ONSDAG") {
-                        daysDisplay.innerText = "SØNDAG - ONSDAG";
-                        timeDisplay.innerHTML = '<i class="fas fa-clock"></i> 21:00 - 22:00';
+                    if (daysDisplay.innerText !== "ONSDAG - TORSDAG") {
+                        daysDisplay.innerText = "ONSDAG - TORSDAG";
+                        timeDisplay.innerHTML = '<i class="fas fa-clock"></i> 00:00 - 01:00';
                     }
                 }
             }
@@ -293,40 +294,50 @@
             let isActive = false;
             let targetTime = new Date(now);
             
-            // Μηδενίζουμε λεπτά, δευτερόλεπτα, χιλιοστά για ακρίβεια!
+            // Μηδενίζουμε λεπτά, δευτερόλεπτα, χιλιοστά για ακρίβεια
             targetTime.setMinutes(0, 0, 0);
 
             if (type === '1') {
-                // PROMO 1: Κυριακή έως Τετάρτη (21:00 - 22:00) & Πέμπτη (23:00 - 00:00)
-                if ((day >= 0 && day <= 3 && hours === 21) || (day === 4 && hours === 23)) {
+                // ACTIVE: Κυριακή (21:00) Ή Τετάρτη-Πέμπτη Βράδυ (Δηλαδή Πέμπτη 00:00 & Παρασκευή 00:00)
+                if (day === 0 && hours === 21) {
+                    isActive = true;
+                } else if ((day === 4 || day === 5) && hours === 0) {
                     isActive = true;
                 }
                 
                 if (!isActive) {
-                    if (day >= 0 && day <= 3) {
+                    if (day === 0) {
                         if (hours < 21) {
                             targetTime.setHours(21);
                         } else {
-                            targetTime.setDate(targetTime.getDate() + 1); 
-                            if (targetTime.getDay() === 4) {
-                                targetTime.setHours(23); // Αν αύριο είναι Πέμπτη, βάλε 23:00
-                            } else {
-                                targetTime.setHours(21);
-                            }
+                            // Κυριακή μετά τις 22:00 -> Στόχος: Πέμπτη 00:00 (δηλαδή Τετάρτη βράδυ). Πηδάμε Δευτ-Τρι!
+                            targetTime.setDate(targetTime.getDate() + 4);
+                            targetTime.setHours(0);
                         }
+                    } else if (day >= 1 && day <= 3) {
+                        // Δευτέρα, Τρίτη, Τετάρτη -> Στόχος: Πέμπτη 00:00 (δηλαδή Τετάρτη βράδυ)
+                        const daysToAdd = 4 - day;
+                        targetTime.setDate(targetTime.getDate() + daysToAdd);
+                        targetTime.setHours(0);
                     } else if (day === 4) {
-                        if (hours < 23) {
-                            targetTime.setHours(23);
+                        if (hours >= 1) {
+                            // Πέμπτη (μετά τη 01:00): Στόχος Παρασκευή 00:00 (δηλαδή Πέμπτη βράδυ)
+                            targetTime.setDate(targetTime.getDate() + 1);
+                            targetTime.setHours(0);
                         } else {
-                            // Μετά την Πέμπτη τα μεσάνυχτα, ο επόμενος στόχος είναι την Κυριακή 21:00
-                            targetTime.setDate(targetTime.getDate() + 3); 
-                            targetTime.setHours(21);
+                            targetTime.setHours(0); // Αυτό δεν θα συμβεί λόγω του isActive, αλλά για ασφάλεια
                         }
-                    } else if (day === 5) { // Παρασκευή
-                        targetTime.setDate(targetTime.getDate() + 2); 
-                        targetTime.setHours(21);
-                    } else if (day === 6) { // Σάββατο
-                        targetTime.setDate(targetTime.getDate() + 1); 
+                    } else if (day === 5) {
+                        if (hours >= 1) {
+                            // Παρασκευή (μετά τη 01:00): Στόχος Κυριακή 21:00
+                            targetTime.setDate(targetTime.getDate() + 2);
+                            targetTime.setHours(21);
+                        } else {
+                            targetTime.setHours(0);
+                        }
+                    } else if (day === 6) {
+                        // Σάββατο: Στόχος Κυριακή 21:00
+                        targetTime.setDate(targetTime.getDate() + 1);
                         targetTime.setHours(21);
                     }
                 }
@@ -386,6 +397,6 @@
     });
     </script>
 
-    <script src="app.js?v=48"></script>
+    <script src="app.js?v=52"></script>
 </body>
 </html>
