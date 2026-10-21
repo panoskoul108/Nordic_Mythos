@@ -146,6 +146,7 @@ function renderSettings(lang) {
 function renderMenu(lang) {
     const container = document.getElementById('menu-container');
     container.innerHTML = ''; 
+    let pizzaCount = 0; // Μετράμε πόσες πίτσες μπήκαν όντως
 
     for (let i = 0; i < globalPizzaData.length; i++) {
         let row = globalPizzaData[i];
@@ -171,7 +172,11 @@ function renderMenu(lang) {
 
         if (number.toString().length === 1 && !isNaN(number)) number = '0' + number;
         if (number.toString().toLowerCase() === 'number' || titleDA.toString().toLowerCase() === 'title') continue;
-// =======================================================
+
+        // Αυξάνουμε τον μετρητή των πιτσών
+        pizzaCount++;
+
+        // =======================================================
         // ΠΟΛΥΓΛΩΣΣΗ ΑΣΦΑΛΗΣ ΜΕΤΑΦΡΑΣΗ EMOJIS ΚΑΙ ΤΕΛΕΙΑΣ
         // =======================================================
         let finalIngredients = '';
@@ -230,6 +235,20 @@ function renderMenu(lang) {
         const oldBanner = document.querySelector('.family-pizza-banner');
         if (oldBanner) oldBanner.style.display = 'none';
 
+        // Ρυθμίζουμε τον κατάλογο να κόβει ΑΚΡΙΒΩΣ στη μέση τις πίτσες, χωρίς να μετράει τα extra boxes
+        const rows = Math.ceil(pizzaCount / 2); // 14 πίτσες / 2 = 7 γραμμές (σταθερά)
+        container.style.gridTemplateRows = `repeat(${rows}, auto)`;
+        container.style.gridAutoFlow = 'column';
+
+        // Προσθέτουμε τα έξτρα κουτιά (Family & Allergens)
+        // Φτιάχνουμε ένα wrapper element για να τα κρατήσει εκτός του grid των πιτσών (για να μην χαλάνε το layout)
+        const extrasWrapper = document.createElement('div');
+        extrasWrapper.style.display = 'flex';
+        extrasWrapper.style.justifyContent = 'center';
+        extrasWrapper.style.gap = '15px';
+        extrasWrapper.style.gridColumn = '1 / -1'; // Τα αναγκάζει να πιάσουν όλο το πλάτος κάτω από τις 2 στήλες
+        extrasWrapper.style.marginTop = '10px';
+
         const tvFamilyBox = document.createElement('div');
         tvFamilyBox.className = 'tv-family-box';
         tvFamilyBox.innerHTML = `
@@ -242,8 +261,7 @@ function renderMenu(lang) {
                 <div class="tv-f-title3">Gør din pizza til <strong>FAMILY SIZE!</strong> (+89 KR)</div>
             </div>
         `;
-        container.appendChild(tvFamilyBox); 
-
+        
         let allergyText = "Vigtig: Mange af vores retter indeholder allergener som gluten, mælk, nødder osv. Spørg personalet.";
         if (lang === 'en') allergyText = "Important: Many dishes contain allergens (gluten, dairy, nuts, etc.). Please ask our staff.";
         if (lang === 'el') allergyText = "Σημαντικό: Πολλά πιάτα περιέχουν αλλεργιογόνα (γλουτένη, γαλακτοκομικά κ.ά.). Ρωτήστε μας.";
@@ -254,15 +272,15 @@ function renderMenu(lang) {
             <div class="tv-allergen-icon">
                 <i class="fas fa-exclamation-triangle"></i>
             </div>
-            <div class="tv-allergen-text">${allergyText}</div>
+            <div class="tv-allergen-text" style="max-width: 250px;">${allergyText}</div>
         `;
-        container.appendChild(tvAllergenBox);
 
-        const totalItems = container.children.length; 
-        const rows = Math.ceil(totalItems / 2); 
-        container.style.gridTemplateRows = `repeat(${rows}, auto)`;
-        container.style.gridAutoFlow = 'column';
+        // Τα βάζουμε στο wrapper και το wrapper κάτω από τον κατάλογο
+        extrasWrapper.appendChild(tvFamilyBox);
+        extrasWrapper.appendChild(tvAllergenBox);
+        container.appendChild(extrasWrapper);
 
+        // Footer
         const tvFooter = document.createElement('div');
         tvFooter.className = 'tv-footer';
         tvFooter.innerHTML = `
