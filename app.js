@@ -146,7 +146,7 @@ function renderSettings(lang) {
 function renderMenu(lang) {
     const container = document.getElementById('menu-container');
     container.innerHTML = ''; 
-    let pizzaCount = 0; // Μετράμε πόσες πίτσες μπήκαν όντως
+    let pizzaCount = 0; 
 
     for (let i = 0; i < globalPizzaData.length; i++) {
         let row = globalPizzaData[i];
@@ -173,12 +173,8 @@ function renderMenu(lang) {
         if (number.toString().length === 1 && !isNaN(number)) number = '0' + number;
         if (number.toString().toLowerCase() === 'number' || titleDA.toString().toLowerCase() === 'title') continue;
 
-        // Αυξάνουμε τον μετρητή των πιτσών
         pizzaCount++;
 
-        // =======================================================
-        // ΠΟΛΥΓΛΩΣΣΗ ΑΣΦΑΛΗΣ ΜΕΤΑΦΡΑΣΗ EMOJIS ΚΑΙ ΤΕΛΕΙΑΣ
-        // =======================================================
         let finalIngredients = '';
         if (activeIngredients) {
             let ingredientsStr = String(activeIngredients); 
@@ -188,12 +184,9 @@ function renderMenu(lang) {
                 let lower = text.toLowerCase();
                 let emoji = '🔸'; 
 
-                // Ξεχωριστοί κανόνες για τα τυριά
                 if (lower.includes('mozzarella') || lower.includes('μοτσαρέλα')) emoji = '⚪️';
                 else if (lower.includes('feta') || lower.includes('φέτα')) emoji = '⬜️';
                 else if (lower.includes('ost') || lower.includes('cheese') || lower.includes('τυρί') || lower.includes('halloumi') || lower.includes('χαλούμι')) emoji = '🧀';
-                
-                // Υπόλοιπα υλικά
                 else if (lower.includes('tomat') || lower.includes('ντομάτα')) emoji = '🍅';
                 else if (lower.includes('oregano') || lower.includes('ρίγανη') || lower.includes('basilikum') || lower.includes('basil') || lower.includes('βασιλικός')) emoji = '🌿';
                 else if (lower.includes('skinke') || lower.includes('ham') || lower.includes('ζαμπόν')) emoji = '🍖';
@@ -235,19 +228,20 @@ function renderMenu(lang) {
         const oldBanner = document.querySelector('.family-pizza-banner');
         if (oldBanner) oldBanner.style.display = 'none';
 
-        // Ρυθμίζουμε τον κατάλογο να κόβει ΑΚΡΙΒΩΣ στη μέση τις πίτσες, χωρίς να μετράει τα extra boxes
-        const rows = Math.ceil(pizzaCount / 2); // 14 πίτσες / 2 = 7 γραμμές (σταθερά)
-        container.style.gridTemplateRows = `repeat(${rows}, auto)`;
+        // Ρυθμίζουμε τον κατάλογο: ΑΥΣΤΗΡΑ 7 γραμμές, διαβάζει τα αντικείμενα κάθετα
+        container.style.gridTemplateRows = `repeat(7, auto)`;
         container.style.gridAutoFlow = 'column';
 
-        // Προσθέτουμε τα έξτρα κουτιά (Family & Allergens)
-        // Φτιάχνουμε ένα wrapper element για να τα κρατήσει εκτός του grid των πιτσών (για να μην χαλάνε το layout)
-        const extrasWrapper = document.createElement('div');
-        extrasWrapper.style.display = 'flex';
-        extrasWrapper.style.justifyContent = 'center';
-        extrasWrapper.style.gap = '15px';
-        extrasWrapper.style.gridColumn = '1 / -1'; // Τα αναγκάζει να πιάσουν όλο το πλάτος κάτω από τις 2 στήλες
-        extrasWrapper.style.marginTop = '10px';
+        // --- Δημιουργία ενός ΝΕΟΥ grid μόνο για τα έξτρα κουτιά (ώστε να μπουν 1 κάτω από κάθε στήλη) ---
+        const extrasGrid = document.createElement('div');
+        extrasGrid.style.display = 'grid';
+        extrasGrid.style.gridTemplateColumns = 'repeat(2, 1fr)';
+        extrasGrid.style.gap = '8px'; // Ίδιο κενό με τις πίτσες
+        extrasGrid.style.marginTop = '4px'; // Ίδιο κενό με τις πίτσες
+        extrasGrid.style.padding = '0 10px'; // Ίδιο padding με το μενού
+        extrasGrid.style.maxWidth = '98%'; // Ίδιο max-width με το μενού
+        extrasGrid.style.alignSelf = 'center'; // Κεντράρισμα στο γενικό layout
+        extrasGrid.style.width = '100%';
 
         const tvFamilyBox = document.createElement('div');
         tvFamilyBox.className = 'tv-family-box';
@@ -272,17 +266,20 @@ function renderMenu(lang) {
             <div class="tv-allergen-icon">
                 <i class="fas fa-exclamation-triangle"></i>
             </div>
-            <div class="tv-allergen-text" style="max-width: 250px;">${allergyText}</div>
+            <div class="tv-allergen-text">${allergyText}</div>
         `;
 
-        // Τα βάζουμε στο wrapper και το wrapper κάτω από τον κατάλογο
-        extrasWrapper.appendChild(tvFamilyBox);
-        extrasWrapper.appendChild(tvAllergenBox);
-        container.appendChild(extrasWrapper);
+        // Προσθέτουμε τα κουτιά στο ΝΕΟ grid
+        extrasGrid.appendChild(tvFamilyBox); // Αυτό θα μπει αριστερά (κάτω από τη 1η στήλη)
+        extrasGrid.appendChild(tvAllergenBox); // Αυτό θα μπει δεξιά (κάτω από τη 2η στήλη)
+        
+        // Βάζουμε το νέο grid κάτω από τον κυρίως κατάλογο
+        document.querySelector('.menu-section').appendChild(extrasGrid);
 
         // Footer
         const tvFooter = document.createElement('div');
         tvFooter.className = 'tv-footer';
+        tvFooter.style.margin = '4px 10px'; // Ίδιο alignment με τα υπόλοιπα
         tvFooter.innerHTML = `
             <div class="tv-footer-top">
                 <span><i class="fas fa-phone-alt fa-flip-horizontal"></i> 93949755</span>
